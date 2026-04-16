@@ -21,8 +21,8 @@ export default function ContactSection() {
   });
 
   const CONTACT_INFO = [
-    { icon: "✉️", label: "Email", value: "hello@hyrovision.ai", href: "mailto:hello@hyrovision.ai" },
-    { icon: "💬", label: "WhatsApp", value: "+1 (555) 123-4567", href: "https://wa.me/15551234567" },
+    { icon: "✉️", label: "Email", value: import.meta.env.VITE_CONTACT_EMAIL || "hello@hyrovision.ai", href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL || "hello@hyrovision.ai"}` },
+    { icon: "💬", label: "WhatsApp", value: import.meta.env.VITE_WHATSAPP_NUMBER || "+1 (555) 123-4567", href: import.meta.env.VITE_WHATSAPP_LINK || "https://wa.me/15551234567" },
     { icon: "📍", label: "Location", value: "Dubai, UAE · Remote Worldwide", href: null },
   ];
 

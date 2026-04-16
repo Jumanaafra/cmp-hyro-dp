@@ -65,7 +65,7 @@ export default function CtaSection() {
           <a href="#contact" className="hv-btn hv-btn-p" style={{ fontSize: "16px", padding: "16px 36px" }}>
             Start Your Project <span className="hv-arr">→</span>
           </a>
-          <a href="mailto:hello@hyrovision.ai" className="hv-btn hv-btn-s" style={{ fontSize: "16px", padding: "16px 36px" }}>
+          <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL || "hello@hyrovision.ai"}`} className="hv-btn hv-btn-s" style={{ fontSize: "16px", padding: "16px 36px" }}>
             <span className="hv-ico">✉</span> Email Us
           </a>
         </div>

@@ -27,8 +27,8 @@ export default function Footer() {
             </div>
             <div className="footer-col">
               <h4 className="footer-col-title">Connect</h4>
-              <a href="mailto:hello@hyrovision.ai" className="footer-link">Email</a>
-              <a href="https://wa.me/15551234567" className="footer-link">WhatsApp</a>
+              <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL || "hello@hyrovision.ai"}`} className="footer-link">Email</a>
+              <a href={import.meta.env.VITE_WHATSAPP_LINK || "https://wa.me/15551234567"} className="footer-link">WhatsApp</a>
               <a href="#" className="footer-link">LinkedIn</a>
               <a href="#" className="footer-link">GitHub</a>
             </div>
