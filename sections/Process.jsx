@@ -1,14 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useData } from "../context/DataContext";
 
-const STEPS = [
-  { icon: "💡", step: "01", title: "Idea & Discovery", desc: "Deep-dive consultations to understand your goals, users, and technical constraints." },
-  { icon: "📐", step: "02", title: "Planning & Strategy", desc: "Architecture diagrams, tech stack selection, sprint planning, and milestone definition." },
-  { icon: "🎨", step: "03", title: "Design & Prototype", desc: "High-fidelity UI designs, interactive prototypes, and design system setup." },
-  { icon: "⚙️", step: "04", title: "Development & QA", desc: "Agile development with continuous testing, code reviews, and performance optimization." },
-  { icon: "🚀", step: "05", title: "Delivery & Support", desc: "Seamless deployment, handover documentation, and ongoing maintenance support." },
-];
 
 export default function ProcessSection() {
+  const { processSteps: STEPS } = useData();
   const sectionRef = useRef(null);
   const lineRef = useRef(null);
 

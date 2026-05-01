@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-
-/* ── Typewriter words ── */
-const WORDS = ["Intelligent", "Powerful", "Scalable", "Futuristic", "Innovative"];
+import { useData } from "../context/DataContext";
 
 function useParticles(canvasRef) {
   useEffect(() => {
@@ -37,6 +35,12 @@ function useParticles(canvasRef) {
 }
 
 export default function HeroSection({ navRef }) {
+  const { heroData } = useData();
+  const WORDS = heroData?.words || ["Intelligent", "Powerful", "Scalable"];
+  const STATS = heroData?.stats || [];
+  const METRICS = heroData?.metrics || [];
+  const TECHS = heroData?.techs || [];
+
   const canvasRef = useRef(null);
   const heroRef = useRef(null);
   const gridRef = useRef(null);
@@ -71,13 +75,7 @@ export default function HeroSection({ navRef }) {
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  const STATS = [{ v: "50+", l: "Projects" }, { v: "30+", l: "Clients" }, { v: "2+", l: "Yrs Exp" }, { v: "4", l: "Products" }];
-  const METRICS = [
-    { label: "AI Inference Speed", val: "12ms", pct: "92%", cls: "hv-mc", color: "#14B8A6" },
-    { label: "System Uptime", val: "99.9%", pct: "99%", cls: "hv-mg", color: "#10b981" },
-    { label: "Client Satisfaction", val: "4.9/5", pct: "98%", cls: "hv-mb", color: "#3b82f6" },
-  ];
-  const TECHS = ["React", "Next.js", "Python", "TensorFlow", "Three.js", "Firebase", "TypeScript", "Node.js", "Flutter", "Docker"];
+  // Data now from Firestore via useData()
 
   return (
     <section id="home" ref={heroRef} onMouseMove={onMouseMove} style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden", background: "var(--bg)" }}>
@@ -121,7 +119,7 @@ export default function HeroSection({ navRef }) {
             {METRICS.map(m => (
               <div key={m.label} className="hv-met">
                 <div className="hv-mrow"><span className="hv-mlbl">{m.label}</span><span className="hv-mval" style={{ color: m.color }}>{m.val}</span></div>
-                <div className="hv-mtrack"><div className={`hv-mbar ${m.cls}`} style={{ width: m.pct }} /></div>
+                <div className="hv-mtrack"><div className="hv-mbar" style={{ width: m.pct, background: `linear-gradient(90deg, ${m.color}, ${m.color}99)` }} /></div>
               </div>
             ))}
           </div>

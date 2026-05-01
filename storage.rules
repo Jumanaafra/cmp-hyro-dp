@@ -1,0 +1,11 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Public read for all uploaded assets (CDN delivery)
+    match /{allPaths=**} {
+      allow read: if true;
+      // Only authenticated admin can upload or delete files
+      allow write, delete: if request.auth != null;
+    }
+  }
+}

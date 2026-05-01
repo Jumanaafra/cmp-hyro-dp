@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: is the request from an authenticated admin?
+    function isAdmin() {
+      return request.auth != null &&
+        request.auth.token.email == request.resource.data.keys().hasAny(['email'])
+          ? false
+          : request.auth != null;
+    }
+
+    // Simpler: any authenticated user = admin (you only create one admin account)
+    function authed() {
+      return request.auth != null;
+    }
+
+    // ── Public read-only sections ── 
+    match /hero_section/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /about_section/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /cta_section/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+
+    // ── Collection-based sections ── 
+    match /services/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /products/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /projects/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /process_steps/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /pricing_plans/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /tech_stack/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+    match /testimonials/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+
+    // ── Contact info ──
+    match /contact_info/{doc} {
+      allow read: if true;
+      allow write: if authed();
+    }
+
+    // ── Contact submissions ──
+    // Anyone can write (submit form), only admin can read/delete
+    match /contact_submissions/{doc} {
+      allow create: if true;             // public form submission
+      allow read, update, delete: if authed();  // admin only
+    }
+  }
+}

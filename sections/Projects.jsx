@@ -1,67 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useData } from "../context/DataContext";
 
-const PROJECTS = [
-  {
-    id: "p1",
-    title: "Neural Retail Analytics",
-    category: "Computer Vision",
-    desc: "AI-powered foot traffic analysis system for retail chains using ceiling cameras and demographic detection.",
-    tech: ["Python", "YOLO", "React", "AWS"],
-    color: "#14B8A6",
-    emoji: "🏪",
-    size: "large",
-  },
-  {
-    id: "p2",
-    title: "MedScan Pro",
-    category: "Healthcare AI",
-    desc: "Medical document digitization and intelligent data extraction for hospital systems.",
-    tech: ["OCR", "TensorFlow", "Node.js"],
-    color: "#3b82f6",
-    emoji: "🏥",
-    size: "small",
-  },
-  {
-    id: "p3",
-    title: "SmartLogistics Hub",
-    category: "Enterprise SaaS",
-    desc: "Real-time fleet tracking, route optimization, and warehouse management platform for logistics companies.",
-    tech: ["React", "PostgreSQL", "Maps API"],
-    color: "#10b981",
-    emoji: "🚚",
-    size: "small",
-  },
-  {
-    id: "p4",
-    title: "EduVision LMS",
-    category: "EdTech Platform",
-    desc: "Modern learning management system with AI-powered personalized curriculum and adaptive assessments.",
-    tech: ["Next.js", "Firebase", "AI/ML"],
-    color: "#8b5cf6",
-    emoji: "🎓",
-    size: "large",
-  },
-  {
-    id: "p5",
-    title: "FinFlow Dashboard",
-    category: "FinTech",
-    desc: "Real-time financial analytics and reporting suite with AI-driven anomaly detection and forecasting.",
-    tech: ["React", "Python", "D3.js"],
-    color: "#f59e0b",
-    emoji: "📊",
-    size: "small",
-  },
-  {
-    id: "p6",
-    title: "SecureVault Identity",
-    category: "Biometrics",
-    desc: "Enterprise-grade facial recognition authentication system with liveness detection and audit logging.",
-    tech: ["OpenCV", "FastAPI", "Redis"],
-    color: "#ec4899",
-    emoji: "🔐",
-    size: "small",
-  },
-];
 
 function ProjectCard({ project }) {
   const [hovered, setHovered] = useState(false);
@@ -97,6 +36,7 @@ function ProjectCard({ project }) {
 }
 
 export default function ProjectsSection() {
+  const { projects: PROJECTS } = useData();
   const sectionRef = useRef(null);
   useEffect(() => {
     const el = sectionRef.current;
