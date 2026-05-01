@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
+import { useData } from "../context/DataContext";
 
 export default function CtaSection() {
+  const { ctaData, contactInfo } = useData();
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -53,20 +55,20 @@ export default function CtaSection() {
       <canvas ref={canvasRef} className="cta-canvas" />
       <div className="cta-orb-1" /><div className="cta-orb-2" />
       <div className="section-container" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-        <div className="section-tag" style={{ justifyContent: "center", display: "flex", margin: "0 auto 24px" }}>Ready to Build?</div>
+        <div className="section-tag" style={{ justifyContent: "center", display: "flex", margin: "0 auto 24px" }}>{ctaData?.tag || "Ready to Build?"}</div>
         <h2 className="cta-title">
-          Let's Build Something<br />
-          <span className="gradient-text">Powerful Together</span>
+          {ctaData?.title || "Let's Build Something"}<br />
+          <span className="gradient-text">{ctaData?.title_gradient || "Powerful Together"}</span>
         </h2>
         <p className="cta-desc">
-          Whether you have a fully-formed idea or just a spark — we're here to turn it into something extraordinary.
+          {ctaData?.description || "Whether you have a fully-formed idea or just a spark — we're here to turn it into something extraordinary."}
         </p>
         <div className="cta-buttons">
-          <a href="#contact" className="hv-btn hv-btn-p" style={{ fontSize: "16px", padding: "16px 36px" }}>
-            Start Your Project <span className="hv-arr">→</span>
+          <a href={ctaData?.btn_primary_href || "#contact"} className="hv-btn hv-btn-p" style={{ fontSize: "16px", padding: "16px 36px" }}>
+            {ctaData?.btn_primary_label || "Start Your Project"} <span className="hv-arr">→</span>
           </a>
-          <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL || "hello@hyrovision.ai"}`} className="hv-btn hv-btn-s" style={{ fontSize: "16px", padding: "16px 36px" }}>
-            <span className="hv-ico">✉</span> Email Us
+          <a href={`mailto:${contactInfo?.email || "hello@hyrovision.ai"}`} className="hv-btn hv-btn-s" style={{ fontSize: "16px", padding: "16px 36px" }}>
+            <span className="hv-ico">✉</span> {ctaData?.btn_secondary_label || "Email Us"}
           </a>
         </div>
       </div>

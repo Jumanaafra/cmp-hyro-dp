@@ -1,64 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { useData } from "../context/DataContext";
 
-const PLANS = [
-  {
-    id: "basic",
-    name: "Starter",
-    price: "$2,500",
-    period: "/ project",
-    tagline: "Perfect for small businesses",
-    features: [
-      "Up to 5 project pages",
-      "Mobile responsive design",
-      "Basic AI integration",
-      "1 month support",
-      "Source code handover",
-    ],
-    missing: ["Advanced AI features", "Cloud deployment", "Priority support"],
-    color: "#3b82f6",
-    cta: "Get Started",
-  },
-  {
-    id: "standard",
-    name: "Professional",
-    price: "$7,500",
-    period: "/ project",
-    tagline: "Most popular for growing teams",
-    features: [
-      "Full-featured web application",
-      "Custom AI/ML integration",
-      "Cloud deployment & DevOps",
-      "3 months priority support",
-      "Performance optimization",
-      "Analytics dashboard",
-    ],
-    missing: ["Dedicated project manager"],
-    color: "#14B8A6",
-    cta: "Most Popular",
-    highlighted: true,
-  },
-  {
-    id: "premium",
-    name: "Enterprise",
-    price: "Custom",
-    period: "quote",
-    tagline: "For large-scale projects",
-    features: [
-      "End-to-end custom platform",
-      "Advanced AI & vision systems",
-      "Multi-cloud architecture",
-      "12 months dedicated support",
-      "SLA guarantee (99.9%)",
-      "Dedicated project manager",
-      "Monthly performance reports",
-    ],
-    missing: [],
-    color: "#8b5cf6",
-    cta: "Contact Us",
-  },
-];
 
 export default function PricingSection() {
+  const { pricingPlans: PLANS } = useData();
   const sectionRef = useRef(null);
   const [hovered, setHovered] = useState(null);
 

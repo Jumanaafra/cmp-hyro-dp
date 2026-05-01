@@ -1,25 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useData } from "../context/DataContext";
 
-const TECHS = [
-  { name: "React", icon: "⚛️" },
-  { name: "Next.js", icon: "▲" },
-  { name: "Python", icon: "🐍" },
-  { name: "TensorFlow", icon: "🧠" },
-  { name: "PyTorch", icon: "🔥" },
-  { name: "Three.js", icon: "🎮" },
-  { name: "Node.js", icon: "🟢" },
-  { name: "TypeScript", icon: "📘" },
-  { name: "Flutter", icon: "🦋" },
-  { name: "Docker", icon: "🐳" },
-  { name: "Kubernetes", icon: "☸️" },
-  { name: "AWS", icon: "☁️" },
-  { name: "Firebase", icon: "🔥" },
-  { name: "PostgreSQL", icon: "🐘" },
-  { name: "OpenCV", icon: "👁️" },
-  { name: "Figma", icon: "🎨" },
-];
 
 export default function TechStackSection() {
+  const { techStack: TECHS } = useData();
   const sectionRef = useRef(null);
 
   useEffect(() => {

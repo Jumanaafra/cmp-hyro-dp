@@ -1,59 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useData } from "../context/DataContext";
 
-const PRODUCTS = [
-  {
-    id: "hyrovision-ai",
-    name: "HyroVision AI",
-    tagline: "Real-Time Computer Vision Platform",
-    desc: "Cloud-native vision AI with object detection, face recognition, and video analytics. Power your camera feeds with intelligence.",
-    badge: "🔥 Flagship",
-    badgeColor: "#14B8A6",
-    stats: [{ v: "60fps", l: "Processing" }, { v: "99.2%", l: "Accuracy" }, { v: "12ms", l: "Latency" }],
-    tags: ["Vision AI", "Real-Time", "Cloud"],
-    gradient: "linear-gradient(135deg, rgba(20,184,166,0.15), rgba(59,130,246,0.08))",
-    border: "rgba(20,184,166,0.35)",
-    glow: "#14B8A6",
-  },
-  {
-    id: "hyroflow",
-    name: "HyroFlow",
-    tagline: "Intelligent Workflow Automation",
-    desc: "AI-powered BPM platform that automates repetitive tasks, orchestrates teams, and delivers measurable business outcomes.",
-    badge: "⚡ Popular",
-    badgeColor: "#8b5cf6",
-    stats: [{ v: "80%", l: "Time Saved" }, { v: "500+", l: "Workflows" }, { v: "4.9★", l: "Rating" }],
-    tags: ["Automation", "BPM", "AI"],
-    gradient: "linear-gradient(135deg, rgba(139,92,246,0.12), rgba(20,184,166,0.06))",
-    border: "rgba(139,92,246,0.3)",
-    glow: "#8b5cf6",
-  },
-  {
-    id: "hyrochat",
-    name: "HyroChat",
-    tagline: "Contextual AI Communications Suite",
-    desc: "Omnichannel messaging platform with built-in GPT-powered chatbot, smart routing, and real-time customer sentiment analysis.",
-    badge: "✨ New",
-    badgeColor: "#10b981",
-    stats: [{ v: "10M+", l: "Messages" }, { v: "50+", l: "Channels" }, { v: "99.9%", l: "Uptime" }],
-    tags: ["Chat AI", "CXM", "SaaS"],
-    gradient: "linear-gradient(135deg, rgba(16,185,129,0.12), rgba(59,130,246,0.06))",
-    border: "rgba(16,185,129,0.3)",
-    glow: "#10b981",
-  },
-  {
-    id: "hyroscan",
-    name: "HyroScan",
-    tagline: "Document Intelligence & OCR Engine",
-    desc: "Extract, classify, and process documents at scale using deep learning OCR. Works on invoices, IDs, reports, and more.",
-    badge: "📄 Enterprise",
-    badgeColor: "#f59e0b",
-    stats: [{ v: "98%", l: "OCR Accuracy" }, { v: "2s", l: "Per Doc" }, { v: "40+", l: "Languages" }],
-    tags: ["OCR", "Document AI", "Enterprise"],
-    gradient: "linear-gradient(135deg, rgba(245,158,11,0.12), rgba(239,68,68,0.06))",
-    border: "rgba(245,158,11,0.3)",
-    glow: "#f59e0b",
-  },
-];
 
 function ProductCard({ product, index }) {
   const [hovered, setHovered] = useState(false);
@@ -115,6 +62,7 @@ function ProductCard({ product, index }) {
 }
 
 export default function ProductsSection() {
+  const { products: PRODUCTS } = useData();
   const sectionRef = useRef(null);
   useEffect(() => {
     const el = sectionRef.current;

@@ -1,41 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { useData } from "../context/DataContext";
 
-const TESTIMONIALS = [
-  {
-    name: "Sarah Chen",
-    role: "CTO, NeuralRetail Inc.",
-    avatar: "SC",
-    text: "Hyro Vision transformed our retail analytics. The computer vision system they built processes 60+ camera feeds in real-time with accuracy we didn't think was possible. It's genuinely impressive.",
-    rating: 5,
-    color: "#14B8A6",
-  },
-  {
-    name: "Alex Müller",
-    role: "CEO, MedScan Solutions",
-    avatar: "AM",
-    text: "We came with a complex healthcare problem and they delivered beyond expectations. The OCR engine processes thousands of medical documents daily with 98% accuracy. Incredible team.",
-    rating: 5,
-    color: "#3b82f6",
-  },
-  {
-    name: "Priya Nair",
-    role: "Product Lead, EduTech Global",
-    avatar: "PN",
-    text: "The LMS they built for us has a UX that our students actually love. The AI personalization module boosted course completion by 43%. We couldn't be happier with the outcome.",
-    rating: 5,
-    color: "#8b5cf6",
-  },
-  {
-    name: "Omar Al-Rashid",
-    role: "Director of Tech, SwiftLogistics",
-    avatar: "OA",
-    text: "Their enterprise logistics platform saved us 80+ hours per week in manual operations. The real-time tracking and AI-driven route optimization paid for itself within 3 months.",
-    rating: 5,
-    color: "#10b981",
-  },
-];
 
 export default function TestimonialsSection() {
+  const { testimonials: TESTIMONIALS } = useData();
   const sectionRef = useRef(null);
   const [active, setActive] = useState(0);
   const [fading, setFading] = useState(false);

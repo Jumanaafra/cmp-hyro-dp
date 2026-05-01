@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useData } from "../context/DataContext";
 
 function use3DCube(canvasRef) {
   useEffect(() => {
@@ -91,6 +92,7 @@ function use3DCube(canvasRef) {
 }
 
 export default function AboutSection() {
+  const { aboutData } = useData();
   const cubeRef = useRef(null);
   use3DCube(cubeRef);
 
@@ -106,12 +108,7 @@ export default function AboutSection() {
     return () => observer.disconnect();
   }, []);
 
-  const stats = [
-    { icon: "🚀", label: "Projects Delivered", value: "50+" },
-    { icon: "🌍", label: "Global Clients", value: "30+" },
-    { icon: "⚡", label: "AI Models Deployed", value: "15+" },
-    { icon: "🏆", label: "Industry Awards", value: "8" },
-  ];
+  const stats = aboutData?.stats || [];
 
   return (
     <section id="about" ref={sectionRef} className="about-section reveal-section">
@@ -121,13 +118,13 @@ export default function AboutSection() {
             <div className="section-tag">About Us</div>
             <h2 className="section-title">
               Pioneering the Future of<br />
-              <span className="gradient-text">Vision Technology</span>
+              <span className="gradient-text">{aboutData?.title_gradient || "Vision Technology"}</span>
             </h2>
             <p className="about-desc">
-              Hyro Vision is a full-stack AI and software studio at the intersection of intelligence and design. We architect digital systems that don't just function — they inspire.
+              {aboutData?.description1}
             </p>
             <p className="about-desc" style={{ marginTop: "16px" }}>
-              From computer vision pipelines to premium enterprise SaaS platforms, we bring technical excellence and aesthetic obsession to every build.
+              {aboutData?.description2}
             </p>
             <div className="about-stats">
               {stats.map(s => (

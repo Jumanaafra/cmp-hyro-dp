@@ -1,17 +1,33 @@
 import { useState, useRef } from "react";
+import { useData } from "../context/DataContext";
+import { createDoc } from "../firebase/firestore";
 
 export default function ContactSection() {
+  const { contactInfo } = useData();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [focused, setFocused] = useState("");
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (form.name && form.email && form.message) {
-      setSent(true);
-      setTimeout(() => setSent(false), 4000);
-      setForm({ name: "", email: "", subject: "", message: "" });
+      setSending(true);
+      try {
+        await createDoc("contact_submissions", {
+          ...form,
+          timestamp: new Date().toISOString(),
+          read: false,
+        });
+        setSent(true);
+        setTimeout(() => setSent(false), 4000);
+        setForm({ name: "", email: "", subject: "", message: "" });
+      } catch (err) {
+        console.error("Failed to send:", err);
+      } finally {
+        setSending(false);
+      }
     }
   };
 
@@ -21,10 +37,11 @@ export default function ContactSection() {
   });
 
   const CONTACT_INFO = [
-    { icon: "✉️", label: "Email", value: import.meta.env.VITE_CONTACT_EMAIL || "hello@hyrovision.ai", href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL || "hello@hyrovision.ai"}` },
-    { icon: "💬", label: "WhatsApp", value: import.meta.env.VITE_WHATSAPP_NUMBER || "+1 (555) 123-4567", href: import.meta.env.VITE_WHATSAPP_LINK || "https://wa.me/15551234567" },
-    { icon: "📍", label: "Location", value: "Dubai, UAE · Remote Worldwide", href: null },
+    { icon: "✉️", label: "Email", value: contactInfo?.email || "hello@hyrovision.ai", href: `mailto:${contactInfo?.email || "hello@hyrovision.ai"}` },
+    { icon: "💬", label: "WhatsApp", value: contactInfo?.whatsapp_number || "+1 (555) 123-4567", href: contactInfo?.whatsapp_link || "https://wa.me/15551234567" },
+    { icon: "📍", label: "Location", value: contactInfo?.location || "Dubai, UAE · Remote Worldwide", href: null },
   ];
+  const SOCIALS = contactInfo?.socials || [{ label: "LinkedIn", href: "#" }, { label: "GitHub", href: "#" }, { label: "Twitter", href: "#" }];
 
   return (
     <section id="contact" className="contact-section">
@@ -53,8 +70,8 @@ export default function ContactSection() {
               ))}
             </div>
             <div className="ci-social">
-              {["LinkedIn", "GitHub", "Twitter"].map(s => (
-                <a key={s} href="#" className="ci-social-btn">{s}</a>
+              {SOCIALS.map(s => (
+                <a key={s.label} href={s.href} className="ci-social-btn">{s.label}</a>
               ))}
             </div>
           </div>
@@ -98,8 +115,8 @@ export default function ContactSection() {
                 className="cf-textarea" style={inputStyle("message")} rows={6} required
               />
             </div>
-            <button type="submit" className="cf-submit">
-              Send Message <span>→</span>
+            <button type="submit" className="cf-submit" disabled={sending}>
+              {sending ? "Sending..." : <>{"Send Message"} <span>→</span></>}
             </button>
           </form>
         </div>

@@ -1,49 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useData } from "../context/DataContext";
 
-const SERVICES = [
-  {
-    icon: "🧠",
-    title: "AI & Machine Learning",
-    desc: "Custom neural networks, computer vision pipelines, NLP systems, and predictive analytics engineered for real-world performance.",
-    tags: ["TensorFlow", "PyTorch", "OpenCV"],
-    color: "#14B8A6",
-  },
-  {
-    icon: "👁️",
-    title: "Computer Vision",
-    desc: "Real-time object detection, facial recognition, document scanning, and video analytics systems built for scale.",
-    tags: ["YOLO", "OpenCV", "MediaPipe"],
-    color: "#3b82f6",
-  },
-  {
-    icon: "⚙️",
-    title: "Enterprise Software",
-    desc: "Full-stack SaaS platforms, ERP systems, and B2B tools designed to automate workflows and drive business growth.",
-    tags: ["React", "Node.js", "PostgreSQL"],
-    color: "#10b981",
-  },
-  {
-    icon: "📱",
-    title: "Mobile Applications",
-    desc: "Cross-platform iOS & Android apps with smooth UX, real-time sync, and AI-powered features baked in.",
-    tags: ["Flutter", "React Native", "Firebase"],
-    color: "#8b5cf6",
-  },
-  {
-    icon: "☁️",
-    title: "Cloud & DevOps",
-    desc: "Scalable cloud infrastructure, CI/CD pipelines, containerized microservices, and 99.9% uptime architecture.",
-    tags: ["AWS", "Docker", "Kubernetes"],
-    color: "#f59e0b",
-  },
-  {
-    icon: "🎨",
-    title: "UI/UX Design",
-    desc: "Pixel-perfect, conversion-optimized interfaces — from wireframe to working product — with motion design and micro-interactions.",
-    tags: ["Figma", "Framer", "Spline"],
-    color: "#ec4899",
-  },
-];
 
 function ServiceCard({ service, index }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -88,6 +45,7 @@ function ServiceCard({ service, index }) {
 }
 
 export default function ServicesSection() {
+  const { services: SERVICES } = useData();
   const sectionRef = useRef(null);
   useEffect(() => {
     const el = sectionRef.current;
