@@ -2,15 +2,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Helper: is the request from an authenticated admin?
+    // isAdmin: user must be authenticated AND use the known admin email
     function isAdmin() {
       return request.auth != null &&
-        request.auth.token.email == request.resource.data.keys().hasAny(['email'])
-          ? false
-          : request.auth != null;
+        request.auth.token.email == "admin@hyrovision.ai";
     }
 
-    // Simpler: any authenticated user = admin (you only create one admin account)
+    // authed: any authenticated user (for flexibility — only one admin account exists)
     function authed() {
       return request.auth != null;
     }

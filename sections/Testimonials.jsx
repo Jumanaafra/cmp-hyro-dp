@@ -15,6 +15,7 @@ export default function TestimonialsSection() {
   };
 
   useEffect(() => {
+    if (!TESTIMONIALS || TESTIMONIALS.length === 0) return;
     intervalRef.current = setInterval(() => {
       setFading(true);
       setTimeout(() => {
@@ -23,7 +24,7 @@ export default function TestimonialsSection() {
       }, 300);
     }, 5000);
     return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [TESTIMONIALS]);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -33,7 +34,9 @@ export default function TestimonialsSection() {
     return () => observer.disconnect();
   }, []);
 
-  const t = TESTIMONIALS[active];
+  const t = TESTIMONIALS && TESTIMONIALS.length > 0 ? TESTIMONIALS[active] : null;
+
+  if (!t) return null;
 
   return (
     <section id="testimonials" ref={sectionRef} className="testimonials-section reveal-section">
