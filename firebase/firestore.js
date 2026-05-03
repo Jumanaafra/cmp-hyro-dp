@@ -22,8 +22,8 @@ import {
 import { db, storage } from "./config";
 
 /* ── Collection helpers ── */
-export const col = (name) => collection(db, name);
-export const docRef = (name, id) => doc(db, name, id);
+export const col = (name) => db ? collection(db, name) : null;
+export const docRef = (name, id) => db ? doc(db, name, id) : null;
 
 /* ── Read all docs from a collection (ordered by `order` field if exists) ── */
 export async function fetchCollection(name) {
@@ -33,6 +33,7 @@ export async function fetchCollection(name) {
 
 /* ── Real-time listener (returns unsubscribe fn) ── */
 export function subscribeCollection(name, callback, orderField = "order") {
+  if (!db) { callback([]); return () => {}; }
   const q = query(col(name), orderBy(orderField, "asc"));
   return onSnapshot(q, (snap) => {
     const data = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -42,6 +43,7 @@ export function subscribeCollection(name, callback, orderField = "order") {
 
 /* ── Real-time listener for a single document ── */
 export function subscribeDoc(name, id, callback) {
+  if (!db) { callback(null); return () => {}; }
   return onSnapshot(docRef(name, id), (snap) => {
     if (snap.exists()) callback({ id: snap.id, ...snap.data() });
     else callback(null);
