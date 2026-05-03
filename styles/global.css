@@ -56,6 +56,8 @@ body {
 @keyframes wordOut    { from{opacity:1;transform:translateY(0);filter:blur(0)} to{opacity:0;transform:translateY(-14px);filter:blur(5px)} }
 @keyframes ticker     { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 @keyframes tickerRev  { from{transform:translateX(-50%)} to{transform:translateX(0)} }
+@keyframes tsLeft  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes tsRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 @keyframes lineGrow   { from{width:0} to{width:100%} }
 @keyframes spinSlow   { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 @keyframes shimmer    { 0%{left:-60%} 100%{left:120%} }
@@ -514,15 +516,21 @@ body {
 .ticker-track--reverse { animation: tickerRev 28s linear infinite; }
 .ticker-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 12px 20px; border-radius: 12px;
+  padding: 12px 22px; border-radius: 12px;
   background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
-  white-space: nowrap; cursor: default;
-  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  white-space: nowrap; cursor: default; flex-shrink: 0;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.25s;
   font-size: 14px; font-weight: 500; color: var(--text-muted);
 }
-.ticker-item:hover { border-color: rgba(20,184,166,0.4); background: rgba(20,184,166,0.07); color: #fff; box-shadow: 0 0 16px rgba(20,184,166,0.12); }
-.ticker-icon { font-size: 18px; }
-.ticker-name { font-weight: 600; }
+.ts-item:hover {
+  border-color: rgba(20,184,166,0.45);
+  background: rgba(20,184,166,0.08);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(20,184,166,0.15);
+  transform: translateY(-2px);
+}
+.ts-icon { font-size: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ts-name { font-weight: 600; }
 
 /* ═══════════════════════ TESTIMONIALS ═══════════════════════ */
 .testimonials-section { padding: 72px 0; background: linear-gradient(180deg, var(--bg) 0%, #0d0d0d 100%); }

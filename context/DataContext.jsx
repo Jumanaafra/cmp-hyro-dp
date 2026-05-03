@@ -1,3 +1,4 @@
+// @refresh reset
 import { createContext, useContext } from "react";
 import { useFirestoreCollection, useFirestoreDoc } from "../hooks/useFirestoreCollection";
 
@@ -45,6 +46,45 @@ const CONTACT_FALLBACK = {
   socials: [{ label: "LinkedIn", href: "#" }, { label: "GitHub", href: "#" }, { label: "Twitter", href: "#" }],
 };
 
+const SERVICES_FALLBACK = [
+  { title: "Custom AI Solutions", icon: "🧠", desc: "Tailor-made machine learning models for enterprise data.", tags: ["Python", "TensorFlow"], color: "#14b8a6" },
+  { title: "Web Development", icon: "💻", desc: "High-performance web applications built with modern tech.", tags: ["React", "Node.js"], color: "#3b82f6" },
+  { title: "UI/UX Design", icon: "✨", desc: "Premium, futuristic interfaces that captivate users.", tags: ["Figma", "Three.js"], color: "#8b5cf6" }
+];
+
+const PRODUCTS_FALLBACK = [
+  { id: "1", name: "VisionAI Core", tagline: "Enterprise Vision", desc: "Advanced image recognition system.", badge: "Enterprise", badgeColor: "#14b8a6", gradient: "linear-gradient(135deg, #14b8a611, #020617)", border: "#14b8a633", glow: "#14b8a6", stats: [{v: "12ms", l: "Latency"}, {v: "99.9%", l: "Accuracy"}], tags: ["Real-time", "High throughput"] },
+  { id: "2", name: "Hyro Analytics", tagline: "Data Intelligence", desc: "Data analytics platform for modern teams.", badge: "SaaS", badgeColor: "#3b82f6", gradient: "linear-gradient(135deg, #3b82f611, #020617)", border: "#3b82f633", glow: "#3b82f6", stats: [{v: "10x", l: "Speed"}, {v: "24/7", l: "Uptime"}], tags: ["Dashboards", "Insights"] }
+];
+
+const PROJECTS_FALLBACK = [
+  { id: "1", size: "large", color: "#14b8a6", emoji: "🛍️", category: "Computer Vision", title: "Smart Retail", desc: "Automated checkout using AI.", tech: ["Python", "TensorFlow"] },
+  { id: "2", size: null, color: "#3b82f6", emoji: "📊", category: "Web App", title: "Nexus Dashboard", desc: "Enterprise management system.", tech: ["React", "Node.js"] }
+];
+
+const PROCESS_FALLBACK = [
+  { step: "01", icon: "🔍", title: "Discovery", desc: "We analyze your needs and outline the architecture." },
+  { step: "02", icon: "⚙️", title: "Development", desc: "We build the solution with cutting-edge tech." },
+  { step: "03", icon: "🚀", title: "Deployment", desc: "We launch and scale your product to the world." }
+];
+
+const PRICING_FALLBACK = [
+  { id: "1", highlighted: false, color: "#94a3b8", name: "Starter", tagline: "For small teams", price: "$99", period: "/mo", features: ["Basic Analytics", "Email Support", "1 User"], missing: ["Custom AI Models"], cta: "Get Started" },
+  { id: "2", highlighted: true, color: "#3b82f6", name: "Pro", tagline: "For enterprises", price: "$299", period: "/mo", features: ["Advanced AI", "Priority Support", "Unlimited Users", "Custom Models"], missing: [], cta: "Get Pro" }
+];
+
+const TECH_FALLBACK = [
+  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" }
+];
+
+const TESTIMONIALS_FALLBACK = [
+  { text: "Hyro Vision completely transformed our business with their incredible AI solutions.", rating: 5, color: "#10b981", avatar: "JD", name: "John Doe", role: "CEO at TechCorp" },
+  { text: "The team delivered a beautiful, performant web app ahead of schedule. Truly premium work.", rating: 5, color: "#3b82f6", avatar: "AS", name: "Alice Smith", role: "Founder at Nexus" }
+];
+
 /* ── Create context ── */
 const DataContext = createContext(null);
 
@@ -74,13 +114,13 @@ export function DataProvider({ children }) {
     settings: settingsRaw || { site_name: "Hyro Vision", maintenance_mode: false },
 
     // Array collections (filter visible, already sorted by `order`)
-    services: services.filter((s) => s.visible !== false),
-    products: products.filter((p) => p.visible !== false),
-    projects: projects.filter((p) => p.visible !== false),
-    processSteps: processSteps.filter((s) => s.visible !== false),
-    pricingPlans: pricingPlans.filter((p) => p.visible !== false),
-    techStack: techStack.filter((t) => t.visible !== false),
-    testimonials: testimonials.filter((t) => t.visible !== false),
+    services: (services.length > 0 ? services : SERVICES_FALLBACK).filter((s) => s.visible !== false),
+    products: (products.length > 0 ? products : PRODUCTS_FALLBACK).filter((p) => p.visible !== false),
+    projects: (projects.length > 0 ? projects : PROJECTS_FALLBACK).filter((p) => p.visible !== false),
+    processSteps: (processSteps.length > 0 ? processSteps : PROCESS_FALLBACK).filter((s) => s.visible !== false),
+    pricingPlans: (pricingPlans.length > 0 ? pricingPlans : PRICING_FALLBACK).filter((p) => p.visible !== false),
+    techStack: (techStack.length > 0 ? techStack : TECH_FALLBACK).filter((t) => t.visible !== false),
+    testimonials: (testimonials.length > 0 ? testimonials : TESTIMONIALS_FALLBACK).filter((t) => t.visible !== false),
 
     // Loading states (individual — prevents cross-section flicker)
     loading: {

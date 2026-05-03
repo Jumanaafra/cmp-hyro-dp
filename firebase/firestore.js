@@ -5,7 +5,6 @@ import {
   getDoc,
   setDoc,
   addDoc,
-  updateDoc,
   deleteDoc,
   onSnapshot,
   query,
@@ -13,6 +12,8 @@ import {
   serverTimestamp,
   writeBatch,
 } from "firebase/firestore";
+// NOTE: updateDoc is intentionally NOT imported — we use setDoc with merge:true
+// everywhere so saves never fail on missing documents.
 import {
   ref,
   uploadBytesResumable,
@@ -60,7 +61,7 @@ export async function createDoc(name, data) {
   return ref.id;
 }
 
-/* ── Create / overwrite a document with specific ID ── */
+/* ── Create / overwrite a document with specific ID (full overwrite) ── */
 export async function setDocument(name, id, data) {
   await setDoc(docRef(name, id), {
     ...data,
@@ -68,12 +69,33 @@ export async function setDocument(name, id, data) {
   });
 }
 
-/* ── Update specific fields on a document ── */
+/**
+ * updateDocument — the KEY fix:
+ * Uses setDoc with { merge: true } instead of updateDoc().
+ *
+ * WHY: updateDoc() throws "No document to update" if the document does
+ * not yet exist (fresh Firebase project / first save ever).
+ * setDoc with merge:true creates the document if missing, or merges
+ * the provided fields into the existing document if it already exists.
+ * This makes it safe for both CREATE and UPDATE in one call.
+ */
 export async function updateDocument(name, id, data) {
-  await updateDoc(docRef(name, id), {
-    ...data,
+  // Strip any undefined values so Firestore doesn't reject them
+  const clean = Object.fromEntries(
+    Object.entries(data).filter(([, v]) => v !== undefined)
+  );
+  await setDoc(docRef(name, id), {
+    ...clean,
     updatedAt: serverTimestamp(),
-  });
+  }, { merge: true });
+}
+
+/**
+ * upsertDocument — explicit alias for clarity in admin sections.
+ * Identical behaviour to the fixed updateDocument above.
+ */
+export async function upsertDocument(name, id, data) {
+  return updateDocument(name, id, data);
 }
 
 /* ── Delete a document ── */
