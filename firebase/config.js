@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
@@ -12,9 +12,29 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+// Guard: only initialise if all required keys are present
+const isConfigured = !!(
+  firebaseConfig.apiKey &&
+  firebaseConfig.projectId &&
+  firebaseConfig.appId &&
+  firebaseConfig.apiKey !== "undefined" &&
+  firebaseConfig.projectId !== "undefined"
+);
 
-export const db = getFirestore(app);
-export const storage = getStorage(app);
-export const auth = getAuth(app);
+let app, db, storage, auth;
+
+try {
+  app = getApps().length ? getApps()[0] : initializeApp(isConfigured ? firebaseConfig : { apiKey: "placeholder", authDomain: "placeholder.firebaseapp.com", projectId: "placeholder", storageBucket: "placeholder.appspot.com", messagingSenderId: "000000000000", appId: "1:000000000000:web:0000000000000000" });
+  db = getFirestore(app);
+  storage = getStorage(app);
+  auth = getAuth(app);
+} catch (e) {
+  console.warn("[Hyro Vision] Firebase init skipped — running in fallback-only mode.", e.message);
+  // Create minimal stubs so imports don't crash
+  db = null;
+  storage = null;
+  auth = null;
+}
+
+export { db, storage, auth };
 export default app;
