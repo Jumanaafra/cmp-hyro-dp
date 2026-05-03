@@ -11,15 +11,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        {/* Main public site */}
-        <Route
-          path="/"
-          element={
-            <DataProvider>
-              <App />
-            </DataProvider>
-          }
-        />
         {/* Admin panel — lazy loaded, completely separate chunk */}
         <Route
           path="/admin/*"
@@ -33,6 +24,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             >
               <AdminApp />
             </Suspense>
+          }
+        />
+        {/* Main public site - catch-all for any other route */}
+        <Route
+          path="*"
+          element={
+            <DataProvider>
+              <App />
+            </DataProvider>
           }
         />
       </Routes>
