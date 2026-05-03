@@ -312,8 +312,8 @@ body {
 .hv-mc { background: linear-gradient(90deg, rgba(20,184,166,0.6), #14B8A6); box-shadow: 0 0 8px rgba(20,184,166,0.5); }
 .hv-mg { background: linear-gradient(90deg, rgba(16,185,129,0.6), #10b981); box-shadow: 0 0 8px rgba(16,185,129,0.5); }
 .hv-mb { background: linear-gradient(90deg, rgba(59,130,246,0.6), #3b82f6); box-shadow: 0 0 8px rgba(59,130,246,0.5); }
-.hv-tags { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
-.hv-tag { padding: 5px 11px; border-radius: 8px; font-size: 12px; font-weight: 500; color: #cbd5e1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); cursor: default; transition: color 0.2s, border-color 0.2s, background 0.2s; flex-shrink: 0; }
+.hv-tags { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 7px; }
+.hv-tag { padding: 6px 10px; border-radius: 8px; font-size: 12px; font-weight: 500; color: #cbd5e1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); cursor: default; transition: color 0.2s, border-color 0.2s, background 0.2s; text-align: center; white-space: nowrap; }
 .hv-tag:hover { color: var(--cyan); border-color: rgba(20,184,166,0.4); background: rgba(20,184,166,0.07); }
 .hv-scroll-ind { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 20; cursor: pointer; opacity: 0; animation: fadeIn 1s ease 2.5s forwards; }
 .hv-slbl { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; font-weight: 500; }
@@ -508,13 +508,14 @@ body {
 
 /* ═══════════════════════ TECH STACK ═══════════════════════ */
 .techstack-section { padding: 72px 0; background: var(--bg); overflow: hidden; }
-.ticker-wrapper { position: relative; width: 100%; overflow: hidden; margin: 0; }
-.ticker-fade-left, .ticker-fade-right { position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
-.ticker-fade-left { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
-.ticker-fade-right { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
-.ticker-track { display: flex; gap: 16px; padding: 8px 0; animation: ticker 28s linear infinite; width: max-content; }
-.ticker-track--reverse { animation: tickerRev 28s linear infinite; }
-.ticker-item {
+.ts-marquee-wrapper { position: relative; width: 100%; overflow: hidden; margin: 0; }
+.ts-fade-left, .ts-fade-right { position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+.ts-fade-left  { left:  0; background: linear-gradient(90deg,  var(--bg), transparent); }
+.ts-fade-right { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
+.ts-track { display: flex; gap: 16px; padding: 8px 0; animation: ticker 32s linear infinite; width: max-content; }
+.ts-track--left  { animation: ticker    32s linear infinite; }
+.ts-track--right { animation: tickerRev 32s linear infinite; }
+.ts-item {
   display: flex; align-items: center; gap: 10px;
   padding: 12px 22px; border-radius: 12px;
   background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
