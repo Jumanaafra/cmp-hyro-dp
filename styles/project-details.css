@@ -1,0 +1,377 @@
+/* ═══════════════════════════════════════════════
+   PROJECT DETAILS PAGE
+   ═══════════════════════════════════════════════ */
+
+.pd-shell {
+  min-height: 100vh;
+  background: var(--bg, #0a0a0a);
+  color: var(--text, #f1f5f9);
+  font-family: 'Inter', 'Space Grotesk', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Background decorations ── */
+.pd-grid-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(20,184,166,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,184,166,0.03) 1px, transparent 1px);
+  background-size: 58px 58px;
+  z-index: 0;
+}
+.pd-orb {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.pd-orb-1 {
+  width: 700px; height: 700px;
+  top: -200px; right: -200px;
+  animation: orbDrift 16s ease-in-out infinite;
+}
+.pd-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -150px; left: -150px;
+  background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+  animation: orbDrift 20s ease-in-out reverse infinite;
+}
+
+/* ── Top bar ── */
+.pd-topbar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 32px 0;
+}
+
+.pd-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.pd-back-btn:hover {
+  background: rgba(20,184,166,0.1);
+  border-color: rgba(20,184,166,0.4);
+  color: #14B8A6;
+  transform: translateX(-2px);
+}
+
+.pd-topbar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.06em;
+}
+.pd-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+/* ── Hero ── */
+.pd-hero {
+  position: relative;
+  z-index: 10;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 32px 40px;
+  text-align: center;
+}
+
+.pd-hero-emoji {
+  font-size: 72px;
+  display: block;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.pd-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+}
+
+.pd-hero-title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 20px;
+  animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.15s both;
+}
+
+.pd-hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted, #94a3b8);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;
+}
+
+/* ── Content grid ── */
+.pd-content {
+  position: relative;
+  z-index: 10;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Cards ── */
+.pd-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 28px 32px;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+  position: relative;
+  overflow: hidden;
+}
+
+.pd-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 18px;
+}
+
+/* Tech pills */
+.pd-tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.pd-tech-pill {
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pd-tech-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Info grid */
+.pd-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.pd-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pd-info-key {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3);
+}
+.pd-info-val {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+/* CTA card */
+.pd-card--cta {
+  animation-delay: 0.4s;
+}
+.pd-cta-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pd-cta-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.pd-cta-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.pd-cta-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+}
+
+.pd-live-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #020617;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  flex-shrink: 0;
+  transition: transform 0.25s, box-shadow 0.25s, filter 0.25s;
+}
+.pd-live-btn:hover {
+  transform: scale(1.04) translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.pd-live-btn--disabled {
+  background: rgba(255,255,255,0.08) !important;
+  color: rgba(255,255,255,0.3);
+  cursor: not-allowed;
+}
+.pd-live-btn--disabled:hover {
+  transform: none;
+  filter: none;
+  box-shadow: none;
+}
+
+/* ── Bottom navigation ── */
+.pd-footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s both;
+}
+
+.pd-back-full-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.pd-back-full-btn:hover {
+  background: rgba(20,184,166,0.08);
+  border-color: rgba(20,184,166,0.3);
+  color: #14B8A6;
+}
+
+.pd-contact-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #14B8A6, #10b981);
+  border: none;
+  color: #020617;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pd-contact-btn:hover {
+  transform: scale(1.03) translateY(-1px);
+  box-shadow: 0 0 24px rgba(20,184,166,0.4);
+}
+
+/* ── Loading state ── */
+.pd-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+}
+.pd-loader-ring {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(20,184,166,0.2);
+  border-top-color: #14B8A6;
+  animation: spinSlow 0.8s linear infinite;
+}
+
+/* ── Not found state ── */
+.pd-not-found {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+  gap: 16px;
+}
+.pd-nf-emoji { font-size: 56px; }
+.pd-nf-title { font-size: 28px; font-weight: 800; color: #fff; }
+.pd-nf-desc { font-size: 15px; color: rgba(255,255,255,0.4); max-width: 360px; line-height: 1.7; font-weight: 300; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .pd-topbar { padding: 24px 20px 0; }
+  .pd-hero { padding: 40px 20px 28px; }
+  .pd-content { padding: 0 20px 60px; }
+  .pd-hero-emoji { font-size: 56px; }
+  .pd-info-grid { grid-template-columns: 1fr 1fr; }
+  .pd-cta-inner { flex-direction: column; align-items: flex-start; }
+  .pd-footer-nav { flex-direction: column; }
+  .pd-back-full-btn, .pd-contact-btn { width: 100%; text-align: center; }
+}

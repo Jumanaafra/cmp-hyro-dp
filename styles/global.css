@@ -442,9 +442,9 @@ body {
 .proj-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 18px; font-weight: 300; }
 .proj-tech { display: flex; flex-wrap: wrap; gap: 6px; }
 .proj-tech-tag { padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 500; color: var(--text-muted); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); }
-.proj-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s; }
-.proj-overlay--visible { opacity: 1; }
-.proj-view-btn { padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transform: translateY(8px); transition: transform 0.3s; }
+.proj-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.proj-overlay--visible { opacity: 1; pointer-events: all; }
+.proj-view-btn { padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transform: translateY(8px); transition: transform 0.3s; position: relative; z-index: 2; cursor: pointer; }
 .proj-overlay--visible .proj-view-btn { transform: translateY(0); }
 .proj-corner-line { position: absolute; bottom: 0; right: 0; width: 60px; height: 60px; border-top: 1px solid; border-left: 1px solid; border-radius: 0 0 var(--radius-md) 0; pointer-events: none; }
 

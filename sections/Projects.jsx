@@ -1,39 +1,70 @@
 import { useEffect, useRef, useState } from "react";
 import { useData } from "../context/DataContext";
 
-
 function ProjectCard({ project }) {
   const [hovered, setHovered] = useState(false);
+
+  const handleClick = () => {
+    console.log("Opening:", project.title, project.liveUrl);
+    if (project.liveUrl) {
+      window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
     <div
       className={`project-card ${project.size === "large" ? "project-card--large" : ""}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ "--proj-color": project.color }}
+      onClick={handleClick}
+      style={{
+        "--proj-color": project.color,
+        cursor: "pointer",
+      }}
     >
+      {/* Background glow */}
       <div className="proj-bg" style={{
         background: `linear-gradient(135deg, ${project.color}20, transparent)`,
         opacity: hovered ? 1 : 0.5,
       }} />
-      <div className="proj-emoji">{project.emoji}</div>
-      <div className="proj-category">{project.category}</div>
-      <h3 className="proj-title">{project.title}</h3>
-      <p className="proj-desc">{project.desc}</p>
-      <div className="proj-tech">
-        {project.tech.map(t => (
-          <span key={t} className="proj-tech-tag">{t}</span>
-        ))}
+
+      {/* Card content — pointer-events: none so card click always fires */}
+      <div style={{ pointerEvents: "none", position: "relative", zIndex: 1 }}>
+        <div className="proj-emoji">{project.emoji}</div>
+        <div className="proj-category">{project.category}</div>
+        <h3 className="proj-title">{project.title}</h3>
+        <p className="proj-desc">{project.desc}</p>
+        <div className="proj-tech">
+          {(project.tech || []).map(t => (
+            <span key={t} className="proj-tech-tag">{t}</span>
+          ))}
+        </div>
       </div>
-      <div className={`proj-overlay ${hovered ? "proj-overlay--visible" : ""}`}>
-        <a href="#contact" className="proj-view-btn" style={{ background: project.color, color: "#020617" }}>
+
+      {/* Hover overlay — pointer-events: none so click passes through to card */}
+      <div
+        className={`proj-overlay ${hovered ? "proj-overlay--visible" : ""}`}
+        style={{ pointerEvents: "none" }}
+      >
+        <span
+          className="proj-view-btn"
+          style={{
+            background: project.color,
+            color: "#020617",
+            border: "none",
+            pointerEvents: "none",
+          }}
+        >
           View Details →
-        </a>
+        </span>
       </div>
-      <div className="proj-corner-line" style={{ borderColor: `${project.color}55` }} />
+
+      <div className="proj-corner-line" style={{ borderColor: `${project.color}55`, pointerEvents: "none" }} />
     </div>
   );
 }
+
+
 
 export default function ProjectsSection() {
   const { projects: PROJECTS } = useData();

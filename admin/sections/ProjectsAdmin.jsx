@@ -3,7 +3,7 @@ import { useFirestoreCollection } from "../../hooks/useFirestoreCollection";
 import { createDoc, updateDocument, deleteDocument, batchUpdateOrder } from "../../firebase/firestore";
 import { useToast, ConfirmDialog, OrderButtons, VisibilityToggle } from "../adminUtils";
 
-const BLANK = { emoji: "🚀", title: "", category: "", desc: "", tech: [], color: "#14B8A6", size: "small", visible: true };
+const BLANK = { emoji: "🚀", title: "", category: "", desc: "", tech: [], color: "#14B8A6", size: "small", liveUrl: "", visible: true };
 const SIZES = ["small", "large"];
 
 export default function ProjectsAdmin() {
@@ -78,6 +78,10 @@ export default function ProjectsAdmin() {
           <label className="admin-field-label">Emoji</label>
           <input className="admin-field-input" value={form.emoji} onChange={e => set("emoji", e.target.value)} />
         </div>
+      </div>
+      <div className="admin-field">
+        <label className="admin-field-label">Live URL</label>
+        <input className="admin-field-input" type="url" placeholder="https://..." value={form.liveUrl || ""} onChange={e => set("liveUrl", e.target.value)} />
       </div>
       <div className="admin-field-row">
         <div className="admin-field">
