@@ -33,8 +33,8 @@ function ServiceCard({ service, index }) {
       <h3 className="sc-title">{service.title}</h3>
       <p className="sc-desc">{service.desc}</p>
       <div className="sc-tags">
-        {service.tags.map(t => (
-          <span key={t} className="sc-tag" style={{ borderColor: `${service.color}44`, color: service.color }}>
+        {(service.tags ?? []).map(t => (
+          <span key={t} className="sc-tag" style={{ borderColor: `${service.color ?? "#14B8A6"}44`, color: service.color ?? "#14B8A6" }}>
             {t}
           </span>
         ))}

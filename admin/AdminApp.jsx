@@ -1,33 +1,22 @@
-import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { useState } from "react";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "./AdminDashboard";
 
+// Check sessionStorage so refresh keeps the user logged in
+function isAuthenticated() {
+  return sessionStorage.getItem("hv_admin_auth") === "true";
+}
+
 export default function AdminApp() {
-  const [user, setUser] = useState(undefined); // undefined = loading
+  const [loggedIn, setLoggedIn] = useState(isAuthenticated);
 
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => setUser(u));
-    return () => unsub();
-  }, []);
+  const handleLogin  = () => setLoggedIn(true);
+  const handleLogout = () => {
+    sessionStorage.removeItem("hv_admin_auth");
+    setLoggedIn(false);
+  };
 
-  // Loading
-  if (user === undefined) {
-    return (
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "center",
-        height: "100vh", background: "#020617", color: "#14B8A6",
-        fontFamily: "Inter, sans-serif", fontSize: "14px",
-      }}>
-        Authenticating...
-      </div>
-    );
-  }
+  if (!loggedIn) return <AdminLogin onLogin={handleLogin} />;
 
-  // Not logged in
-  if (!user) return <AdminLogin />;
-
-  // Logged in
-  return <AdminDashboard user={user} />;
+  return <AdminDashboard onLogout={handleLogout} />;
 }

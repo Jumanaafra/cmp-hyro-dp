@@ -36,13 +36,15 @@ export default function ProcessSection() {
           <div className="process-steps">
             {STEPS.map((s, i) => (
               <div key={s.step} className="process-step" style={{ animationDelay: `${i * 0.18}s` }}>
-                <div className="ps-number">{s.step}</div>
                 <div className="ps-icon-wrap">
+                  <div className="ps-number">{s.step}</div>
                   <div className="ps-icon">{s.icon}</div>
                   <div className="ps-dot" />
                 </div>
-                <h3 className="ps-title">{s.title}</h3>
-                <p className="ps-desc">{s.desc}</p>
+                <div className="ps-content">
+                  <h3 className="ps-title">{s.title}</h3>
+                  <p className="ps-desc">{s.desc}</p>
+                </div>
               </div>
             ))}
           </div>

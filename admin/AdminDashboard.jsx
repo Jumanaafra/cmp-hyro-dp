@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase/config";
+
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL ?? "Admin";
 
 // Lazy section imports
 import HeroAdmin from "./sections/HeroAdmin";
@@ -53,12 +53,8 @@ const SECTION_MAP = {
   settings: SettingsAdmin,
 };
 
-export default function AdminDashboard({ user }) {
+export default function AdminDashboard({ onLogout }) {
   const [active, setActive] = useState("hero");
-
-  const handleLogout = async () => {
-    await signOut(auth);
-  };
 
   const ActiveSection = SECTION_MAP[active] || HeroAdmin;
   const allItems = NAV.flatMap(g => g.items);
@@ -100,11 +96,11 @@ export default function AdminDashboard({ user }) {
           <div className="admin-sidebar-footer">
             <div className="admin-user-info">
               <div className="admin-avatar">
-                {(user.email?.[0] || "A").toUpperCase()}
+                {(ADMIN_EMAIL?.[0] ?? "A").toUpperCase()}
               </div>
-              <div className="admin-user-email">{user.email}</div>
+              <div className="admin-user-email">{ADMIN_EMAIL}</div>
             </div>
-            <button className="admin-logout-btn" onClick={handleLogout} id="admin-logout">
+            <button className="admin-logout-btn" onClick={onLogout} id="admin-logout">
               Sign Out
             </button>
           </div>

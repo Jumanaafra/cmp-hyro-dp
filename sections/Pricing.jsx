@@ -46,12 +46,12 @@ export default function PricingSection() {
               </div>
               <div className="pc2-divider" style={{ background: `linear-gradient(90deg, transparent, ${plan.color}55, transparent)` }} />
               <ul className="pc2-features">
-                {plan.features.map(f => (
+                {(plan.features ?? []).map(f => (
                   <li key={f} className="pc2-feature pc2-feature--yes">
                     <span className="pc2-check" style={{ color: plan.color }}>✓</span>{f}
                   </li>
                 ))}
-                {plan.missing.map(f => (
+                {(plan.missing ?? []).map(f => (
                   <li key={f} className="pc2-feature pc2-feature--no">
                     <span className="pc2-check-no">✕</span>{f}
                   </li>
