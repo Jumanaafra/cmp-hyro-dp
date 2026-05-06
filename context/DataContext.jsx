@@ -1,9 +1,7 @@
-// @refresh reset
 import { createContext, useContext } from "react";
-import { useFirestoreCollection, useFirestoreDoc } from "../hooks/useFirestoreCollection";
 
 /* ── Static fallback data (shown instantly before Firestore loads) ── */
-const HERO_FALLBACK = {
+export const HERO_FALLBACK = {
   badge: "Next-Gen Vision AI · Est. 2024",
   headline_prefix: "We Build",
   words: ["Intelligent", "Powerful", "Scalable", "Futuristic", "Innovative"],
@@ -20,7 +18,7 @@ const HERO_FALLBACK = {
   techs: ["React", "Next.js", "Python", "TensorFlow", "Three.js", "Firebase", "TypeScript", "Node.js", "Flutter", "Docker"],
 };
 
-const ABOUT_FALLBACK = {
+export const ABOUT_FALLBACK = {
   tag: "About Us", title: "Pioneering the Future of", title_gradient: "Vision Technology",
   description1: "Hyro Vision is a full-stack AI and software studio at the intersection of intelligence and design. We architect digital systems that don't just function — they inspire.",
   description2: "From computer vision pipelines to premium enterprise SaaS platforms, we bring technical excellence and aesthetic obsession to every build.",
@@ -32,13 +30,13 @@ const ABOUT_FALLBACK = {
   ],
 };
 
-const CTA_FALLBACK = {
+export const CTA_FALLBACK = {
   tag: "Ready to Build?", title: "Let's Build Something", title_gradient: "Powerful Together",
   description: "Whether you have a fully-formed idea or just a spark — we're here to turn it into something extraordinary.",
   btn_primary_label: "Start Your Project", btn_primary_href: "#contact", btn_secondary_label: "Email Us",
 };
 
-const CONTACT_FALLBACK = {
+export const CONTACT_FALLBACK = {
   email: "hello@hyrovision.ai",
   whatsapp_number: "+1 (555) 123-4567",
   whatsapp_link: "https://wa.me/15551234567",
@@ -46,103 +44,93 @@ const CONTACT_FALLBACK = {
   socials: [{ label: "LinkedIn", href: "#" }, { label: "GitHub", href: "#" }, { label: "Twitter", href: "#" }],
 };
 
-const SERVICES_FALLBACK = [
+export const SERVICES_FALLBACK = [
   { title: "Custom AI Solutions", icon: "🧠", desc: "Tailor-made machine learning models for enterprise data.", tags: ["Python", "TensorFlow"], color: "#14b8a6" },
   { title: "Web Development", icon: "💻", desc: "High-performance web applications built with modern tech.", tags: ["React", "Node.js"], color: "#3b82f6" },
   { title: "UI/UX Design", icon: "✨", desc: "Premium, futuristic interfaces that captivate users.", tags: ["Figma", "Three.js"], color: "#8b5cf6" }
 ];
 
-const PRODUCTS_FALLBACK = [
+export const PRODUCTS_FALLBACK = [
   { id: "1", name: "VisionAI Core", tagline: "Enterprise Vision", desc: "Advanced image recognition system.", badge: "Enterprise", badgeColor: "#14b8a6", gradient: "linear-gradient(135deg, #14b8a611, #020617)", border: "#14b8a633", glow: "#14b8a6", stats: [{v: "12ms", l: "Latency"}, {v: "99.9%", l: "Accuracy"}], tags: ["Real-time", "High throughput"] },
   { id: "2", name: "Hyro Analytics", tagline: "Data Intelligence", desc: "Data analytics platform for modern teams.", badge: "SaaS", badgeColor: "#3b82f6", gradient: "linear-gradient(135deg, #3b82f611, #020617)", border: "#3b82f633", glow: "#3b82f6", stats: [{v: "10x", l: "Speed"}, {v: "24/7", l: "Uptime"}], tags: ["Dashboards", "Insights"] }
 ];
 
-const PROJECTS_FALLBACK = [
-  { id: "1", size: "large", color: "#14b8a6", emoji: "🛍️", category: "Computer Vision", title: "Smart Retail", desc: "Automated checkout using AI.", tech: ["Python", "TensorFlow"] },
-  { id: "2", size: null, color: "#3b82f6", emoji: "📊", category: "Web App", title: "Nexus Dashboard", desc: "Enterprise management system.", tech: ["React", "Node.js"] }
+export const PROJECTS_FALLBACK = [
+  { id: "p1", size: "large", color: "#14b8a6", emoji: "🛍️", category: "Computer Vision", title: "Neural Retail Analytics", desc: "Automated checkout using AI.", tech: ["Python", "TensorFlow"], liveUrl: "https://b-smart-glass-aura-vision.vercel.app/" },
+  { id: "p2", size: null, color: "#3b82f6", emoji: "📊", category: "Web App", title: "MedScan Pro", desc: "Enterprise management system.", tech: ["React", "Node.js"], liveUrl: "https://alumni-connection-frontend.vercel.app/" }
 ];
 
-const PROCESS_FALLBACK = [
+export const PROCESS_FALLBACK = [
   { step: "01", icon: "🔍", title: "Discovery", desc: "We analyze your needs and outline the architecture." },
   { step: "02", icon: "⚙️", title: "Development", desc: "We build the solution with cutting-edge tech." },
   { step: "03", icon: "🚀", title: "Deployment", desc: "We launch and scale your product to the world." }
 ];
 
-const PRICING_FALLBACK = [
+export const PRICING_FALLBACK = [
   { id: "1", highlighted: false, color: "#94a3b8", name: "Starter", tagline: "For small teams", price: "$99", period: "/mo", features: ["Basic Analytics", "Email Support", "1 User"], missing: ["Custom AI Models"], cta: "Get Started" },
   { id: "2", highlighted: true, color: "#3b82f6", name: "Pro", tagline: "For enterprises", price: "$299", period: "/mo", features: ["Advanced AI", "Priority Support", "Unlimited Users", "Custom Models"], missing: [], cta: "Get Pro" }
 ];
 
-const TECH_FALLBACK = [
+export const TECH_FALLBACK = [
   { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
   { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
   { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
   { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" }
 ];
 
-const TESTIMONIALS_FALLBACK = [
+export const TESTIMONIALS_FALLBACK = [
   { text: "Hyro Vision completely transformed our business with their incredible AI solutions.", rating: 5, color: "#10b981", avatar: "JD", name: "John Doe", role: "CEO at TechCorp" },
   { text: "The team delivered a beautiful, performant web app ahead of schedule. Truly premium work.", rating: 5, color: "#3b82f6", avatar: "AS", name: "Alice Smith", role: "Founder at Nexus" }
 ];
 
+/* ── Backup liveUrl resolver — fuzzy keyword match (case-insensitive) ── */
+const LIVE_URL_BY_TITLE = {
+  "Aura Vision":                    "https://b-smart-glass-aura-vision.vercel.app/",
+  "Alumni Connect":                  "https://alumni-connection-frontend.vercel.app/",
+  "Alumini Connect":                 "https://alumni-connection-frontend.vercel.app/",
+  "Happy Star Satellite Vision":     "https://happystarsatellitevision.netlify.app/",
+  "Happy Star":                      "https://happystarsatellitevision.netlify.app/",
+  "Pakka Tourism":                   "https://pakkatourism.com",
+  "IEEMA":                           "https://ieema.vercel.app/",
+  "Hyro Vision":                     "https://hyrovision.vercel.app/",
+  "Neural Retail Analytics":         "https://b-smart-glass-aura-vision.vercel.app/",
+  "MedScan Pro":                     "https://alumni-connection-frontend.vercel.app/",
+  "SmartLogistics Hub":              "https://happystarsatellitevision.netlify.app/",
+  "EduVision LMS":                   "https://pakkatourism.com",
+  "FinFlow Dashboard":               "https://ieema.vercel.app/",
+  "SecureVault Identity":            "https://hyrovision.vercel.app/",
+};
+
+const KEYWORD_URL_MAP = [
+  { keywords: ["aura"],                    url: "https://b-smart-glass-aura-vision.vercel.app/" },
+  { keywords: ["alumin", "alumni"],        url: "https://alumni-connection-frontend.vercel.app/" },
+  { keywords: ["happy star", "satellite"], url: "https://happystarsatellitevision.netlify.app/" },
+  { keywords: ["pakka"],                   url: "https://pakkatourism.com" },
+  { keywords: ["ieema"],                   url: "https://ieema.vercel.app/" },
+  { keywords: ["hyro"],                    url: "https://hyrovision.vercel.app/" },
+];
+
+export const resolveLiveUrl = (title = "", firestoreUrl = "") => {
+  if (firestoreUrl) return firestoreUrl;
+  const exact = LIVE_URL_BY_TITLE[title];
+  if (exact) return exact;
+  const lower = title.toLowerCase();
+  const match = KEYWORD_URL_MAP.find(({ keywords }) =>
+    keywords.some((kw) => lower.includes(kw))
+  );
+  return match ? match.url : "";
+};
+
+export const withLiveUrl = (p) => {
+  const resolved = resolveLiveUrl(p.title, p.liveUrl);
+  console.log(`[Project] "${p.title}" → liveUrl: ${resolved || "(none)"}`);
+  return { ...p, liveUrl: resolved };
+};
+
 /* ── Create context ── */
-const DataContext = createContext(null);
+export const DataContext = createContext(null);
 
-export function DataProvider({ children }) {
-  // Single-document collections
-  const { data: heroRaw, loading: heroLoading } = useFirestoreDoc("hero_section", "main");
-  const { data: aboutRaw, loading: aboutLoading } = useFirestoreDoc("about_section", "main");
-  const { data: ctaRaw, loading: ctaLoading } = useFirestoreDoc("cta_section", "main");
-  const { data: contactRaw, loading: contactLoading } = useFirestoreDoc("contact_info", "main");
-  const { data: settingsRaw, loading: settingsLoading } = useFirestoreDoc("settings", "main");
-
-  // Array collections
-  const { data: services, loading: servicesLoading } = useFirestoreCollection("services");
-  const { data: products, loading: productsLoading } = useFirestoreCollection("products");
-  const { data: projects, loading: projectsLoading } = useFirestoreCollection("projects");
-  const { data: processSteps, loading: processLoading } = useFirestoreCollection("process_steps");
-  const { data: pricingPlans, loading: pricingLoading } = useFirestoreCollection("pricing_plans");
-  const { data: techStack, loading: techLoading } = useFirestoreCollection("tech_stack");
-  const { data: testimonials, loading: testimonialsLoading } = useFirestoreCollection("testimonials");
-
-  const value = {
-    // Merge fallbacks so the site renders instantly without flicker
-    heroData: heroRaw || HERO_FALLBACK,
-    aboutData: aboutRaw || ABOUT_FALLBACK,
-    ctaData: ctaRaw || CTA_FALLBACK,
-    contactInfo: contactRaw || CONTACT_FALLBACK,
-    settings: settingsRaw || { site_name: "Hyro Vision", maintenance_mode: false },
-
-    // Array collections (filter visible, already sorted by `order`)
-    services: (services.length > 0 ? services : SERVICES_FALLBACK).filter((s) => s.visible !== false),
-    products: (products.length > 0 ? products : PRODUCTS_FALLBACK).filter((p) => p.visible !== false),
-    projects: (projects.length > 0 ? projects : PROJECTS_FALLBACK).filter((p) => p.visible !== false),
-    processSteps: (processSteps.length > 0 ? processSteps : PROCESS_FALLBACK).filter((s) => s.visible !== false),
-    pricingPlans: (pricingPlans.length > 0 ? pricingPlans : PRICING_FALLBACK).filter((p) => p.visible !== false),
-    techStack: (techStack.length > 0 ? techStack : TECH_FALLBACK).filter((t) => t.visible !== false),
-    testimonials: (testimonials.length > 0 ? testimonials : TESTIMONIALS_FALLBACK).filter((t) => t.visible !== false),
-
-    // Loading states (individual — prevents cross-section flicker)
-    loading: {
-      hero: heroLoading,
-      about: aboutLoading,
-      services: servicesLoading,
-      products: productsLoading,
-      projects: projectsLoading,
-      process: processLoading,
-      pricing: pricingLoading,
-      techStack: techLoading,
-      testimonials: testimonialsLoading,
-      cta: ctaLoading,
-      contact: contactLoading,
-      settings: settingsLoading,
-    },
-  };
-
-  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
-}
-
-/* ── Hook to consume context ── */
+/* ── Hook to consume context (only export from this file) ── */
 export function useData() {
   const ctx = useContext(DataContext);
   if (!ctx) throw new Error("useData must be used within DataProvider");
