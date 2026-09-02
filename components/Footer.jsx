@@ -12,7 +12,7 @@ export default function Footer() {
               <div className="hv-logo-mark">
                 <img src="/assets/hyro-logo-mark.png" alt="Hyro Vision Logo" className="hv-logo-mark-img" />
               </div>
-              <span className="hv-logo-text">Hyro <span>Vision</span></span>
+              <span className="hv-logo-text" style={{ color: "#ffffff" }}>Hyro <span>Vision</span></span>
             </div>
             <p className="footer-desc">
               {company.positioning}

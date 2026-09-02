@@ -224,7 +224,7 @@ export default function AIChatbot() {
 
   return (
     <div className="hv-chat">
-      {/* ── Floating Toggle Button with HyroVision Brand Logo ── */}
+      {/* ── Floating Toggle Button with Official HyroVision Company Logo & Blinking Beacon ── */}
       <button
         className={`hv-chat-toggle ${isOpen ? "hv-chat-toggle--open" : ""}`}
         onClick={toggleChat}
@@ -232,8 +232,20 @@ export default function AIChatbot() {
         aria-expanded={isOpen}
         id="hv-chat-toggle"
       >
-        {isOpen ? <CloseIcon /> : <HvLogoMark size={32} />}
-        {showDot && !isOpen && <span className="hv-chat-toggle-dot" />}
+        {!isOpen && <span className="hv-chat-radar-ring" />}
+        {!isOpen && <span className="hv-chat-beacon" />}
+
+        {isOpen ? (
+          <CloseIcon />
+        ) : (
+          <div className="hv-chat-logo-wrap">
+            <img
+              src="/assets/hyro-logo-mark.png"
+              alt="Hyro Vision Logo"
+              className="hv-chat-logo-img"
+            />
+          </div>
+        )}
       </button>
 
       {/* ── Chat Panel ── */}
