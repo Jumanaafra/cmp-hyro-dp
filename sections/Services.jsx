@@ -47,6 +47,7 @@ function ServiceCard({ service, index }) {
 export default function ServicesSection() {
   const { services: SERVICES } = useData();
   const sectionRef = useRef(null);
+
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;

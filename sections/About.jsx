@@ -1,7 +1,64 @@
 import { useEffect, useRef } from "react";
 import { useData } from "../context/DataContext";
-import { capabilities } from "../data/capabilities";
 import { company } from "../data/company";
+
+const VIDEO_URL =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4";
+
+const FADE_DURATION_MS = 500;
+const FADE_OUT_TRIGGER_SEC = 0.55;
+
+/* ── Custom requestAnimationFrame fade system (no CSS transitions) ── */
+function createFader(videoEl) {
+  let rafId = null;
+
+  function cancelCurrent() {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  function fadeIn() {
+    cancelCurrent();
+    const start = performance.now();
+    const startOpacity = videoEl.style.opacity === "" ? 0 : parseFloat(videoEl.style.opacity);
+
+    function step(now) {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / FADE_DURATION_MS, 1);
+      videoEl.style.opacity = String(startOpacity + (1 - startOpacity) * t);
+      if (t < 1) {
+        rafId = requestAnimationFrame(step);
+      } else {
+        rafId = null;
+      }
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  function fadeOut(onComplete) {
+    cancelCurrent();
+    const start = performance.now();
+    const startOpacity = videoEl.style.opacity === "" ? 1 : parseFloat(videoEl.style.opacity);
+
+    function step(now) {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / FADE_DURATION_MS, 1);
+      videoEl.style.opacity = String(startOpacity * (1 - t));
+      if (t < 1) {
+        rafId = requestAnimationFrame(step);
+      } else {
+        videoEl.style.opacity = "0";
+        rafId = null;
+        onComplete?.();
+      }
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  return { fadeIn, fadeOut, cancelCurrent };
+}
 
 function use3DCube(canvasRef) {
   useEffect(() => {
@@ -12,11 +69,10 @@ function use3DCube(canvasRef) {
     const size = 90;
 
     const project = (x, y, z, ax, ay) => {
-      // Rotate around Y axis
       const cosY = Math.cos(ay), sinY = Math.sin(ay);
       const x1 = x * cosY - z * sinY;
       const z1 = x * sinY + z * cosY;
-      // Rotate around X axis
+
       const cosX = Math.cos(ax), sinX = Math.sin(ax);
       const y1 = y * cosX - z1 * sinX;
       const z2 = y * sinX + z1 * cosX;
@@ -49,7 +105,6 @@ function use3DCube(canvasRef) {
       const projected = vertices.map(([x, y, z]) => project(x, y, z, ax, ay));
       const cx = W / 2, cy = H / 2;
 
-      // Sort faces by average Z
       const sortedFaces = faces.map((face, i) => ({
         face, i,
         avgZ: face.reduce((s, vi) => s + projected[vi].z, 0) / 4,
@@ -71,7 +126,6 @@ function use3DCube(canvasRef) {
         ctx.restore();
       });
 
-      // Draw glow at center
       const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, size * 1.6);
       grd.addColorStop(0, "rgba(20,184,166,0.06)");
       grd.addColorStop(1, "transparent");
@@ -96,9 +150,13 @@ function use3DCube(canvasRef) {
 export default function AboutSection() {
   const { aboutData } = useData();
   const cubeRef = useRef(null);
+  const videoRef = useRef(null);
+  const fadingOutRef = useRef(false);
+  const faderRef = useRef(null);
+  const sectionRef = useRef(null);
+
   use3DCube(cubeRef);
 
-  const sectionRef = useRef(null);
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -110,39 +168,173 @@ export default function AboutSection() {
     return () => observer.disconnect();
   }, []);
 
+  /* ── Fullscreen Video Seamless Loop + Fader ── */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.style.opacity = "0";
+    const fader = createFader(video);
+    faderRef.current = fader;
+
+    const handlePlay = () => {
+      fadingOutRef.current = false;
+      fader.fadeIn();
+    };
+
+    const handleTimeUpdate = () => {
+      if (!video.duration) return;
+      const remaining = video.duration - video.currentTime;
+      if (remaining <= FADE_OUT_TRIGGER_SEC && !fadingOutRef.current) {
+        fadingOutRef.current = true;
+        fader.fadeOut();
+      }
+    };
+
+    const handleEnded = () => {
+      video.style.opacity = "0";
+      fader.cancelCurrent();
+      fadingOutRef.current = false;
+      setTimeout(() => {
+        if (!video) return;
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }, 100);
+    };
+
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("ended", handleEnded);
+
+    video.play().catch(() => {});
+
+    return () => {
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+      video.removeEventListener("ended", handleEnded);
+      fader.cancelCurrent();
+    };
+  }, []);
+
   const principles = aboutData?.principles || company.principles;
 
   return (
-    <section id="about" ref={sectionRef} className="about-section reveal-section">
-      <div className="section-container">
+    <section
+      id="about"
+      ref={sectionRef}
+      className="about-section reveal-section"
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#000000",
+        overflow: "hidden",
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      {/* ── Background Video with 17% Downshift ── */}
+      <video
+        ref={videoRef}
+        src={VIDEO_URL}
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        className="about-bg-video"
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: "translateY(17%)",
+          opacity: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Dark Overlay for Cinematic Depth ── */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: "none",
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 100%)",
+        }}
+      />
+
+      {/* ── Section Content ── */}
+      <div className="section-container" style={{ position: "relative", zIndex: 10, width: "100%" }}>
         <div className="about-grid">
           <div className="about-left">
-            <div className="section-tag">{aboutData?.tag || "About HyroVision"}</div>
-            <h2 className="section-title">
-              We Engineer What's<br />
-              <span className="gradient-text">{aboutData?.title_gradient || "Next."}</span>
+            <div className="section-tag" style={{ color: "var(--cyan, #14B8A6)" }}>
+              {aboutData?.tag || "About HyroVision"}
+            </div>
+            <h2
+              className="section-title"
+              style={{
+                fontFamily: "'Instrument Serif', serif",
+                fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)",
+                fontWeight: 400,
+                lineHeight: 1.05,
+                letterSpacing: "-0.01em",
+                color: "#ffffff",
+                marginBottom: "20px",
+              }}
+            >
+              We Engineer What's{" "}
+              <span
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--cyan, #14B8A6)",
+                }}
+              >
+                {aboutData?.title_gradient || "Next."}
+              </span>
             </h2>
-            <p className="about-desc">
+            <p className="about-desc" style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "1.05rem", lineHeight: 1.8 }}>
               {aboutData?.description1 ||
                 "HyroVision is a modern technology and IT services company focused on building intelligent digital products, AI-powered systems, automation solutions, SaaS platforms, enterprise systems and connected technology experiences."}
             </p>
-            <p className="about-desc" style={{ marginTop: "16px" }}>
+            <p className="about-desc" style={{ marginTop: "16px", color: "rgba(255, 255, 255, 0.72)", fontSize: "1.02rem", lineHeight: 1.8 }}>
               {aboutData?.description2 ||
                 "We approach technology engineering with rigorous architecture, business-grounded pragmatism, and high-performance standards — turning complex challenges into resilient digital products."}
             </p>
 
-            <div className="about-principles">
+            <div className="about-principles" style={{ marginTop: "32px" }}>
               {principles.map((p) => (
-                <div key={p.number} className="about-principle-card">
-                  <span className="ap-num">{p.number}</span>
-                  <span className="ap-title">{p.title}</span>
+                <div
+                  key={p.number}
+                  className="about-principle-card liquid-glass"
+                  style={{
+                    padding: "16px 20px",
+                    borderRadius: "14px",
+                  }}
+                >
+                  <span className="ap-num" style={{ color: "var(--cyan, #14B8A6)", fontWeight: 700, fontSize: "12px" }}>
+                    {p.number}
+                  </span>
+                  <span className="ap-title" style={{ color: "#ffffff", fontWeight: 600, fontSize: "15px" }}>
+                    {p.title}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="about-right">
-            <div className="cube-container">
+            <div
+              className="cube-container liquid-glass"
+              style={{
+                borderRadius: "28px",
+                padding: "20px",
+              }}
+            >
               <canvas ref={cubeRef} className="cube-canvas" />
               <div className="cube-orb-1" />
               <div className="cube-orb-2" />

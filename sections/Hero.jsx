@@ -174,11 +174,6 @@ export default function HeroSection() {
 
       <div className="hv-hero-content" ref={gridRef}>
         <div>
-          <div className="hv-badge">
-            <div className="hv-dot" />
-            {heroData?.badge || "Intelligent Systems · Technology Engineering"}
-          </div>
-
           <h1 className="hv-h1">
             Building{" "}
             <span className="hv-word-wrap">
