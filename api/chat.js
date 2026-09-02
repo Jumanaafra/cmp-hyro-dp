@@ -6,7 +6,7 @@ import { capabilities } from "../data/capabilities.js";
 import { processSteps } from "../data/process.js";
 
 /**
- * Build Knowledge Base Chunks for RAG Retrieval
+ * Build Knowledge Base Chunks for fallback retrieval
  */
 const KNOWLEDGE_CHUNKS = [
   {
@@ -91,11 +91,9 @@ function retrieveRelevantContext(queryText) {
 
   const scored = KNOWLEDGE_CHUNKS.map((chunk) => {
     let score = 0;
-    // Direct chunk content search
     const contentLower = chunk.content.toLowerCase();
     if (contentLower.includes(q)) score += 10;
 
-    // Keyword matching
     for (const kw of chunk.keywords) {
       if (q.includes(kw)) score += 5;
       for (const w of words) {
@@ -103,18 +101,13 @@ function retrieveRelevantContext(queryText) {
       }
     }
 
-    // Always give base weight to company core
     if (chunk.id === "company-core") score += 3;
-
     return { chunk, score };
   });
 
   scored.sort((a, b) => b.score - a.score);
-
-  // Take top 4 relevant chunks (or at least company-core + top matches)
   const topChunks = scored.slice(0, 4).map((s) => s.chunk.content);
 
-  // Guarantee company-core is present
   const coreChunk = KNOWLEDGE_CHUNKS.find((c) => c.id === "company-core").content;
   if (!topChunks.includes(coreChunk)) {
     topChunks.unshift(coreChunk);
@@ -127,8 +120,15 @@ function retrieveRelevantContext(queryText) {
  * Parse JSON body gracefully.
  */
 async function parseBody(req) {
-  if (req.body && typeof req.body === "object") {
-    return req.body;
+  if (req.body) {
+    if (typeof req.body === "object") return req.body;
+    if (typeof req.body === "string") {
+      try {
+        return JSON.parse(req.body);
+      } catch (err) {
+        return {};
+      }
+    }
   }
 
   return new Promise((resolve, reject) => {
@@ -148,7 +148,7 @@ async function parseBody(req) {
 }
 
 /**
- * Serverless / local API Handler
+ * Serverless / local API Handler with Python RAG Proxy & Direct Fallback
  */
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -168,10 +168,50 @@ export default async function handler(req, res) {
     return;
   }
 
+  const body = await parseBody(req);
+  const userMessage = body.message;
+
+  if (!userMessage || typeof userMessage !== "string") {
+    res.statusCode = 400;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify({ error: "Invalid message provided." }));
+    return;
+  }
+
+  // 1. Attempt Python FastAPI RAG Service first
+  const ragServiceUrl = process.env.RAG_SERVICE_URL || "http://localhost:8000";
+  try {
+    const ragResponse = await fetch(`${ragServiceUrl}/api/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: userMessage,
+        conversation_id: body.conversation_id,
+        history: body.history || [],
+      }),
+      signal: AbortSignal.timeout(15000), // 15s timeout
+    });
+
+    if (ragResponse.ok) {
+      const ragData = await ragResponse.json();
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.end(
+        JSON.stringify({
+          ...ragData,
+          text: ragData.answer, // backward compatibility
+        })
+      );
+      return;
+    }
+  } catch (err) {
+    // Python service offline or unreachable -> proceed to internal fallback
+  }
+
+  // 2. Fallback: Internal Gemini Handler
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    console.error("[API] GEMINI_API_KEY environment variable is not configured.");
     res.statusCode = 503;
     res.setHeader("Content-Type", "application/json");
     res.end(
@@ -183,17 +223,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    const body = await parseBody(req);
-    const userMessage = body.message;
-
-    if (!userMessage || typeof userMessage !== "string") {
-      res.statusCode = 400;
-      res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify({ error: "Invalid message provided." }));
-      return;
-    }
-
-    // RAG Retrieval Layer
     const retrievedContext = retrieveRelevantContext(userMessage);
 
     const systemInstruction = `You are the "HyroVision AI Assistant", the official representative and technology advisor for HyroVision.
@@ -209,7 +238,7 @@ CRITICAL OPERATIONAL RULES:
 ${retrievedContext}
 =========================`;
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
 
     const payload = {
       system_instruction: {
@@ -234,8 +263,6 @@ ${retrievedContext}
     });
 
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error("[API] Gemini API response error:", response.status, errorData);
       throw new Error(`Gemini status ${response.status}`);
     }
 
@@ -250,7 +277,10 @@ ${retrievedContext}
     res.setHeader("Content-Type", "application/json");
     res.end(
       JSON.stringify({
+        answer: botText,
         text: botText,
+        provider: "gemini",
+        sources: [{ title: "HyroVision Knowledge Base", section: "Verified" }],
         suggestions: [
           "What services do you offer?",
           "Show me your projects",
@@ -260,7 +290,6 @@ ${retrievedContext}
       })
     );
   } catch (error) {
-    console.error("[API] Error in chat endpoint:", error.message);
     res.statusCode = 500;
     res.setHeader("Content-Type", "application/json");
     res.end(

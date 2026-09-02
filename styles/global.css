@@ -202,18 +202,29 @@ body {
   padding: 0 16px;
   height: 64px;
 }
-.hv-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; background: none; border: none; }
+.hv-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; cursor: pointer; background: none; border: none; }
 .hv-logo-mark {
-  width: 36px; height: 36px;
+  width: 38px; height: 38px;
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, rgba(var(--cyan-rgb), 0.18), rgba(30,64,175,0.18));
-  border: 1px solid rgba(var(--cyan-rgb), 0.5);
-  font-weight: 900; font-size: 15px; color: var(--cyan);
-  box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.2);
-  transition: transform 0.25s, box-shadow 0.25s;
+  background: linear-gradient(135deg, rgba(var(--cyan-rgb), 0.16), rgba(30,64,175,0.16));
+  border: 1px solid rgba(var(--cyan-rgb), 0.45);
+  box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.18);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  padding: 4px;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
-.hv-logo:hover .hv-logo-mark { transform: scale(1.08); box-shadow: 0 0 24px rgba(var(--cyan-rgb), 0.45); }
+.hv-logo:hover .hv-logo-mark { transform: scale(1.08); box-shadow: 0 0 24px rgba(var(--cyan-rgb), 0.45); border-color: rgba(var(--cyan-rgb), 0.7); }
+.hv-logo-mark-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 0 3px rgba(var(--cyan-rgb), 0.35));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+.hv-logo:hover .hv-logo-mark-img { transform: scale(1.06); filter: drop-shadow(0 0 6px rgba(var(--cyan-rgb), 0.6)); }
 .hv-logo-text { font-weight: 800; font-size: 17px; letter-spacing: -0.4px; color: var(--text-heading); }
 .hv-logo-text span { background: linear-gradient(135deg, var(--cyan), #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hv-nav-links { display: flex; align-items: center; gap: 4px; }

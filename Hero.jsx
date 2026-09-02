@@ -283,7 +283,9 @@ export default function Hero() {
       <nav id="hv-nav" ref={navRef}>
         <div className="hv-nav-inner">
           <a href="#" className="hv-logo">
-            <div className="hv-logo-mark">H</div>
+            <div className="hv-logo-mark">
+              <img src="/assets/hyro-logo-mark.png" alt="Hyro Vision Logo" style={{ width: "100%", height: "100%", objectFit: "contain", filter: "drop-shadow(0 0 3px rgba(20,184,166,.4))" }} />
+            </div>
             <span className="hv-logo-text">Hyro <span>Vision</span></span>
           </a>
           <div className="hv-nav-links">

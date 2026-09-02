@@ -9,7 +9,9 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="hv-logo" style={{ marginBottom: "16px" }}>
-              <div className="hv-logo-mark">H</div>
+              <div className="hv-logo-mark">
+                <img src="/assets/hyro-logo-mark.png" alt="Hyro Vision Logo" className="hv-logo-mark-img" />
+              </div>
               <span className="hv-logo-text">Hyro <span>Vision</span></span>
             </div>
             <p className="footer-desc">

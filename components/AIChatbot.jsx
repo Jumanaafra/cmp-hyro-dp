@@ -8,13 +8,28 @@ const HvLogoMark = ({ size = 32 }) => (
     style={{
       width: `${size}px`,
       height: `${size}px`,
-      fontSize: `${Math.round(size * 0.42)}px`,
-      borderRadius: `${Math.round(size * 0.28)}px`,
+      minWidth: `${size}px`,
+      minHeight: `${size}px`,
+      padding: `${Math.max(2, Math.round(size * 0.12))}px`,
       pointerEvents: "none",
       boxShadow: "none",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: `${Math.round(size * 0.28)}px`,
     }}
   >
-    H
+    <img
+      src="/assets/hyro-logo-mark.png"
+      alt="Hyro Vision Logo"
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+        display: "block",
+        filter: "drop-shadow(0 0 4px rgba(20, 184, 166, 0.4))",
+      }}
+    />
   </div>
 );
 
@@ -74,6 +89,7 @@ export default function AIChatbot() {
   const [isTyping, setIsTyping] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [showDot, setShowDot] = useState(true);
+  const [conversationId, setConversationId] = useState(() => "conv_" + Math.random().toString(36).substring(2, 9));
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -115,6 +131,12 @@ export default function AIChatbot() {
         setShowDot(false);
       }
 
+      // Build history payload for RAG context memory
+      const historyPayload = messages.slice(-8).map((m) => ({
+        role: m.role,
+        content: m.text,
+      }));
+
       setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
       setInput("");
       setIsTyping(true);
@@ -123,7 +145,11 @@ export default function AIChatbot() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: trimmed }),
+          body: JSON.stringify({
+            message: trimmed,
+            conversation_id: conversationId,
+            history: historyPayload,
+          }),
         });
 
         if (!res.ok) {
@@ -136,11 +162,16 @@ export default function AIChatbot() {
           throw new Error(data.error);
         }
 
+        if (data.conversation_id) {
+          setConversationId(data.conversation_id);
+        }
+
         setMessages((prev) => [
           ...prev,
           {
             role: "bot",
-            text: data.text,
+            text: data.answer || data.text,
+            sources: data.sources || [],
             suggestions: data.suggestions || [],
           },
         ]);
@@ -163,7 +194,7 @@ export default function AIChatbot() {
         setIsTyping(false);
       }
     },
-    [input, hasInteracted]
+    [input, hasInteracted, messages, conversationId]
   );
 
   const handleSubmit = (e) => {
@@ -183,6 +214,7 @@ export default function AIChatbot() {
 
   const clearChat = () => {
     setMessages([]);
+    setConversationId("conv_" + Math.random().toString(36).substring(2, 9));
   };
 
   const toggleChat = () => {
@@ -219,7 +251,7 @@ export default function AIChatbot() {
           </div>
           <div className="hv-chat-header-info">
             <div className="hv-chat-header-title">HyroVision AI</div>
-            <div className="hv-chat-header-status">Online — Grounded Intelligence</div>
+            <div className="hv-chat-header-status">Online — Grounded RAG Assistant</div>
           </div>
           {messages.length > 0 && (
             <button
@@ -272,12 +304,43 @@ export default function AIChatbot() {
                   <div className="hv-chat-msg-avatar">
                     {msg.role === "bot" ? <HvLogoMark size={24} /> : "You"}
                   </div>
-                  <div
-                    className="hv-chat-msg-bubble"
-                    dangerouslySetInnerHTML={{
-                      __html: formatMessage(msg.text),
-                    }}
-                  />
+                  <div>
+                    <div
+                      className="hv-chat-msg-bubble"
+                      dangerouslySetInnerHTML={{
+                        __html: formatMessage(msg.text),
+                      }}
+                    />
+                    {/* Source Citations */}
+                    {msg.sources && msg.sources.length > 0 && (
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          color: "var(--chat-text-muted)",
+                          marginTop: "4px",
+                          paddingLeft: "4px",
+                          display: "flex",
+                          gap: "6px",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <span style={{ opacity: 0.7 }}>Sources:</span>
+                        {msg.sources.map((s, sIdx) => (
+                          <span
+                            key={sIdx}
+                            style={{
+                              background: "var(--chat-surface)",
+                              border: "1px solid var(--chat-border)",
+                              borderRadius: "4px",
+                              padding: "1px 6px",
+                            }}
+                          >
+                            {s.title}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Suggestions after bot message */}

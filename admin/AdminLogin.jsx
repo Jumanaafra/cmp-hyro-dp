@@ -36,7 +36,9 @@ export default function AdminLogin({ onLogin }) {
       <div className="admin-login-wrap">
         <div className="admin-login-card">
           <div className="admin-login-logo">
-            <div className="admin-login-logo-mark">H</div>
+            <div className="admin-login-logo-mark">
+              <img src="/assets/hyro-logo-mark.png" alt="Hyro Vision Logo" className="admin-logo-img" />
+            </div>
             <div className="admin-login-title">Hyro Vision Admin</div>
             <div className="admin-login-sub">Control Panel · Secured</div>
           </div>

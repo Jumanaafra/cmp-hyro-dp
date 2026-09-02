@@ -66,7 +66,9 @@ export default function AdminDashboard({ onLogout }) {
         {/* ── Sidebar ── */}
         <aside className="admin-sidebar">
           <div className="admin-sidebar-logo">
-            <div className="admin-sidebar-logo-mark">H</div>
+            <div className="admin-sidebar-logo-mark">
+              <img src="/assets/hyro-logo-mark.png" alt="Hyro Vision Logo" className="admin-sidebar-logo-img" />
+            </div>
             <div>
               <div className="admin-sidebar-title">Hyro Vision</div>
               <div className="admin-sidebar-sub">Admin Panel</div>

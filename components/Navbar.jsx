@@ -76,7 +76,9 @@ export default function Navbar() {
     <nav ref={navRef} className={`hv-nav ${scrolled ? "hv-nav--scrolled" : ""}`}>
       <div className="hv-nav-inner">
         <a href="#" className="hv-logo" onClick={(e) => { e.preventDefault(); scrollTo("home"); }}>
-          <div className="hv-logo-mark">H</div>
+          <div className="hv-logo-mark">
+            <img src="/assets/hyro-logo-mark.png" alt="Hyro Vision Logo" className="hv-logo-mark-img" />
+          </div>
           <span className="hv-logo-text">Hyro <span>Vision</span></span>
         </a>
 

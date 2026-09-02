@@ -20,3 +20,13 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Python & RAG Service
+rag-service/.env
+rag-service/chroma_db/
+rag-service/.venv/
+rag-service/**/__pycache__/
+rag-service/**/*.pyc
+rag-service/.pytest_cache/
+__pycache__/
+*.pyc
