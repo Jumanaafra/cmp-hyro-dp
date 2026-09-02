@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useData } from "../context/DataContext";
+import { capabilities } from "../data/capabilities";
+import { company } from "../data/company";
 
 function use3DCube(canvasRef) {
   useEffect(() => {
@@ -108,34 +110,37 @@ export default function AboutSection() {
     return () => observer.disconnect();
   }, []);
 
-  const stats = aboutData?.stats || [];
+  const principles = aboutData?.principles || company.principles;
 
   return (
     <section id="about" ref={sectionRef} className="about-section reveal-section">
       <div className="section-container">
         <div className="about-grid">
           <div className="about-left">
-            <div className="section-tag">About Us</div>
+            <div className="section-tag">{aboutData?.tag || "About HyroVision"}</div>
             <h2 className="section-title">
-              Pioneering the Future of<br />
-              <span className="gradient-text">{aboutData?.title_gradient || "Vision Technology"}</span>
+              We Engineer What's<br />
+              <span className="gradient-text">{aboutData?.title_gradient || "Next."}</span>
             </h2>
             <p className="about-desc">
-              {aboutData?.description1}
+              {aboutData?.description1 ||
+                "HyroVision is a modern technology and IT services company focused on building intelligent digital products, AI-powered systems, automation solutions, SaaS platforms, enterprise systems and connected technology experiences."}
             </p>
             <p className="about-desc" style={{ marginTop: "16px" }}>
-              {aboutData?.description2}
+              {aboutData?.description2 ||
+                "We approach technology engineering with rigorous architecture, business-grounded pragmatism, and high-performance standards — turning complex challenges into resilient digital products."}
             </p>
-            <div className="about-stats">
-              {stats.map(s => (
-                <div key={s.label} className="about-stat-card">
-                  <span className="asc-icon">{s.icon}</span>
-                  <span className="asc-value gradient-text">{s.value}</span>
-                  <span className="asc-label">{s.label}</span>
+
+            <div className="about-principles">
+              {principles.map((p) => (
+                <div key={p.number} className="about-principle-card">
+                  <span className="ap-num">{p.number}</span>
+                  <span className="ap-title">{p.title}</span>
                 </div>
               ))}
             </div>
           </div>
+
           <div className="about-right">
             <div className="cube-container">
               <canvas ref={cubeRef} className="cube-canvas" />
@@ -143,7 +148,7 @@ export default function AboutSection() {
               <div className="cube-orb-2" />
               <div className="cube-ring" />
               <div className="cube-glow-label">
-                <span className="pulse-dot" />Hyro Vision Core AI
+                <span className="pulse-dot" />HyroVision Engineering Core
               </div>
             </div>
           </div>

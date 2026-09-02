@@ -5,6 +5,9 @@ import { db } from "../firebase/config";
 import "../styles/global.css";
 import "../styles/project-details.css";
 
+import { projects as verifiedProjects } from "../data/projects";
+import { PROJECTS_FALLBACK } from "../context/DataContext";
+
 export default function ProjectDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,21 +18,32 @@ export default function ProjectDetails() {
   useEffect(() => {
     window.scrollTo(0, 0);
     async function fetchProject() {
-      try {
-        const snap = await getDoc(doc(db, "projects", id));
-        if (snap.exists()) {
-          const data = { id: snap.id, ...snap.data() };
-          console.log("LIVE URL:", data.liveUrl);   // ← debug
-          setProject(data);
-        } else {
-          setNotFound(true);
-        }
-      } catch (err) {
-        console.error("Failed to load project:", err);
-        setNotFound(true);
-      } finally {
+      // First check local verified projects
+      const local = PROJECTS_FALLBACK.find(
+        (p) => p.id === id || p.slug === id || p.id.toLowerCase() === id.toLowerCase()
+      );
+      if (local) {
+        setProject(local);
         setLoading(false);
+        return;
       }
+
+      if (db) {
+        try {
+          const snap = await getDoc(doc(db, "projects", id));
+          if (snap.exists()) {
+            const data = { id: snap.id, ...snap.data() };
+            setProject(data);
+            setLoading(false);
+            return;
+          }
+        } catch (err) {
+          console.warn("Firestore project lookup error:", err.message);
+        }
+      }
+
+      setNotFound(true);
+      setLoading(false);
     }
     fetchProject();
   }, [id]);

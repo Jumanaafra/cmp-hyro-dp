@@ -1,3 +1,5 @@
+import { company } from "../data/company";
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
@@ -10,33 +12,45 @@ export default function Footer() {
               <div className="hv-logo-mark">H</div>
               <span className="hv-logo-text">Hyro <span>Vision</span></span>
             </div>
-            <p className="footer-desc">Building the next generation of AI-powered software. From vision systems to enterprise platforms.</p>
+            <p className="footer-desc">
+              {company.positioning}
+            </p>
           </div>
           <div className="footer-links">
             <div className="footer-col">
-              <h4 className="footer-col-title">Company</h4>
-              {["About", "Services", "Projects", "Careers"].map(l => (
-                <a key={l} href={`#${l.toLowerCase()}`} className="footer-link">{l}</a>
-              ))}
+              <h4 className="footer-col-title">Navigation</h4>
+              <a href="#home" className="footer-link">Home</a>
+              <a href="#about" className="footer-link">About</a>
+              <a href="#services" className="footer-link">Services</a>
+              <a href="#projects" className="footer-link">Projects</a>
             </div>
             <div className="footer-col">
-              <h4 className="footer-col-title">Products</h4>
-              {["HyroVision AI", "HyroFlow", "HyroChat", "HyroScan"].map(l => (
-                <a key={l} href="#products" className="footer-link">{l}</a>
-              ))}
+              <h4 className="footer-col-title">Expertise</h4>
+              <a href="#services" className="footer-link">Full-Stack Development</a>
+              <a href="#services" className="footer-link">AI & Autonomous Agents</a>
+              <a href="#services" className="footer-link">SaaS & Enterprise Systems</a>
+              <a href="#tech" className="footer-link">Technology Universe</a>
             </div>
             <div className="footer-col">
-              <h4 className="footer-col-title">Connect</h4>
-              <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL || "hello@hyrovision.ai"}`} className="footer-link">Email</a>
-              <a href={import.meta.env.VITE_WHATSAPP_LINK || "https://wa.me/15551234567"} className="footer-link">WhatsApp</a>
-              <a href="#" className="footer-link">LinkedIn</a>
-              <a href="#" className="footer-link">GitHub</a>
+              <h4 className="footer-col-title">Direct Connect</h4>
+              <a href={`mailto:${company.contact.email}`} className="footer-link">
+                {company.contact.email}
+              </a>
+              <a
+                href={`https://wa.me/${company.contact.whatsappNumber.replace(/[^0-9]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                WhatsApp Inquiry
+              </a>
+              <a href="#contact" className="footer-link">Start a Project</a>
             </div>
           </div>
         </div>
         <div className="footer-bottom">
-          <span className="footer-copy">© {currentYear} Hyro Vision. All rights reserved.</span>
-          <span className="footer-made">Crafted with ⚡ by Hyro Vision</span>
+          <span className="footer-copy">© {currentYear} HyroVision. All rights reserved.</span>
+          <span className="footer-made">We Engineer Intelligent Digital Products.</span>
         </div>
       </div>
     </footer>

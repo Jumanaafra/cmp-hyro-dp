@@ -35,20 +35,46 @@ export async function fetchCollection(name) {
 /* ── Real-time listener (returns unsubscribe fn) ── */
 export function subscribeCollection(name, callback, orderField = "order") {
   if (!db) { callback([]); return () => {}; }
-  const q = query(col(name), orderBy(orderField, "asc"));
-  return onSnapshot(q, (snap) => {
-    const data = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-    callback(data);
-  });
+  try {
+    const q = query(col(name), orderBy(orderField, "asc"));
+    return onSnapshot(
+      q,
+      (snap) => {
+        const data = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        callback(data);
+      },
+      (err) => {
+        console.warn(`[Firestore] Graceful fallback for "${name}":`, err.message);
+        callback([]);
+      }
+    );
+  } catch (err) {
+    console.warn(`[Firestore] Query error for "${name}":`, err.message);
+    callback([]);
+    return () => {};
+  }
 }
 
 /* ── Real-time listener for a single document ── */
 export function subscribeDoc(name, id, callback) {
   if (!db) { callback(null); return () => {}; }
-  return onSnapshot(docRef(name, id), (snap) => {
-    if (snap.exists()) callback({ id: snap.id, ...snap.data() });
-    else callback(null);
-  });
+  try {
+    return onSnapshot(
+      docRef(name, id),
+      (snap) => {
+        if (snap.exists()) callback({ id: snap.id, ...snap.data() });
+        else callback(null);
+      },
+      (err) => {
+        console.warn(`[Firestore] Graceful fallback for "${name}/${id}":`, err.message);
+        callback(null);
+      }
+    );
+  } catch (err) {
+    console.warn(`[Firestore] Doc ref error for "${name}/${id}":`, err.message);
+    callback(null);
+    return () => {};
+  }
 }
 
 /* ── Create a new document (auto-id) ── */

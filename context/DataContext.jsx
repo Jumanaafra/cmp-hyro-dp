@@ -1,136 +1,149 @@
 import { createContext, useContext } from "react";
+import { company } from "../data/company";
+import { services as verifiedServices } from "../data/services";
+import { projects as verifiedProjects } from "../data/projects";
+import { technologies as verifiedTechnologies } from "../data/technologies";
+import { capabilities as verifiedCapabilities } from "../data/capabilities";
+import { processSteps as verifiedProcessSteps } from "../data/process";
 
-/* ── Static fallback data (shown instantly before Firestore loads) ── */
+/* ── Static verified fallback data (shown before Firestore or when offline) ── */
 export const HERO_FALLBACK = {
-  badge: "Next-Gen Vision AI · Est. 2024",
-  headline_prefix: "We Build",
-  words: ["Intelligent", "Powerful", "Scalable", "Futuristic", "Innovative"],
-  headline_suffix: "Digital Experiences",
-  subtitle: "AI-powered software, custom vision systems, and enterprise platforms — engineered to perform at scale and designed to impress at first glance.",
-  cta_primary_label: "View Projects", cta_primary_href: "#projects",
-  cta_secondary_label: "Get Started", cta_secondary_href: "#contact",
-  stats: [{ v: "50+", l: "Projects" }, { v: "30+", l: "Clients" }, { v: "2+", l: "Yrs Exp" }, { v: "4", l: "Products" }],
-  metrics: [
-    { label: "AI Inference Speed", val: "12ms", pct: "92%", color: "#14B8A6" },
-    { label: "System Uptime", val: "99.9%", pct: "99%", color: "#10b981" },
-    { label: "Client Satisfaction", val: "4.9/5", pct: "98%", color: "#3b82f6" },
+  badge: "Intelligent Systems · Technology Engineering",
+  headline_prefix: "Building",
+  words: ["Intelligent", "Scalable", "Autonomous", "High-Performance", "Connected"],
+  headline_suffix: "Digital Products.",
+  subtitle:
+    "HyroVision builds high-performance digital products, AI-powered systems and intelligent automation solutions for modern businesses.",
+  cta_primary_label: "Start a Project",
+  cta_primary_href: "#contact",
+  cta_secondary_label: "Explore Work",
+  cta_secondary_href: "#projects",
+  capabilities_strip: [
+    "FULL-STACK",
+    "AI & AGENTS",
+    "AUTOMATION",
+    "IoT",
+    "REAL-TIME SYSTEMS",
+    "CLOUD",
   ],
-  techs: ["React", "Next.js", "Python", "TensorFlow", "Three.js", "Firebase", "TypeScript", "Node.js", "Flutter", "Docker"],
+  metrics: [
+    { label: "Engineering Quality", val: "Enterprise", pct: "100%", color: "#14B8A6" },
+    { label: "System Reliability", val: "99.9%", pct: "99%", color: "#10b981" },
+    { label: "AI Integration", val: "Production-Ready", pct: "95%", color: "#3b82f6" },
+  ],
+  techs: [
+    "React.js",
+    "Next.js",
+    "Node.js",
+    "Python",
+    "Gemini",
+    "OpenAI",
+    "LangGraph",
+    "Supabase",
+    "PostgreSQL",
+    "AWS",
+  ],
 };
 
 export const ABOUT_FALLBACK = {
-  tag: "About Us", title: "Pioneering the Future of", title_gradient: "Vision Technology",
-  description1: "Hyro Vision is a full-stack AI and software studio at the intersection of intelligence and design. We architect digital systems that don't just function — they inspire.",
-  description2: "From computer vision pipelines to premium enterprise SaaS platforms, we bring technical excellence and aesthetic obsession to every build.",
-  stats: [
-    { icon: "🚀", label: "Projects Delivered", value: "50+" },
-    { icon: "🌍", label: "Global Clients", value: "30+" },
-    { icon: "⚡", label: "AI Models Deployed", value: "15+" },
-    { icon: "🏆", label: "Industry Awards", value: "8" },
-  ],
+  tag: "About HyroVision",
+  title: "We Engineer What's",
+  title_gradient: "Next.",
+  description1:
+    "HyroVision is a modern technology and IT services company focused on building intelligent digital products, AI-powered systems, automation solutions, SaaS platforms, enterprise systems and connected technology experiences.",
+  description2:
+    "We approach technology engineering with rigorous architecture, business-grounded pragmatism, and high-performance standards — turning complex challenges into resilient digital products.",
+  capabilities: verifiedCapabilities,
+  principles: company.principles,
 };
 
 export const CTA_FALLBACK = {
-  tag: "Ready to Build?", title: "Let's Build Something", title_gradient: "Powerful Together",
-  description: "Whether you have a fully-formed idea or just a spark — we're here to turn it into something extraordinary.",
-  btn_primary_label: "Start Your Project", btn_primary_href: "#contact", btn_secondary_label: "Email Us",
+  tag: "Let's Collaborate",
+  title: "Let's Build",
+  title_gradient: "Something Exceptional.",
+  description:
+    "Have an idea, a business problem, or an operational bottleneck that needs intelligent automation? Let's discuss how we can engineer the right solution.",
+  btn_primary_label: "Start a Project",
+  btn_primary_href: "#contact",
+  btn_secondary_label: "Contact Team",
 };
 
 export const CONTACT_FALLBACK = {
-  email: "hello@hyrovision.ai",
-  whatsapp_number: "+1 (555) 123-4567",
-  whatsapp_link: "https://wa.me/15551234567",
-  location: "Dubai, UAE · Remote Worldwide",
-  socials: [{ label: "LinkedIn", href: "#" }, { label: "GitHub", href: "#" }, { label: "Twitter", href: "#" }],
+  email: company.contact.email,
+  whatsapp_number: company.contact.whatsappNumber,
+  whatsapp_link: `https://wa.me/${company.contact.whatsappNumber.replace(/[^0-9]/g, "")}`,
+  location: "Remote Worldwide · Engineering Hub",
+  socials: [
+    { label: "LinkedIn", href: "#" },
+    { label: "GitHub", href: "#" },
+    { label: "Website", href: company.contact.website },
+  ],
 };
 
-export const SERVICES_FALLBACK = [
-  { title: "Custom AI Solutions", icon: "🧠", desc: "Tailor-made machine learning models for enterprise data.", tags: ["Python", "TensorFlow"], color: "#14b8a6" },
-  { title: "Web Development", icon: "💻", desc: "High-performance web applications built with modern tech.", tags: ["React", "Node.js"], color: "#3b82f6" },
-  { title: "UI/UX Design", icon: "✨", desc: "Premium, futuristic interfaces that captivate users.", tags: ["Figma", "Three.js"], color: "#8b5cf6" }
+const PROJECT_COLORS = [
+  "#14B8A6",
+  "#3B82F6",
+  "#8B5CF6",
+  "#10B981",
+  "#06B6D4",
+  "#6366F1",
+  "#EC4899",
+  "#F59E0B",
 ];
+const PROJECT_EMOJIS = ["🚀", "🌍", "📊", "👓", "🧠", "🎓", "🏖️", "✨"];
 
-export const PRODUCTS_FALLBACK = [
-  { id: "1", name: "VisionAI Core", tagline: "Enterprise Vision", desc: "Advanced image recognition system.", badge: "Enterprise", badgeColor: "#14b8a6", gradient: "linear-gradient(135deg, #14b8a611, #020617)", border: "#14b8a633", glow: "#14b8a6", stats: [{v: "12ms", l: "Latency"}, {v: "99.9%", l: "Accuracy"}], tags: ["Real-time", "High throughput"] },
-  { id: "2", name: "Hyro Analytics", tagline: "Data Intelligence", desc: "Data analytics platform for modern teams.", badge: "SaaS", badgeColor: "#3b82f6", gradient: "linear-gradient(135deg, #3b82f611, #020617)", border: "#3b82f633", glow: "#3b82f6", stats: [{v: "10x", l: "Speed"}, {v: "24/7", l: "Uptime"}], tags: ["Dashboards", "Insights"] }
-];
+export const SERVICES_FALLBACK = verifiedServices.map((s, idx) => ({
+  ...s,
+  desc: s.description,
+  tags: s.capabilities.slice(0, 4),
+  icon: ["💻", "📊", "🧠", "🗄️", "☁️"][idx % 5],
+  color: PROJECT_COLORS[idx % PROJECT_COLORS.length],
+}));
 
-export const PROJECTS_FALLBACK = [
-  { id: "p1", size: "large", color: "#14b8a6", emoji: "🛍️", category: "Computer Vision", title: "Neural Retail Analytics", desc: "Automated checkout using AI.", tech: ["Python", "TensorFlow"], liveUrl: "https://b-smart-glass-aura-vision.vercel.app/" },
-  { id: "p2", size: null, color: "#3b82f6", emoji: "📊", category: "Web App", title: "MedScan Pro", desc: "Enterprise management system.", tech: ["React", "Node.js"], liveUrl: "https://alumni-connection-frontend.vercel.app/" }
-];
+export const PROJECTS_FALLBACK = verifiedProjects.map((p, idx) => ({
+  ...p,
+  desc: p.description,
+  tech: p.technologies,
+  color: PROJECT_COLORS[idx % PROJECT_COLORS.length],
+  emoji: PROJECT_EMOJIS[idx % PROJECT_EMOJIS.length],
+  size: idx === 0 || idx === 3 ? "large" : null,
+}));
 
-export const PROCESS_FALLBACK = [
-  { step: "01", icon: "🔍", title: "Discovery", desc: "We analyze your needs and outline the architecture." },
-  { step: "02", icon: "⚙️", title: "Development", desc: "We build the solution with cutting-edge tech." },
-  { step: "03", icon: "🚀", title: "Deployment", desc: "We launch and scale your product to the world." }
-];
+export const PROCESS_FALLBACK = verifiedProcessSteps.map((s) => ({
+  step: s.step,
+  title: s.title,
+  desc: s.description,
+  icon: s.icon,
+  whatWeDo: s.whatWeDo,
+  clientProvides: s.clientProvides,
+  expectedOutput: s.expectedOutput,
+}));
 
-export const PRICING_FALLBACK = [
-  { id: "1", highlighted: false, color: "#94a3b8", name: "Starter", tagline: "For small teams", price: "$99", period: "/mo", features: ["Basic Analytics", "Email Support", "1 User"], missing: ["Custom AI Models"], cta: "Get Started" },
-  { id: "2", highlighted: true, color: "#3b82f6", name: "Pro", tagline: "For enterprises", price: "$299", period: "/mo", features: ["Advanced AI", "Priority Support", "Unlimited Users", "Custom Models"], missing: [], cta: "Get Pro" }
-];
+export const TECH_FALLBACK = Object.entries(verifiedTechnologies).flatMap(([category, list]) =>
+  list.map((name) => ({
+    name,
+    category,
+  }))
+);
 
-export const TECH_FALLBACK = [
-  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-  { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
-  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" }
-];
-
-export const TESTIMONIALS_FALLBACK = [
-  { text: "Hyro Vision completely transformed our business with their incredible AI solutions.", rating: 5, color: "#10b981", avatar: "JD", name: "John Doe", role: "CEO at TechCorp" },
-  { text: "The team delivered a beautiful, performant web app ahead of schedule. Truly premium work.", rating: 5, color: "#3b82f6", avatar: "AS", name: "Alice Smith", role: "Founder at Nexus" }
-];
-
-/* ── Backup liveUrl resolver — fuzzy keyword match (case-insensitive) ── */
-const LIVE_URL_BY_TITLE = {
-  "Aura Vision":                    "https://b-smart-glass-aura-vision.vercel.app/",
-  "Alumni Connect":                  "https://alumni-connection-frontend.vercel.app/",
-  "Alumini Connect":                 "https://alumni-connection-frontend.vercel.app/",
-  "Happy Star Satellite Vision":     "https://happystarsatellitevision.netlify.app/",
-  "Happy Star":                      "https://happystarsatellitevision.netlify.app/",
-  "Pakka Tourism":                   "https://pakkatourism.com",
-  "IEEMA":                           "https://ieema.vercel.app/",
-  "Hyro Vision":                     "https://hyrovision.vercel.app/",
-  "Neural Retail Analytics":         "https://b-smart-glass-aura-vision.vercel.app/",
-  "MedScan Pro":                     "https://alumni-connection-frontend.vercel.app/",
-  "SmartLogistics Hub":              "https://happystarsatellitevision.netlify.app/",
-  "EduVision LMS":                   "https://pakkatourism.com",
-  "FinFlow Dashboard":               "https://ieema.vercel.app/",
-  "SecureVault Identity":            "https://hyrovision.vercel.app/",
-};
-
-const KEYWORD_URL_MAP = [
-  { keywords: ["aura"],                    url: "https://b-smart-glass-aura-vision.vercel.app/" },
-  { keywords: ["alumin", "alumni"],        url: "https://alumni-connection-frontend.vercel.app/" },
-  { keywords: ["happy star", "satellite"], url: "https://happystarsatellitevision.netlify.app/" },
-  { keywords: ["pakka"],                   url: "https://pakkatourism.com" },
-  { keywords: ["ieema"],                   url: "https://ieema.vercel.app/" },
-  { keywords: ["hyro"],                    url: "https://hyrovision.vercel.app/" },
-];
-
+/* ── Backup liveUrl resolver ── */
 export const resolveLiveUrl = (title = "", firestoreUrl = "") => {
-  if (firestoreUrl) return firestoreUrl;
-  const exact = LIVE_URL_BY_TITLE[title];
-  if (exact) return exact;
-  const lower = title.toLowerCase();
-  const match = KEYWORD_URL_MAP.find(({ keywords }) =>
-    keywords.some((kw) => lower.includes(kw))
+  if (firestoreUrl && firestoreUrl !== "#") return firestoreUrl;
+  const match = verifiedProjects.find(
+    (p) => p.title.toLowerCase() === title.toLowerCase() || p.slug === title
   );
-  return match ? match.url : "";
+  return match?.liveUrl || "";
 };
 
 export const withLiveUrl = (p) => {
   const resolved = resolveLiveUrl(p.title, p.liveUrl);
-  console.log(`[Project] "${p.title}" → liveUrl: ${resolved || "(none)"}`);
-  return { ...p, liveUrl: resolved };
+  return { ...p, liveUrl: resolved || p.liveUrl || "" };
 };
 
 /* ── Create context ── */
 export const DataContext = createContext(null);
 
-/* ── Hook to consume context (only export from this file) ── */
+/* ── Hook to consume context ── */
 export function useData() {
   const ctx = useContext(DataContext);
   if (!ctx) throw new Error("useData must be used within DataProvider");

@@ -1,5 +1,16 @@
 import { useEffect, useRef } from "react";
 import { useData } from "../context/DataContext";
+import { technologies } from "../data/technologies";
+
+const CATEGORY_ICONS = {
+  Frontend: "⚛️",
+  Backend: "⚡",
+  Database: "🗄️",
+  AI: "🧠",
+  Automation: "🔄",
+  Cloud: "☁️",
+  Creative: "✨",
+};
 
 export default function TechStackSection() {
   const { techStack: TECHS } = useData();
@@ -9,55 +20,58 @@ export default function TechStackSection() {
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) el.classList.add("visible"); },
+      ([entry]) => {
+        if (entry.isIntersecting) el.classList.add("visible");
+      },
       { threshold: 0.1 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  // Duplicate exactly 2× — the seamless loop trick:
-  // Track width = 2× content. Animating -50% shifts exactly 1 copy.
-  // When it resets to 0, the second copy looks identical → no visible jump.
-  const items = TECHS.length > 0 ? TECHS : [];
-  const doubled = [...items, ...items];
+  const items = TECHS && TECHS.length > 0 ? TECHS : [];
+  const half = Math.ceil(items.length / 2);
+  const row1 = [...items.slice(0, half), ...items.slice(0, half)];
+  const row2 = [...items.slice(half), ...items.slice(half)];
 
   const renderItem = (t, i) => (
     <div key={i} className="ts-item" aria-hidden={i >= items.length}>
       <span className="ts-icon">
-        {typeof t.icon === 'string' && t.icon.startsWith('http')
-          ? <img src={t.icon} alt={t.name} width="22" height="22" style={{ objectFit: 'contain', display: 'block' }} />
-          : t.icon}
+        {CATEGORY_ICONS[t.category] || "🛠️"}
       </span>
       <span className="ts-name">{t.name}</span>
     </div>
   );
 
   return (
-    <section id="techstack" ref={sectionRef} className="techstack-section reveal-section">
+    <section id="tech" ref={sectionRef} className="techstack-section reveal-section">
       <div className="section-container">
         <div className="section-header">
-          <div className="section-tag">Our Arsenal</div>
-          <h2 className="section-title">Tech We <span className="gradient-text">Master</span></h2>
-          <p className="section-subtitle">Battle-tested technologies powering scalable, high-performance digital experiences.</p>
+          <div className="section-tag">Technology Universe</div>
+          <h2 className="section-title">
+            Technologies We <span className="gradient-text">Engineer With</span>
+          </h2>
+          <p className="section-subtitle">
+            Modern, battle-tested tools and frameworks powering our full-stack architectures, AI agents, and cloud platforms.
+          </p>
         </div>
       </div>
 
-      {/* Row 1 — scrolls LEFT (0 → -50%) */}
+      {/* Row 1 — scrolls LEFT */}
       <div className="ts-marquee-wrapper">
         <div className="ts-fade-left" />
         <div className="ts-fade-right" />
         <div className="ts-track ts-track--left">
-          {doubled.map(renderItem)}
+          {row1.map(renderItem)}
         </div>
       </div>
 
-      {/* Row 2 — scrolls RIGHT (-50% → 0) */}
-      <div className="ts-marquee-wrapper" style={{ marginTop: '16px' }}>
+      {/* Row 2 — scrolls RIGHT */}
+      <div className="ts-marquee-wrapper" style={{ marginTop: "16px" }}>
         <div className="ts-fade-left" />
         <div className="ts-fade-right" />
         <div className="ts-track ts-track--right">
-          {doubled.map(renderItem)}
+          {row2.map(renderItem)}
         </div>
       </div>
     </section>

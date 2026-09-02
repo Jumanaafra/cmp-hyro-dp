@@ -11,9 +11,11 @@ const AdminApp = lazy(() => import("./admin/AdminApp.jsx"));
 // Lazy-load project detail page
 const ProjectDetails = lazy(() => import("./pages/ProjectDetails.jsx"));
 
+import { ThemeProvider } from "./context/ThemeContext.jsx";
+
 function PageLoader() {
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", background: "#0a0a0a", color: "#14B8A6", fontFamily: "Inter, sans-serif", fontSize: "16px" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", background: "var(--bg, #0a0a0a)", color: "var(--cyan, #14B8A6)", fontFamily: "Inter, sans-serif", fontSize: "16px" }}>
       Loading...
     </div>
   );
@@ -21,37 +23,39 @@ function PageLoader() {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        {/* Admin panel — lazy loaded, completely separate chunk */}
-        <Route
-          path="/admin/*"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <AdminApp />
-            </Suspense>
-          }
-        />
-        {/* Project detail page — dynamic route */}
-        <Route
-          path="/projects/:id"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <ProjectDetails />
-            </Suspense>
-          }
-        />
-        {/* Main public site - catch-all for any other route */}
-        <Route
-          path="*"
-          element={
-            <DataProvider>
-              <App />
-            </DataProvider>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Admin panel — lazy loaded, completely separate chunk */}
+          <Route
+            path="/admin/*"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AdminApp />
+              </Suspense>
+            }
+          />
+          {/* Project detail page — dynamic route */}
+          <Route
+            path="/projects/:id"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ProjectDetails />
+              </Suspense>
+            }
+          />
+          {/* Main public site - catch-all for any other route */}
+          <Route
+            path="*"
+            element={
+              <DataProvider>
+                <App />
+              </DataProvider>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
