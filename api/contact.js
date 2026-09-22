@@ -41,6 +41,34 @@ function sanitize(str) {
     .replace(/'/g, "&#039;");
 }
 
+async function parseBody(req) {
+  if (req.body) {
+    if (typeof req.body === "object") return req.body;
+    if (typeof req.body === "string") {
+      try {
+        return JSON.parse(req.body);
+      } catch (err) {
+        return {};
+      }
+    }
+  }
+
+  return new Promise((resolve, reject) => {
+    let raw = "";
+    req.on("data", (chunk) => {
+      raw += chunk.toString();
+    });
+    req.on("end", () => {
+      try {
+        resolve(raw ? JSON.parse(raw) : {});
+      } catch (err) {
+        resolve({});
+      }
+    });
+    req.on("error", reject);
+  });
+}
+
 export default async function handler(req, res) {
   // Only accept POST
   if (req.method !== "POST") {
@@ -51,18 +79,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Parse body if not already parsed
-    let body = req.body;
-    if (typeof body === "string") {
-      try {
-        body = JSON.parse(body);
-      } catch {
-        res.statusCode = 400;
-        res.setHeader("Content-Type", "application/json");
-        return res.end(JSON.stringify({ error: "Invalid JSON payload." }));
-      }
-    }
-    body = body || {};
+    const body = (await parseBody(req)) || {};
 
     const {
       name,

@@ -74,7 +74,12 @@ export default function Contact() {
         }),
       });
 
-      const data = await res.json();
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {
+        data = { error: `Server response error (${res.status}). Please contact info@hyrovision.com.` };
+      }
       if (!res.ok || data.error) {
         throw new Error(data.error || "Failed to submit enquiry. Please try again.");
       }

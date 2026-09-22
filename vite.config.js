@@ -11,15 +11,17 @@ function apiDevServer() {
       Object.assign(process.env, env);
 
       server.middlewares.use(async (req, res, next) => {
-        if (req.url.startsWith('/api/chat')) {
+        if (req.url.startsWith('/api/')) {
+          const endpoint = req.url.split('?')[0].replace('/api/', '');
           try {
-            const module = await server.ssrLoadModule('/api/chat.js');
+            const module = await server.ssrLoadModule(`/api/${endpoint}.js`);
             const handler = module.default || module;
             await handler(req, res);
           } catch (err) {
-            console.error('[Vite API Error]', err);
+            console.error(`[Vite API Error: /api/${endpoint}]`, err);
             res.statusCode = 500;
-            res.end(JSON.stringify({ error: 'Internal Server Error' }));
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: `API route /api/${endpoint} error: ${err.message}` }));
           }
         } else {
           next();
