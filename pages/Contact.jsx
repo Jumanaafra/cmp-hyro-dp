@@ -16,7 +16,7 @@ import {
   LuCircleCheck,
   LuArrowRight,
 } from "react-icons/lu";
-import { FaWhatsapp, FaLinkedin, FaInstagram } from "react-icons/fa6";
+import { FaWhatsapp, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa6";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -248,6 +248,30 @@ export default function Contact() {
                     <div>
                       <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>Instagram Official</div>
                       <div style={{ fontWeight: 600 }}>@hyro_vision</div>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://github.com/hyrovision"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "14px",
+                      textDecoration: "none",
+                      color: "var(--text)",
+                      padding: "12px 16px",
+                      borderRadius: "10px",
+                      background: "var(--input-bg)",
+                      border: "1px solid var(--border)",
+                      transition: "border-color 0.2s",
+                    }}
+                  >
+                    <div style={{ color: "var(--text-heading)", fontSize: "22px" }}><FaGithub /></div>
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>GitHub Official</div>
+                      <div style={{ fontWeight: 600 }}>github.com/hyrovision</div>
                     </div>
                   </a>
                 </div>

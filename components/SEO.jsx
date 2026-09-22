@@ -96,6 +96,7 @@ export default function SEO({
       sameAs: [
         "https://www.linkedin.com/company/hyrovision/",
         "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx",
+        "https://github.com/hyrovision",
       ],
       contactPoint: {
         "@type": "ContactPoint",

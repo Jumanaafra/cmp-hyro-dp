@@ -76,6 +76,7 @@ export const CONTACT_FALLBACK = {
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/hyrovision/" },
     { label: "Instagram", href: "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx" },
+    { label: "GitHub", href: "https://github.com/hyrovision" },
     { label: "Website", href: company.contact.website },
   ],
 };

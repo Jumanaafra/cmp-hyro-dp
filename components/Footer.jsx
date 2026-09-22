@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { company } from "../data/company";
-import { FaLinkedin, FaInstagram } from "react-icons/fa6";
+import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa6";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -71,6 +71,27 @@ export default function Footer() {
               >
                 <FaInstagram size={16} />
               </a>
+              <a
+                href={company.socials?.github || "https://github.com/hyrovision"}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Hyro Vision on GitHub"
+                aria-label="Hyro Vision on GitHub"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "10px",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "#ffffff",
+                  transition: "all 0.2s",
+                }}
+              >
+                <FaGithub size={16} />
+              </a>
             </div>
           </div>
 
@@ -128,6 +149,14 @@ export default function Footer() {
                 className="footer-link"
               >
                 Instagram Profile ↗
+              </a>
+              <a
+                href="https://github.com/hyrovision"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                GitHub Organization ↗
               </a>
               <Link to="/contact" className="footer-link" style={{ color: "var(--cyan, #14B8A6)", fontWeight: 600 }}>
                 Start a Project →

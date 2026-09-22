@@ -26,6 +26,7 @@ export const company = {
   socialProfiles: [
     "https://www.linkedin.com/company/hyrovision/",
     "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx",
+    "https://github.com/hyrovision",
   ],
 
   services: [
@@ -120,6 +121,7 @@ export const company = {
   socials: {
     linkedin: "https://www.linkedin.com/company/hyrovision/",
     instagram: "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx",
+    github: "https://github.com/hyrovision",
   },
 
   /** How to start a project — for chatbot responses */

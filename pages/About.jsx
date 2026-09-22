@@ -400,6 +400,14 @@ export default function About() {
               >
                 Instagram Profile <LuExternalLink size={13} />
               </a>
+              <a
+                href={company.socials.github || "https://github.com/hyrovision"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="page-btn page-btn-outline"
+              >
+                GitHub Profile <LuExternalLink size={13} />
+              </a>
             </div>
           </section>
 

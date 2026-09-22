@@ -126,6 +126,7 @@ export default function ContactSection() {
   const SOCIALS = [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/hyrovision/", icon: FaLinkedin },
     { label: "Instagram", href: "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx", icon: FaInstagram },
+    { label: "GitHub", href: "https://github.com/hyrovision", icon: FaGithub },
     { label: "Website", href: company.contact.website, icon: LuGlobe },
   ];
 

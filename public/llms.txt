@@ -8,6 +8,10 @@
 - **Headquarters**: Remote Worldwide · Engineering Hub
 - **Contact Email**: info@hyrovision.com
 - **Telephone**: +919360294463
+- **Official Profiles**:
+  - LinkedIn: https://www.linkedin.com/company/hyrovision/
+  - Instagram: https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx
+  - GitHub: https://github.com/hyrovision
 
 ## Core Engineering Services
 - **Full-Stack Web Application Development**: End-to-end web engineering, React/Next.js frontends, scalable Node.js/Python backends, and performant API architectures. (https://hyrovision.com/services/fullstack-web)
