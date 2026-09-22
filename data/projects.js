@@ -1,50 +1,91 @@
 /**
  * HYROVISION — Centralized Projects Data
  * SOURCE OF TRUTH for all project/portfolio information.
- * Used by AI chatbot and project-related components.
- *
- * All data verified from spec.md Section 14.
- * DO NOT add unsupported results, statistics, or fabricated descriptions.
+ * Used by AI chatbot, landing page, and project catalog components.
  */
 
 export const projects = [
   {
+    id: "hills-tourism",
+    title: "HillsTourism",
+    slug: "hills-tourism",
+    status: "Completed / Live",
+    domain: "hillstourism.com",
+    category: "Tourism / Travel Technology",
+    description:
+      "A complete tourism platform featuring tailored hill station holiday packages, hotel & resort bookings, transport vehicle reservations, back-office administration, and full SEO infrastructure.",
+    technologies: ["Next.js", "React", "PostgreSQL", "Node.js", "Tailwind CSS", "SEO Infrastructure"],
+    liveUrl: "https://hillstourism.com",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    color: "#0D9488",
+    featured: true,
+  },
+  {
+    id: "super-d-hospital",
+    title: "Super D — Hospital Management System",
+    slug: "super-d-hospital-management",
+    status: "Ongoing",
+    domain: "",
+    category: "Healthcare / Hospital Management",
+    description:
+      "A comprehensive hospital management platform currently under active development, engineered for patient records (EMR), doctor scheduling, department workflows, clinical billing, and pharmacy operations.",
+    technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "RBAC Auth"],
+    liveUrl: "",
+    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+    color: "#2563EB",
+    featured: true,
+  },
+  {
     id: "happy-star",
     title: "Happy Star Satellite Vision",
     slug: "happy-star-satellite-vision",
+    status: "Completed / Live",
+    domain: "happystarsatellitevision.netlify.app",
     category: "Commercial / Business Management Platform",
     description:
       "A comprehensive commercial business management platform with integrated payment processing, designed for operational efficiency and scale.",
     technologies: ["Next.js", "Supabase", "PostgreSQL", "Razorpay", "Netlify"],
     liveUrl: "https://happystarsatellitevision.netlify.app/",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+    color: "#14B8A6",
     featured: true,
   },
   {
     id: "pakka-tourism",
     title: "Pakka Tourism",
     slug: "pakka-tourism",
+    status: "Completed / Live",
+    domain: "pakkatourism.com",
     category: "Tourism Platform",
     description:
       "A modern tourism platform providing curated travel experiences, booking management, and destination discovery.",
-    technologies: ["Next.js", "Firebase"],
+    technologies: ["Next.js", "Firebase", "React", "Tailwind CSS"],
     liveUrl: "https://pakkatourism.com",
+    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+    color: "#10B981",
     featured: true,
   },
   {
     id: "advanced-crm-hrms",
     title: "Advanced CRM / HRMS",
     slug: "advanced-crm-hrms",
+    status: "Completed",
+    domain: "",
     category: "Enterprise Platform",
     description:
       "A full-featured enterprise CRM and HRMS platform for managing customer relationships, workforce operations, and business data.",
-    technologies: ["MongoDB", "Express", "React", "Node.js"],
+    technologies: ["MongoDB", "Express", "React", "Node.js", "Chart.js"],
     liveUrl: "",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    color: "#8B5CF6",
     featured: true,
   },
   {
     id: "bsmartglass-auravision",
     title: "BSmartGlass / AuraVision 2.0",
     slug: "bsmartglass-auravision",
+    status: "Completed / Prototype Live",
+    domain: "b-smart-glass-aura-vision.vercel.app",
     category: "AI + IoT",
     description:
       "An AI-powered IoT smart glasses system with real-time video streaming, location services, AI assistance, and automation — connecting wearable hardware with intelligent cloud services.",
@@ -59,12 +100,16 @@ export const projects = [
       "Raspberry Pi Zero 2 W",
     ],
     liveUrl: "https://b-smart-glass-aura-vision.vercel.app/",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+    color: "#06B6D4",
     featured: true,
   },
   {
     id: "ai-learning-path",
     title: "AI-Powered Learning Path Generator",
     slug: "ai-learning-path-generator",
+    status: "Completed",
+    domain: "",
     category: "AI Agent / Autonomous Workflow",
     description:
       "An autonomous AI agent that generates personalized learning paths by integrating multiple APIs and knowledge sources — built with agentic AI architecture.",
@@ -79,34 +124,46 @@ export const projects = [
       "Notion API",
     ],
     liveUrl: "",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+    color: "#6366F1",
     featured: false,
   },
   {
     id: "alumni-connect",
     title: "Alumni Connect Platform",
     slug: "alumni-connect-platform",
+    status: "Completed / Live",
+    domain: "alumni-connection-frontend.vercel.app",
     category: "Full-Stack Networking Platform",
     description:
       "A professional alumni networking platform enabling graduates to connect, collaborate, and share opportunities within their institution community.",
-    technologies: ["MERN", "AWS", "MongoDB", "Mongoose"],
+    technologies: ["MERN", "AWS", "MongoDB", "Mongoose", "React"],
     liveUrl: "https://alumni-connection-frontend.vercel.app/",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+    color: "#3B82F6",
     featured: false,
   },
   {
     id: "jojo-resort",
     title: "Jojo Resort",
     slug: "jojo-resort",
+    status: "Completed",
+    domain: "",
     category: "Commercial Web Application",
     description:
       "A premium commercial web application for a resort business, featuring booking management, gallery, and guest experience features.",
-    technologies: ["Next.js", "React"],
+    technologies: ["Next.js", "React", "CSS Modules"],
     liveUrl: "",
+    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
+    color: "#EC4899",
     featured: false,
   },
   {
     id: "3d-ai-portfolio",
     title: "Personal 3D AI Portfolio",
     slug: "personal-3d-ai-portfolio",
+    status: "Completed",
+    domain: "",
     category: "AI + Interactive Web Experience",
     description:
       "An interactive 3D portfolio website with AI-powered features, canvas animations, and premium visual effects — showcasing creative technology capabilities.",
@@ -120,6 +177,8 @@ export const projects = [
       "GA4",
     ],
     liveUrl: "",
+    image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",
+    color: "#F59E0B",
     featured: false,
   },
 ];

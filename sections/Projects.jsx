@@ -15,6 +15,8 @@ import {
   LuGlobe,
   LuArrowUpRight,
   LuArrowRight,
+  LuMountainSnow,
+  LuHeartPulse,
 } from "react-icons/lu";
 
 const FILTERS = ["ALL", "AI & AGENTS", "SAAS & ENTERPRISE", "IoT", "COMMERCIAL"];
@@ -23,6 +25,8 @@ export function getProjectIcon(project, size = 22) {
   const key = (project.id || project.slug || project.title || "").toLowerCase();
   const cat = (project.category || "").toLowerCase();
 
+  if (key.includes("hills") || key.includes("hillstourism")) return <LuMountainSnow size={size} />;
+  if (key.includes("super-d") || key.includes("hospital") || cat.includes("healthcare") || cat.includes("hospital")) return <LuHeartPulse size={size} />;
   if (key.includes("happy-star") || key.includes("satellite")) return <LuRocket size={size} />;
   if (key.includes("pakka") || key.includes("tourism")) return <LuCompass size={size} />;
   if (key.includes("crm") || key.includes("hrms") || cat.includes("enterprise")) return <LuChartBar size={size} />;
@@ -45,9 +49,9 @@ function matchesFilter(project, filter) {
   const full = `${cat} ${tech} ${title}`;
 
   if (filter === "AI & AGENTS") return full.includes("AI") || full.includes("AGENT") || full.includes("VISION");
-  if (filter === "SAAS & ENTERPRISE") return full.includes("SAAS") || full.includes("ENTERPRISE") || full.includes("CRM") || full.includes("MANAGEMENT") || full.includes("PLATFORM");
+  if (filter === "SAAS & ENTERPRISE") return full.includes("SAAS") || full.includes("ENTERPRISE") || full.includes("CRM") || full.includes("MANAGEMENT") || full.includes("PLATFORM") || full.includes("HOSPITAL") || full.includes("HEALTHCARE");
   if (filter === "IoT") return full.includes("IOT") || full.includes("GLASS") || full.includes("HARDWARE") || full.includes("WEBRTC");
-  if (filter === "COMMERCIAL") return full.includes("COMMERCIAL") || full.includes("TOURISM") || full.includes("RESORT") || full.includes("BUSINESS");
+  if (filter === "COMMERCIAL") return full.includes("COMMERCIAL") || full.includes("TOURISM") || full.includes("RESORT") || full.includes("BUSINESS") || full.includes("HILLS");
   return true;
 }
 
@@ -95,6 +99,37 @@ function ProjectCard({ project }) {
 
       {/* Card inner content */}
       <div className="proj-card-inner">
+        {project.image && (
+          <div className="proj-preview-media">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="proj-preview-img"
+              loading="lazy"
+            />
+            <div className="proj-preview-overlay" />
+            <div className="proj-preview-badges">
+              {project.status && (
+                <span
+                  className={`proj-preview-status ${
+                    project.status.toLowerCase().includes("ongoing")
+                      ? "proj-preview-status--ongoing"
+                      : "proj-preview-status--live"
+                  }`}
+                >
+                  <span className="pulse-dot" style={{ width: 6, height: 6 }} />
+                  {project.status.toLowerCase().includes("ongoing") ? "Ongoing" : "Live"}
+                </span>
+              )}
+              {project.domain && (
+                <span className="proj-preview-domain">
+                  <LuGlobe size={11} /> {project.domain}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
         <div className="proj-header">
           <div
             className="proj-icon-wrapper"

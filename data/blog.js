@@ -28,6 +28,7 @@ export const blogPosts = [
     publishedDate: "2026-08-15",
     readTime: "6 min read",
     coverGradient: "linear-gradient(135deg, #14B8A620 0%, #3B82F620 100%)",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
     tags: ["LLM", "Gemini", "Groq", "RAG", "System Reliability"],
     content: `
 ### The Fragility of Single-Model Dependencies
@@ -83,6 +84,7 @@ Implementing multi-provider fallback routers dramatically improves SLA adherence
     publishedDate: "2026-07-28",
     readTime: "7 min read",
     coverGradient: "linear-gradient(135deg, #3B82F620 0%, #10B98120 100%)",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
     tags: ["Next.js", "Supabase", "PostgreSQL", "Multi-Tenancy", "Security"],
     content: `
 ### The Multi-Tenant Challenge in B2B Platforms
@@ -132,6 +134,7 @@ By shifting tenant authorization down into the database engine, developers elimi
     publishedDate: "2026-06-20",
     readTime: "8 min read",
     coverGradient: "linear-gradient(135deg, #8B5CF620 0%, #14B8A620 100%)",
+    image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=1200&q=80",
     tags: ["RAG", "LangChain", "VectorStore", "Python", "Hallucination Control"],
     content: `
 ### Beyond Naive Vector Search
@@ -172,6 +175,7 @@ Grounded AI is the only viable path for commercial AI adoption. When users can v
     publishedDate: "2026-05-12",
     readTime: "9 min read",
     coverGradient: "linear-gradient(135deg, #06B6D420 0%, #EC489920 100%)",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
     tags: ["IoT", "WebRTC", "WebSockets", "Hardware", "Raspberry Pi"],
     content: `
 ### Engineering for Thermal and Compute Constraints

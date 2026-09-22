@@ -43,6 +43,8 @@ export default function Projects() {
         matchesCategory =
           project.category.toLowerCase().includes("enterprise") ||
           project.category.toLowerCase().includes("crm") ||
+          project.category.toLowerCase().includes("hospital") ||
+          project.category.toLowerCase().includes("healthcare") ||
           project.category.toLowerCase().includes("saas");
       } else if (selectedCategory === "IOT & HARDWARE") {
         matchesCategory =
@@ -193,10 +195,40 @@ export default function Projects() {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    padding: "32px",
+                    padding: "24px",
                   }}
                 >
                   <div>
+                    {project.image && (
+                      <div className="proj-preview-media">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="proj-preview-img"
+                          loading="lazy"
+                        />
+                        <div className="proj-preview-overlay" />
+                        <div className="proj-preview-badges">
+                          {project.status && (
+                            <span
+                              className={`proj-preview-status ${
+                                project.status.toLowerCase().includes("ongoing")
+                                  ? "proj-preview-status--ongoing"
+                                  : "proj-preview-status--live"
+                              }`}
+                            >
+                              <span className="pulse-dot" style={{ width: 6, height: 6 }} />
+                              {project.status.toLowerCase().includes("ongoing") ? "Ongoing" : "Live"}
+                            </span>
+                          )}
+                          {project.domain && (
+                            <span className="proj-preview-domain">
+                              <LuGlobe size={11} /> {project.domain}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
                     <div
                       style={{
                         display: "flex",

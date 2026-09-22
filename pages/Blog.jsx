@@ -167,21 +167,19 @@ export default function Blog() {
                   }}
                 >
                   <div>
-                    <div
-                      style={{
-                        height: "120px",
-                        borderRadius: "12px",
-                        background: post.coverGradient || "linear-gradient(135deg, rgba(var(--cyan-rgb), 0.15) 0%, rgba(59, 130, 246, 0.1) 100%)",
-                        marginBottom: "20px",
-                        display: "flex",
-                        alignItems: "flex-end",
-                        padding: "16px",
-                        border: "1px solid var(--border-subtle)",
-                      }}
-                    >
-                      <span className="page-chip" style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)", color: "var(--cyan)", borderColor: "rgba(var(--cyan-rgb), 0.3)" }}>
-                        {post.category}
-                      </span>
+                    <div className="blog-card-media">
+                      <img
+                        src={post.image || "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"}
+                        alt={post.title}
+                        className="blog-card-img"
+                        loading="lazy"
+                      />
+                      <div className="blog-card-overlay" />
+                      <div className="blog-card-badge">
+                        <span className="page-chip" style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)", color: "var(--cyan)", borderColor: "rgba(var(--cyan-rgb), 0.35)" }}>
+                          {post.category}
+                        </span>
+                      </div>
                     </div>
 
                     <div style={{ display: "flex", alignItems: "center", gap: "14px", fontSize: "0.825rem", color: "var(--text-dim)", marginBottom: "12px" }}>

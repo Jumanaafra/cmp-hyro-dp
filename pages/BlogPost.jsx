@@ -276,6 +276,14 @@ export default function BlogPost() {
             </div>
           </header>
 
+          {/* Article Hero Cover Image */}
+          {post.image && (
+            <div className="blog-post-hero-image-wrap">
+              <img src={post.image} alt={post.title} className="blog-post-hero-img" />
+              <div className="blog-post-hero-overlay" />
+            </div>
+          )}
+
           {/* Article Body */}
           <article className="legal-container" style={{ padding: "40px" }}>
             <div className="legal-prose">

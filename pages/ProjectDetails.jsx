@@ -116,8 +116,29 @@ export default function ProjectDetails() {
           {project.category}
         </div>
         <h1 className="pd-hero-title">{project.title}</h1>
-        <p className="pd-hero-desc">{project.desc}</p>
+        <p className="pd-hero-desc">{project.desc || project.description}</p>
       </header>
+
+      {/* Visual Project Preview Image */}
+      {project.image && (
+        <div style={{ maxWidth: "1000px", margin: "0 auto 36px", padding: "0 20px" }}>
+          <div style={{ position: "relative", height: "360px", borderRadius: "20px", overflow: "hidden", border: "1px solid var(--border)", boxShadow: "0 20px 48px rgba(0,0,0,0.3)" }}>
+            <img src={project.image} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(10, 15, 26, 0.8) 100%)" }} />
+            <div style={{ position: "absolute", bottom: "20px", left: "24px", right: "24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
+              <span className="page-chip" style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(10px)", color: project.color || "var(--cyan)", borderColor: "rgba(var(--cyan-rgb), 0.3)" }}>
+                {project.category}
+              </span>
+              {project.status && (
+                <span className={`proj-preview-status ${project.status.toLowerCase().includes("ongoing") ? "proj-preview-status--ongoing" : "proj-preview-status--live"}`}>
+                  <span className="pulse-dot" style={{ width: 6, height: 6 }} />
+                  {project.status}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Content grid */}
       <div className="pd-content">
