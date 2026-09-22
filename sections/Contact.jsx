@@ -22,9 +22,11 @@ export default function ContactSection() {
     email: "",
     projectType: "Web Application",
     message: "",
+    _hp: "",
   });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [focused, setFocused] = useState("");
 
   const handleChange = (e) =>
@@ -32,27 +34,57 @@ export default function ContactSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.name && form.email && form.message) {
-      setSending(true);
+    if (!form.name || !form.email || !form.message) return;
+    setSending(true);
+    setError("");
+
+    try {
+      // 1. Submit to Resend Serverless Endpoint
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          service: form.projectType,
+          message: form.message,
+          _hp: form._hp,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || data.error) {
+        throw new Error(data.error || "Failed to submit enquiry. Please try again.");
+      }
+
+      // 2. Also log to Firestore if available
       try {
         await createDoc("contact_submissions", {
-          ...form,
+          name: form.name,
+          email: form.email,
+          projectType: form.projectType,
+          message: form.message,
           timestamp: new Date().toISOString(),
           read: false,
         });
       } catch (err) {
-        console.warn("Notice: Storing submission locally:", err.message);
-      } finally {
-        setSent(true);
-        setSending(false);
-        setForm({
-          name: "",
-          email: "",
-          projectType: "Web Application",
-          message: "",
-        });
-        setTimeout(() => setSent(false), 5000);
+        console.warn("Notice: Firestore backup error:", err.message);
       }
+
+      setSent(true);
+      setForm({
+        name: "",
+        email: "",
+        projectType: "Web Application",
+        message: "",
+        _hp: "",
+      });
+      setTimeout(() => setSent(false), 6000);
+    } catch (err) {
+      console.error("Enquiry submission error:", err);
+      setError(err.message || "Failed to deliver enquiry. Please contact info@hyrovision.com.");
+    } finally {
+      setSending(false);
     }
   };
 
@@ -149,10 +181,38 @@ export default function ContactSection() {
           </div>
 
           <form className="contact-form" onSubmit={handleSubmit}>
+            {/* Honeypot field for bot detection */}
+            <input
+              type="text"
+              name="_hp"
+              value={form._hp || ""}
+              onChange={handleChange}
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: "none", position: "absolute", left: "-9999px" }}
+              aria-hidden="true"
+            />
+
             {sent && (
               <div className="cf-success">
                 <LuCheck size={18} />
-                Message received! We will connect with you within 24 hours.
+                Enquiry transmitted successfully! Confirmation sent to your inbox.
+              </div>
+            )}
+
+            {error && (
+              <div
+                style={{
+                  padding: "12px 16px",
+                  background: "rgba(239, 68, 68, 0.1)",
+                  border: "1px solid rgba(239, 68, 68, 0.3)",
+                  borderRadius: "8px",
+                  color: "#f87171",
+                  fontSize: "0.875rem",
+                  marginBottom: "16px",
+                }}
+              >
+                {error}
               </div>
             )}
             <div className="cf-row">

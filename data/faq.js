@@ -35,7 +35,7 @@ export const faqs = [
     category: "General",
     question: "How do I initiate a new project with HyroVision?",
     answer:
-      "You can begin by submitting an inquiry through our Contact page or emailing us directly at hyrovision@gmail.com. We schedule an initial technical discovery session to evaluate project scope, timelines, and architectural requirements.",
+      "You can begin by submitting an inquiry through our Contact page or emailing us directly at info@hyrovision.com. We schedule an initial technical discovery session to evaluate project scope, timelines, and architectural requirements.",
   },
 
   // ── Services ──

@@ -54,9 +54,9 @@ We select technologies based on:
 - User experience
 
 ## Contact Information
-- Email: hyrovision@gmail.com
+- Email: info@hyrovision.com
 - WhatsApp: +919360294463
-- Website: https://hyrovision.vercel.app/
+- Website: https://hyrovision.com
 
 ## How to Start a Project
 You can start a project with HyroVision by visiting our Contact section and filling out the project inquiry form. Share details about your project type, timeline, and requirements — and our team will get back to you to discuss the next steps.

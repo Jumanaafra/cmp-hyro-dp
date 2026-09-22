@@ -181,7 +181,7 @@ export default function AIChatbot() {
           {
             role: "bot",
             text:
-              "AI assistant is temporarily unavailable. Please try again or reach out directly at hyrovision@gmail.com.",
+              "AI assistant is temporarily unavailable. Please try again or reach out directly at info@hyrovision.com.",
             suggestions: [
               "What services does HyroVision provide?",
               "Show me your projects",

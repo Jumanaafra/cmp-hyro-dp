@@ -72,9 +72,9 @@ export const company = {
   ],
 
   contact: {
-    email: "hyrovision@gmail.com",
+    email: "info@hyrovision.com",
     whatsappNumber: "+919360294463",
-    website: "https://hyrovision.vercel.app/",
+    website: "https://hyrovision.com",
   },
 
   /** How to start a project — for chatbot responses */

@@ -26,9 +26,11 @@ export default function Contact() {
     service: "Full-Stack Web Application",
     budget: "$5,000 - $15,000",
     message: "",
+    _hp: "",
   });
 
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -44,22 +46,46 @@ export default function Contact() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       errs.email = "Please enter a valid email address";
     }
-    if (!form.message.trim() || form.message.length < 15) {
-      errs.message = "Please share a brief description (min 15 chars) of your project requirements";
+    if (!form.message.trim() || form.message.length < 10) {
+      errs.message = "Please share a brief description (min 10 chars) of your project requirements";
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
+    setServerError("");
 
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          company: form.companyName,
+          service: form.service,
+          budget: form.budget,
+          message: form.message,
+          _hp: form._hp,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || data.error) {
+        throw new Error(data.error || "Failed to submit enquiry. Please try again.");
+      }
+
       setSubmitted(true);
-    }, 700);
+    } catch (err) {
+      console.error("Enquiry submission error:", err);
+      setServerError(err.message || "Failed to deliver enquiry. Please contact info@hyrovision.com.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const structuredSchema = {
@@ -207,7 +233,7 @@ export default function Contact() {
                     Message Received!
                   </h3>
                   <p style={{ margin: "0 0 12px 0", color: "var(--text)" }}>
-                    Thank you, <strong>{form.name}</strong>. Your project inquiry has been queued for engineering review. We'll be in touch at <strong>{form.email}</strong> shortly.
+                    Thank you, <strong>{form.name}</strong>. Your project inquiry has been delivered and confirmation sent to <strong>{form.email}</strong>. Our engineering team will be in touch within 24 business hours.
                   </p>
                   <button
                     onClick={() => {
@@ -219,6 +245,7 @@ export default function Contact() {
                         service: "Full-Stack Web Application",
                         budget: "$5,000 - $15,000",
                         message: "",
+                        _hp: "",
                       });
                     }}
                     className="page-btn page-btn-outline"
@@ -229,6 +256,34 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="form-shell" noValidate>
+                  {/* Honeypot field for bot detection */}
+                  <input
+                    type="text"
+                    name="_hp"
+                    value={form._hp || ""}
+                    onChange={(e) => setForm({ ...form, _hp: e.target.value })}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    style={{ display: "none", position: "absolute", left: "-9999px" }}
+                    aria-hidden="true"
+                  />
+
+                  {serverError && (
+                    <div
+                      style={{
+                        padding: "14px 18px",
+                        background: "rgba(239, 68, 68, 0.1)",
+                        border: "1px solid rgba(239, 68, 68, 0.3)",
+                        borderRadius: "8px",
+                        color: "#f87171",
+                        fontSize: "0.9rem",
+                        lineHeight: "1.5",
+                      }}
+                    >
+                      {serverError}
+                    </div>
+                  )}
+
                   <div className="form-row-2">
                     <div className="form-group">
                       <label className="form-label" htmlFor="name">
