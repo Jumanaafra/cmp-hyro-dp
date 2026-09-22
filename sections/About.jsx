@@ -46,7 +46,7 @@ function use3DCube(canvasRef) {
       ctx.clearRect(0, 0, W, H);
       const ax = angle * 0.4, ay = angle;
       const projected = vertices.map(([x, y, z]) => project(x, y, z, ax, ay));
-      const cx = W / 2, cy = H / 2;
+      const cx = W / 2, cy = (H - 28) / 2;
 
       const sortedFaces = faces.map((face, i) => ({
         face, i,
@@ -186,13 +186,7 @@ export default function AboutSection() {
           </div>
 
           <div className="about-right">
-            <div
-              className="cube-container liquid-glass"
-              style={{
-                borderRadius: "28px",
-                padding: "20px",
-              }}
-            >
+            <div className="cube-container liquid-glass">
               <canvas ref={cubeRef} className="cube-canvas" />
               <div className="cube-orb-1" />
               <div className="cube-orb-2" />

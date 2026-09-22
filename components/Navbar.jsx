@@ -1,6 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
+import {
+  LuHouse,
+  LuUsers,
+  LuLayers,
+  LuBriefcase,
+  LuUserPlus,
+  LuBookOpen,
+  LuCircleHelp,
+  LuChevronRight,
+  LuArrowUpRight,
+  LuMail,
+} from "react-icons/lu";
 
 const NAV_LINKS = [
   { label: "Home", id: "home" },
@@ -10,6 +22,16 @@ const NAV_LINKS = [
   { label: "Process", id: "process" },
   { label: "Tech Stack", id: "tech" },
   { label: "Contact", id: "contact" },
+];
+
+const MOBILE_NAV_ITEMS = [
+  { label: "Home", path: "/", icon: LuHouse, desc: "Main Portal" },
+  { label: "About Us", path: "/about", icon: LuUsers, desc: "Mission, Leadership & Values" },
+  { label: "Services", path: "/services", icon: LuLayers, desc: "AI, Cloud & Engineering" },
+  { label: "Portfolio", path: "/projects", icon: LuBriefcase, desc: "Enterprise Case Studies" },
+  { label: "Careers", path: "/careers", icon: LuUserPlus, desc: "Open Engineering Roles", badge: "Hiring" },
+  { label: "Engineering Blog", path: "/blog", icon: LuBookOpen, desc: "Tech Insights & AI Systems", badge: "New" },
+  { label: "FAQ", path: "/faq", icon: LuCircleHelp, desc: "Client & Project Inquiries" },
 ];
 
 function ThemeToggle({ className = "" }) {
@@ -71,6 +93,25 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [location.pathname]);
 
+  // Close menu on Escape or outside click
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
+
   const handleNavClick = (id) => {
     setMenuOpen(false);
     if (location.pathname !== "/") {
@@ -83,6 +124,28 @@ export default function Navbar() {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleMobileItemClick = (item) => {
+    setMenuOpen(false);
+    if (item.path === "/") {
+      if (location.pathname === "/") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      navigate(item.path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const isMobileActive = (item) => {
+    if (item.path === "/") {
+      return location.pathname === "/" && (!active || active === "home");
+    }
+    return location.pathname === item.path || location.pathname.startsWith(item.path + "/");
   };
 
   const handleLogoClick = (e) => {
@@ -148,30 +211,71 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div className={`mobile-menu ${menuOpen ? "mobile-menu--open" : ""}`}>
-        {NAV_LINKS.map(({ label, id }) => (
-          <button
-            key={id}
-            className={`mobile-nav-a ${location.pathname === "/" && active === id ? "mobile-nav-a--active" : ""}`}
-            onClick={() => handleNavClick(id)}
-          >
-            {label}
-          </button>
-        ))}
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "14px 24px", borderTop: "1px solid var(--border)" }}>
-          <Link to="/about" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>About Us</Link>
-          <Link to="/services" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>All Services</Link>
-          <Link to="/projects" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>Portfolio</Link>
-          <Link to="/careers" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>Careers</Link>
-          <Link to="/blog" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>Insights</Link>
-          <Link to="/faq" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>FAQ</Link>
+      {/* Unique Modern Mobile Menu Drawer */}
+      <div
+        className={`mobile-menu ${menuOpen ? "mobile-menu--open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation Menu"
+      >
+        <div className="mobile-menu-header">
+          <span className="mobile-menu-tag">HYRO NAVIGATION</span>
+          <div className="mobile-menu-badge">
+            <span className="pulse-dot" />
+            <span>Available for Projects</span>
+          </div>
         </div>
+
+        <nav className="mobile-nav-list" aria-label="Mobile Navigation Links">
+          {MOBILE_NAV_ITEMS.map((item) => {
+            const Icon = item.icon;
+            const itemActive = isMobileActive(item);
+            return (
+              <button
+                key={item.label}
+                type="button"
+                className={`mobile-nav-item ${itemActive ? "mobile-nav-item--active" : ""}`}
+                onClick={() => handleMobileItemClick(item)}
+              >
+                <div className="mobile-nav-item-icon">
+                  <Icon size={17} />
+                </div>
+                <div className="mobile-nav-item-body">
+                  <div className="mobile-nav-item-title-row">
+                    <span className="mobile-nav-item-title">{item.label}</span>
+                    {item.badge && (
+                      <span className={`mobile-nav-badge ${item.badge === "Hiring" ? "mobile-nav-badge--hiring" : "mobile-nav-badge--new"}`}>
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                  <span className="mobile-nav-item-desc">{item.desc}</span>
+                </div>
+                <div className="mobile-nav-item-arrow">
+                  <LuChevronRight size={16} />
+                </div>
+              </button>
+            );
+          })}
+        </nav>
+
+        <div className="mobile-menu-divider" />
+
         <div className="mobile-menu-footer">
           <ThemeToggle className="mobile-theme-toggle" />
           <button className="mobile-cta" onClick={handleStartProject}>
-            Start a Project →
+            <span>Start a Project</span>
+            <LuArrowUpRight size={17} />
           </button>
+        </div>
+
+        <div className="mobile-menu-contact-bar">
+          <a href="mailto:info@hyrovision.com" className="mobile-menu-email">
+            <LuMail size={13} />
+            <span>info@hyrovision.com</span>
+          </a>
+          <span className="mobile-menu-sep">•</span>
+          <span className="mobile-menu-loc">UK &amp; Remote</span>
         </div>
       </div>
     </nav>
