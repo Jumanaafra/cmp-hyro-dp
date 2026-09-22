@@ -51,4 +51,8 @@ class GroqProvider(AIProvider):
         client = self._get_client()
         logger.info(f"Invoking Groq fallback ({self._model_name})...")
         response = await client.ainvoke([HumanMessage(content=prompt)])
-        return response.content if hasattr(response, "content") else str(response)
+        content = response.content if hasattr(response, "content") else response
+        if isinstance(content, list):
+            parts = [p.get("text", str(p)) if isinstance(p, dict) else str(p) for p in content]
+            return "".join(parts).strip()
+        return str(content).strip()

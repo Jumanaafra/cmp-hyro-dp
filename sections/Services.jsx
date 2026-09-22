@@ -1,6 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import { useData } from "../context/DataContext";
+import {
+  LuCode,
+  LuLayoutDashboard,
+  LuBrainCircuit,
+  LuWorkflow,
+  LuCloud,
+  LuCpu,
+  LuDatabase,
+  LuArrowRight,
+} from "react-icons/lu";
 
+function getServiceIcon(service, index) {
+  const title = (service.title || "").toLowerCase();
+  const id = (service.id || "").toLowerCase();
+
+  if (title.includes("web") || title.includes("full-stack") || id.includes("fullstack")) return <LuCode size={24} />;
+  if (title.includes("saas") || title.includes("dashboard") || title.includes("enterprise") || id.includes("saas")) return <LuLayoutDashboard size={24} />;
+  if (title.includes("ai") || title.includes("agent") || id.includes("ai")) return <LuBrainCircuit size={24} />;
+  if (title.includes("automation") || title.includes("workflow") || id.includes("automation")) return <LuWorkflow size={24} />;
+  if (title.includes("cloud") || title.includes("devops") || id.includes("cloud")) return <LuCloud size={24} />;
+  if (title.includes("iot") || title.includes("hardware") || id.includes("iot")) return <LuCpu size={24} />;
+  if (title.includes("database") || title.includes("data") || id.includes("data")) return <LuDatabase size={24} />;
+
+  const fallbackList = [LuCode, LuLayoutDashboard, LuBrainCircuit, LuDatabase, LuCloud];
+  const Fallback = fallbackList[index % fallbackList.length];
+  return <Fallback size={24} />;
+}
 
 function ServiceCard({ service, index }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -27,8 +53,8 @@ function ServiceCard({ service, index }) {
       }}
     >
       <div className="sc-glow" style={{ background: `radial-gradient(circle at 50% 0%, ${service.color}22 0%, transparent 70%)` }} />
-      <div className="sc-icon" style={{ borderColor: `${service.color}44`, background: `${service.color}15` }}>
-        {service.icon}
+      <div className="sc-icon" style={{ borderColor: `${service.color}44`, background: `${service.color}15`, color: service.color }}>
+        {getServiceIcon(service, index)}
       </div>
       <h3 className="sc-title">{service.title}</h3>
       <p className="sc-desc">{service.desc}</p>
@@ -39,7 +65,7 @@ function ServiceCard({ service, index }) {
           </span>
         ))}
       </div>
-      <div className="sc-arrow">→</div>
+      <div className="sc-arrow"><LuArrowRight size={18} /></div>
     </div>
   );
 }

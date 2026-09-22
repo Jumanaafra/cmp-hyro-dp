@@ -1,6 +1,30 @@
 import { useEffect, useRef } from "react";
 import { useData } from "../context/DataContext";
+import {
+  LuSearch,
+  LuRuler,
+  LuPalette,
+  LuCode,
+  LuPlug,
+  LuShieldCheck,
+  LuRocket,
+  LuWorkflow,
+} from "react-icons/lu";
 
+function getProcessIcon(step) {
+  const num = step.step;
+  const title = (step.title || "").toLowerCase();
+
+  if (num === "01" || title.includes("discover")) return <LuSearch size={24} />;
+  if (num === "02" || title.includes("define")) return <LuRuler size={24} />;
+  if (num === "03" || title.includes("design")) return <LuPalette size={24} />;
+  if (num === "04" || title.includes("build")) return <LuCode size={24} />;
+  if (num === "05" || title.includes("integrate")) return <LuPlug size={24} />;
+  if (num === "06" || title.includes("test")) return <LuShieldCheck size={24} />;
+  if (num === "07" || title.includes("deploy") || title.includes("launch")) return <LuRocket size={24} />;
+
+  return <LuWorkflow size={24} />;
+}
 
 export default function ProcessSection() {
   const { processSteps: STEPS } = useData();
@@ -38,7 +62,7 @@ export default function ProcessSection() {
               <div key={s.step} className="process-step" style={{ animationDelay: `${i * 0.18}s` }}>
                 <div className="ps-icon-wrap">
                   <div className="ps-number">{s.step}</div>
-                  <div className="ps-icon">{s.icon}</div>
+                  <div className="ps-icon" style={{ color: "var(--cyan)" }}>{getProcessIcon(s)}</div>
                   <div className="ps-dot" />
                 </div>
                 <div className="ps-content">

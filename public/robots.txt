@@ -1,0 +1,10 @@
+# robots.txt for Hyro Vision (https://hyrovision.com)
+User-agent: *
+Allow: /
+
+# Admin & Internal CMS Routes
+Disallow: /admin
+Disallow: /admin/*
+
+# Technical Sitemap
+Sitemap: https://hyrovision.com/sitemap.xml

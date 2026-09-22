@@ -2,63 +2,6 @@ import { useEffect, useRef } from "react";
 import { useData } from "../context/DataContext";
 import { company } from "../data/company";
 
-const VIDEO_URL =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4";
-
-const FADE_DURATION_MS = 500;
-const FADE_OUT_TRIGGER_SEC = 0.55;
-
-/* ── Custom requestAnimationFrame fade system (no CSS transitions) ── */
-function createFader(videoEl) {
-  let rafId = null;
-
-  function cancelCurrent() {
-    if (rafId !== null) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
-    }
-  }
-
-  function fadeIn() {
-    cancelCurrent();
-    const start = performance.now();
-    const startOpacity = videoEl.style.opacity === "" ? 0 : parseFloat(videoEl.style.opacity);
-
-    function step(now) {
-      const elapsed = now - start;
-      const t = Math.min(elapsed / FADE_DURATION_MS, 1);
-      videoEl.style.opacity = String(startOpacity + (1 - startOpacity) * t);
-      if (t < 1) {
-        rafId = requestAnimationFrame(step);
-      } else {
-        rafId = null;
-      }
-    }
-    rafId = requestAnimationFrame(step);
-  }
-
-  function fadeOut(onComplete) {
-    cancelCurrent();
-    const start = performance.now();
-    const startOpacity = videoEl.style.opacity === "" ? 1 : parseFloat(videoEl.style.opacity);
-
-    function step(now) {
-      const elapsed = now - start;
-      const t = Math.min(elapsed / FADE_DURATION_MS, 1);
-      videoEl.style.opacity = String(startOpacity * (1 - t));
-      if (t < 1) {
-        rafId = requestAnimationFrame(step);
-      } else {
-        videoEl.style.opacity = "0";
-        rafId = null;
-        onComplete?.();
-      }
-    }
-    rafId = requestAnimationFrame(step);
-  }
-
-  return { fadeIn, fadeOut, cancelCurrent };
-}
 
 function use3DCube(canvasRef) {
   useEffect(() => {
@@ -150,9 +93,6 @@ function use3DCube(canvasRef) {
 export default function AboutSection() {
   const { aboutData } = useData();
   const cubeRef = useRef(null);
-  const videoRef = useRef(null);
-  const fadingOutRef = useRef(false);
-  const faderRef = useRef(null);
   const sectionRef = useRef(null);
 
   use3DCube(cubeRef);
@@ -166,54 +106,6 @@ export default function AboutSection() {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
-
-  /* ── Fullscreen Video Seamless Loop + Fader ── */
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.style.opacity = "0";
-    const fader = createFader(video);
-    faderRef.current = fader;
-
-    const handlePlay = () => {
-      fadingOutRef.current = false;
-      fader.fadeIn();
-    };
-
-    const handleTimeUpdate = () => {
-      if (!video.duration) return;
-      const remaining = video.duration - video.currentTime;
-      if (remaining <= FADE_OUT_TRIGGER_SEC && !fadingOutRef.current) {
-        fadingOutRef.current = true;
-        fader.fadeOut();
-      }
-    };
-
-    const handleEnded = () => {
-      video.style.opacity = "0";
-      fader.cancelCurrent();
-      fadingOutRef.current = false;
-      setTimeout(() => {
-        if (!video) return;
-        video.currentTime = 0;
-        video.play().catch(() => {});
-      }, 100);
-    };
-
-    video.addEventListener("play", handlePlay);
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    video.addEventListener("ended", handleEnded);
-
-    video.play().catch(() => {});
-
-    return () => {
-      video.removeEventListener("play", handlePlay);
-      video.removeEventListener("timeupdate", handleTimeUpdate);
-      video.removeEventListener("ended", handleEnded);
-      fader.cancelCurrent();
-    };
   }, []);
 
   const principles = aboutData?.principles || company.principles;
@@ -233,40 +125,6 @@ export default function AboutSection() {
         justifyContent: "center",
       }}
     >
-      {/* ── Background Video with 17% Downshift ── */}
-      <video
-        ref={videoRef}
-        src={VIDEO_URL}
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        className="about-bg-video"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          transform: "translateY(17%)",
-          opacity: 0,
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Dark Overlay for Cinematic Depth ── */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          pointerEvents: "none",
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 100%)",
-        }}
-      />
 
       {/* ── Section Content ── */}
       <div className="section-container" style={{ position: "relative", zIndex: 10, width: "100%" }}>

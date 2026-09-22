@@ -2,7 +2,40 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/DataContext";
 
+import {
+  LuRocket,
+  LuCompass,
+  LuChartBar,
+  LuGlasses,
+  LuBrainCircuit,
+  LuGraduationCap,
+  LuHotel,
+  LuSparkles,
+  LuLayers,
+  LuGlobe,
+  LuArrowUpRight,
+  LuArrowRight,
+} from "react-icons/lu";
+
 const FILTERS = ["ALL", "AI & AGENTS", "SAAS & ENTERPRISE", "IoT", "COMMERCIAL"];
+
+export function getProjectIcon(project, size = 22) {
+  const key = (project.id || project.slug || project.title || "").toLowerCase();
+  const cat = (project.category || "").toLowerCase();
+
+  if (key.includes("happy-star") || key.includes("satellite")) return <LuRocket size={size} />;
+  if (key.includes("pakka") || key.includes("tourism")) return <LuCompass size={size} />;
+  if (key.includes("crm") || key.includes("hrms") || cat.includes("enterprise")) return <LuChartBar size={size} />;
+  if (key.includes("glass") || key.includes("auravision") || cat.includes("iot")) return <LuGlasses size={size} />;
+  if (key.includes("learning") || key.includes("agent") || cat.includes("agent")) return <LuBrainCircuit size={size} />;
+  if (key.includes("alumni") || key.includes("connect") || cat.includes("networking")) return <LuGraduationCap size={size} />;
+  if (key.includes("jojo") || key.includes("resort")) return <LuHotel size={size} />;
+  if (key.includes("portfolio") || key.includes("3d") || cat.includes("creative")) return <LuSparkles size={size} />;
+  if (cat.includes("ai")) return <LuBrainCircuit size={size} />;
+  if (cat.includes("commercial")) return <LuGlobe size={size} />;
+
+  return <LuLayers size={size} />;
+}
 
 function matchesFilter(project, filter) {
   if (filter === "ALL") return true;
@@ -23,10 +56,13 @@ function ProjectCard({ project }) {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
+    navigate(`/projects/${project.id || project.slug}`);
+  };
+
+  const handleLiveClick = (e) => {
+    e.stopPropagation();
     if (project.liveUrl && project.liveUrl !== "#") {
       window.open(project.liveUrl, "_blank", "noopener,noreferrer");
-    } else {
-      navigate(`/projects/${project.id || project.slug}`);
     }
   };
 
@@ -34,6 +70,8 @@ function ProjectCard({ project }) {
     e.stopPropagation();
     navigate(`/projects/${project.id || project.slug}`);
   };
+
+  const hasLiveUrl = Boolean(project.liveUrl && project.liveUrl !== "#");
 
   return (
     <div
@@ -50,17 +88,33 @@ function ProjectCard({ project }) {
       <div
         className="proj-bg"
         style={{
-          background: `linear-gradient(135deg, ${project.color || "#14B8A6"}18, transparent)`,
-          opacity: hovered ? 1 : 0.4,
+          background: `radial-gradient(circle at 85% 15%, ${project.color || "#14B8A6"}24 0%, transparent 60%)`,
+          opacity: hovered ? 1 : 0.35,
         }}
       />
 
-      {/* Card content */}
-      <div style={{ position: "relative", zIndex: 1 }}>
-        <div className="proj-emoji">{project.emoji || "🚀"}</div>
+      {/* Card inner content */}
+      <div className="proj-card-inner">
+        <div className="proj-header">
+          <div
+            className="proj-icon-wrapper"
+            style={{
+              color: project.color || "var(--cyan)",
+              background: `${project.color || "#14B8A6"}16`,
+              borderColor: `${project.color || "#14B8A6"}38`,
+            }}
+          >
+            {getProjectIcon(project, 22)}
+          </div>
+          <div className="proj-arrow-indicator" aria-hidden="true">
+            <LuArrowUpRight size={16} />
+          </div>
+        </div>
+
         <div className="proj-category">{project.category}</div>
         <h3 className="proj-title">{project.title}</h3>
         <p className="proj-desc">{project.desc || project.description}</p>
+
         <div className="proj-tech">
           {(project.tech || project.technologies || []).map((t) => (
             <span key={t} className="proj-tech-tag">
@@ -68,46 +122,33 @@ function ProjectCard({ project }) {
             </span>
           ))}
         </div>
-      </div>
 
-      {/* Hover action overlay */}
-      <div
-        className={`proj-overlay ${hovered ? "proj-overlay--visible" : ""}`}
-        style={{ pointerEvents: hovered ? "all" : "none" }}
-      >
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
-          {project.liveUrl && project.liveUrl !== "#" && (
-            <span
-              className="proj-view-btn"
-              style={{
-                background: project.color || "var(--cyan)",
-                color: "#020617",
-                border: "none",
-              }}
-              onClick={handleCardClick}
+        {/* Action buttons at bottom */}
+        <div className="proj-actions">
+          {hasLiveUrl && (
+            <button
+              type="button"
+              className="proj-btn proj-btn--primary"
+              onClick={handleLiveClick}
+              title="Open live project"
             >
-              Open Live Project ↗
-            </span>
+              Open Live Project <LuArrowUpRight size={14} />
+            </button>
           )}
           <button
-            className="proj-view-btn"
-            style={{
-              background: "rgba(255, 255, 255, 0.15)",
-              color: "#ffffff",
-              border: "1px solid rgba(255, 255, 255, 0.3)",
-              backdropFilter: "blur(8px)",
-              cursor: "pointer",
-            }}
+            type="button"
+            className={`proj-btn ${hasLiveUrl ? "proj-btn--secondary" : "proj-btn--primary"}`}
             onClick={handleDetailsClick}
+            title="View project case study"
           >
-            Case Study →
+            Case Study <LuArrowRight size={14} />
           </button>
         </div>
       </div>
 
       <div
         className="proj-corner-line"
-        style={{ borderColor: `${project.color || "#14B8A6"}55`, pointerEvents: "none" }}
+        style={{ borderColor: `${project.color || "#14B8A6"}44`, pointerEvents: "none" }}
       />
     </div>
   );

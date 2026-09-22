@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 
 const NAV_LINKS = [
@@ -46,6 +47,8 @@ function ThemeToggle({ className = "" }) {
 
 export default function Navbar() {
   const navRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -53,29 +56,61 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      // Active section detection
-      for (const { id } of [...NAV_LINKS].reverse()) {
-        const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          setActive(id);
-          break;
+      if (location.pathname === "/") {
+        // Active section detection on home
+        for (const { id } of [...NAV_LINKS].reverse()) {
+          const el = document.getElementById(id);
+          if (el && window.scrollY >= el.offsetTop - 120) {
+            setActive(id);
+            break;
+          }
         }
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [location.pathname]);
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+  const handleNavClick = (id) => {
     setMenuOpen(false);
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleStartProject = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/contact");
+    } else {
+      const el = document.getElementById("contact");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      else navigate("/contact");
+    }
   };
 
   return (
     <nav ref={navRef} className={`hv-nav ${scrolled ? "hv-nav--scrolled" : ""}`}>
       <div className="hv-nav-inner">
-        <a href="#" className="hv-logo" onClick={(e) => { e.preventDefault(); scrollTo("home"); }}>
+        <a href="/" className="hv-logo" onClick={handleLogoClick}>
           <div className="hv-logo-mark">
             <img src="/assets/hyro-logo-mark.png" alt="Hyro Vision Logo" className="hv-logo-mark-img" />
           </div>
@@ -86,8 +121,8 @@ export default function Navbar() {
           {NAV_LINKS.map(({ label, id }) => (
             <button
               key={id}
-              className={`hv-nav-a ${active === id ? "hv-nav-a--active" : ""}`}
-              onClick={() => scrollTo(id)}
+              className={`hv-nav-a ${location.pathname === "/" && active === id ? "hv-nav-a--active" : ""}`}
+              onClick={() => handleNavClick(id)}
             >
               {label}
             </button>
@@ -97,9 +132,9 @@ export default function Navbar() {
         <div className="hv-nav-actions">
           <ThemeToggle />
           <a
-            href="#contact"
+            href="/contact"
             className="hv-nav-cta"
-            onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}
+            onClick={handleStartProject}
           >
             Start a Project
           </a>
@@ -118,15 +153,23 @@ export default function Navbar() {
         {NAV_LINKS.map(({ label, id }) => (
           <button
             key={id}
-            className={`mobile-nav-a ${active === id ? "mobile-nav-a--active" : ""}`}
-            onClick={() => scrollTo(id)}
+            className={`mobile-nav-a ${location.pathname === "/" && active === id ? "mobile-nav-a--active" : ""}`}
+            onClick={() => handleNavClick(id)}
           >
             {label}
           </button>
         ))}
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "14px 24px", borderTop: "1px solid var(--border)" }}>
+          <Link to="/about" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>About Us</Link>
+          <Link to="/services" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>All Services</Link>
+          <Link to="/projects" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>Portfolio</Link>
+          <Link to="/careers" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>Careers</Link>
+          <Link to="/blog" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>Insights</Link>
+          <Link to="/faq" className="mobile-nav-a" onClick={() => setMenuOpen(false)}>FAQ</Link>
+        </div>
         <div className="mobile-menu-footer">
           <ThemeToggle className="mobile-theme-toggle" />
-          <button className="mobile-cta" onClick={() => scrollTo("contact")}>
+          <button className="mobile-cta" onClick={handleStartProject}>
             Start a Project →
           </button>
         </div>

@@ -4,6 +4,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import "../styles/global.css";
 import "../styles/project-details.css";
+import { LuSearch, LuCpu, LuInfo } from "react-icons/lu";
+import { getProjectIcon } from "../sections/Projects";
 
 import { projects as verifiedProjects } from "../data/projects";
 import { PROJECTS_FALLBACK } from "../context/DataContext";
@@ -65,7 +67,9 @@ export default function ProjectDetails() {
     return (
       <div className="pd-shell">
         <div className="pd-not-found">
-          <div className="pd-nf-emoji">🔍</div>
+          <div className="pd-nf-icon" style={{ display: "inline-flex", color: "var(--cyan)", marginBottom: "16px" }}>
+            <LuSearch size={52} />
+          </div>
           <h1 className="pd-nf-title">Project Not Found</h1>
           <p className="pd-nf-desc">The project you're looking for doesn't exist or may have been removed.</p>
           <button className="pd-back-btn" onClick={() => navigate("/#projects")}>
@@ -96,7 +100,18 @@ export default function ProjectDetails() {
 
       {/* Hero area */}
       <header className="pd-hero">
-        <div className="pd-hero-emoji">{project.emoji}</div>
+        <div
+          className="pd-hero-icon"
+          style={{
+            color: project.color || "var(--cyan)",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "16px",
+          }}
+        >
+          {getProjectIcon(project, 48)}
+        </div>
         <div className="pd-hero-tag" style={{ borderColor: `${project.color}44`, color: project.color, background: `${project.color}12` }}>
           {project.category}
         </div>
@@ -110,7 +125,9 @@ export default function ProjectDetails() {
         {/* Tech stack card */}
         {project.tech && project.tech.length > 0 && (
           <div className="pd-card">
-            <div className="pd-card-label">🛠 Tech Stack</div>
+            <div className="pd-card-label" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <LuCpu size={16} /> Tech Stack
+            </div>
             <div className="pd-tech-grid">
               {project.tech.map(t => (
                 <span
@@ -127,7 +144,9 @@ export default function ProjectDetails() {
 
         {/* Project info card */}
         <div className="pd-card">
-          <div className="pd-card-label">📋 Project Info</div>
+          <div className="pd-card-label" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <LuInfo size={16} /> Project Info
+          </div>
           <div className="pd-info-grid">
             <div className="pd-info-item">
               <span className="pd-info-key">Category</span>

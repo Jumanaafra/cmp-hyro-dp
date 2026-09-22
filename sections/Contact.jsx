@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useData } from "../context/DataContext";
 import { createDoc } from "../firebase/firestore";
 import { company } from "../data/company";
+import { LuMail, LuMapPin, LuGlobe, LuSend, LuCheck } from "react-icons/lu";
+import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa6";
 
 const PROJECT_TYPES = [
   "Web Application",
@@ -65,19 +67,19 @@ export default function ContactSection() {
 
   const CONTACT_INFO = [
     {
-      icon: "✉️",
+      icon: <LuMail size={18} />,
       label: "Email",
       value: emailVal,
       href: `mailto:${emailVal}`,
     },
     {
-      icon: "💬",
+      icon: <FaWhatsapp size={18} />,
       label: "WhatsApp",
       value: whatsappVal,
       href: whatsappLink,
     },
     {
-      icon: "📍",
+      icon: <LuMapPin size={18} />,
       label: "Operations",
       value: "Remote Worldwide · Engineering Studio",
       href: null,
@@ -85,9 +87,9 @@ export default function ContactSection() {
   ];
 
   const SOCIALS = [
-    { label: "LinkedIn", href: "#" },
-    { label: "GitHub", href: "#" },
-    { label: "Website", href: company.contact.website },
+    { label: "LinkedIn", href: "#", icon: FaLinkedin },
+    { label: "GitHub", href: "#", icon: FaGithub },
+    { label: "Website", href: company.contact.website, icon: LuGlobe },
   ];
 
   return (
@@ -112,7 +114,7 @@ export default function ContactSection() {
             <div className="ci-items">
               {CONTACT_INFO.map((c) => (
                 <div key={c.label} className="ci-item">
-                  <div className="ci-icon">{c.icon}</div>
+                  <div className="ci-icon" style={{ color: "var(--cyan)" }}>{c.icon}</div>
                   <div>
                     <div className="ci-label">{c.label}</div>
                     {c.href ? (
@@ -127,18 +129,30 @@ export default function ContactSection() {
               ))}
             </div>
             <div className="ci-social">
-              {SOCIALS.map((s) => (
-                <a key={s.label} href={s.href} className="ci-social-btn">
-                  {s.label}
-                </a>
-              ))}
+              {SOCIALS.map((s) => {
+                const IconComponent = s.icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    className="ci-social-btn"
+                    target={s.href.startsWith("http") ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}
+                  >
+                    <IconComponent size={14} />
+                    {s.label}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
           <form className="contact-form" onSubmit={handleSubmit}>
             {sent && (
               <div className="cf-success">
-                <span>✓</span> Thank you! Your project inquiry has been received.
+                <LuCheck size={18} />
+                Message received! We will connect with you within 24 hours.
               </div>
             )}
             <div className="cf-row">
