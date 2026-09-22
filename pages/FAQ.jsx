@@ -50,9 +50,8 @@ export default function FAQ() {
   }, [selectedCategory, searchQuery]);
 
   const structuredSchema = {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.slice(0, 15).map((f) => ({
+    "mainEntity": faqs.map((f) => ({
       "@type": "Question",
       "name": f.question,
       "acceptedAnswer": {
@@ -62,12 +61,18 @@ export default function FAQ() {
     })),
   };
 
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "FAQ", path: "/faq" },
+  ];
+
   return (
     <>
       <SEO
         title="Frequently Asked Questions (FAQ) — Hyro Vision"
-        description="Find answers to common questions about Hyro Vision's software engineering services, AI agents, architecture standards, pricing, and project workflows."
+        description="Find verified answers to common questions about Hyro Vision's software engineering services, web development, custom software, AI solutions, and case studies."
         schema={structuredSchema}
+        breadcrumbs={breadcrumbs}
       />
       <Navbar />
 

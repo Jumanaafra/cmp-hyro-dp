@@ -4,6 +4,7 @@ import "./styles/global.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AIChatbot from "./components/AIChatbot";
+import SEO from "./components/SEO";
 import HeroSection from "./sections/Hero";
 import AboutSection from "./sections/About";
 import ServicesSection from "./sections/Services";
@@ -60,6 +61,11 @@ function CursorSpotlight() {
 export default function App() {
   return (
     <>
+      <SEO
+        title="Hyro Vision — Technology, AI & Digital Solutions"
+        description="Hyro Vision develops custom web applications, AI-powered systems, and scalable digital solutions for modern businesses."
+        breadcrumbs={[{ name: "Home", path: "/" }]}
+      />
       <CursorSpotlight />
       <Navbar />
       <main>

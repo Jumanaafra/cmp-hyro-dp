@@ -1,0 +1,48 @@
+# Hyro Vision (https://hyrovision.com)
+> High-performance digital products, AI-powered systems, and intelligent automation solutions.
+
+## Company Overview
+- **Name**: Hyro Vision
+- **Website**: https://hyrovision.com
+- **Description**: Hyro Vision is a modern technology and IT services engineering company. We build intelligent digital products, full-stack web applications, SaaS platforms, enterprise systems, and AI-powered automation solutions.
+- **Headquarters**: Remote Worldwide · Engineering Hub
+- **Contact Email**: info@hyrovision.com
+- **Telephone**: +919360294463
+
+## Core Engineering Services
+- **Full-Stack Web Application Development**: End-to-end web engineering, React/Next.js frontends, scalable Node.js/Python backends, and performant API architectures. (https://hyrovision.com/services/fullstack-web)
+- **Custom SaaS & Enterprise Dashboards**: Multi-tenant architectures, role-based access control (RBAC), and custom enterprise management software. (https://hyrovision.com/services/saas-enterprise)
+- **AI Integration & Autonomous Workflows**: Production Retrieval-Augmented Generation (RAG), vector embeddings, multi-provider LLM routers, and autonomous workflow automation. (https://hyrovision.com/services/ai-integration)
+- **Backend Architecture & Database Design**: Resilient database modeling (PostgreSQL, MongoDB, Supabase), connection pooling, caching layers, and high-throughput APIs. (https://hyrovision.com/services/backend-database)
+- **Cloud Deployment & Technical SEO**: High-availability CDN deployment on Vercel/AWS, automated CI/CD pipelines, Core Web Vitals optimization, and structured data architecture. (https://hyrovision.com/services/cloud-seo)
+
+## Public Projects & Case Studies
+- **HillsTourism** (Status: LIVE)
+  - **Category**: Tourism / Travel Technology
+  - **URL**: https://hillstourism.com
+  - **Case Study**: https://hyrovision.com/projects/hills-tourism
+  - **Overview**: Full-featured tourism and travel platform featuring holiday package booking, hotel and resort reservations, transport booking flows, and administrative management.
+- **Super D — Hospital Management System** (Status: ONGOING)
+  - **Category**: Healthcare / Hospital Management
+  - **Status Notice**: Project currently under development.
+  - **Case Study**: https://hyrovision.com/projects/super-d-hospital-management
+  - **Overview**: Comprehensive hospital information and management system engineered for electronic medical records (EMR), doctor scheduling, department workflows, and clinical operations.
+
+## Important Public Resources
+- **Home**: https://hyrovision.com/
+- **About Hyro Vision**: https://hyrovision.com/about
+- **Services Catalog**: https://hyrovision.com/services
+- **Projects Portfolio**: https://hyrovision.com/projects
+- **Careers & Roles**: https://hyrovision.com/careers
+- **Engineering Blog**: https://hyrovision.com/blog
+- **Frequently Asked Questions (FAQ)**: https://hyrovision.com/faq
+- **Contact & Inquiries**: https://hyrovision.com/contact
+
+## Legal & Policies
+- **Privacy Policy**: https://hyrovision.com/privacy-policy
+- **Terms & Conditions**: https://hyrovision.com/terms
+- **Cookie Policy**: https://hyrovision.com/cookie-policy
+- **Refund Policy**: https://hyrovision.com/refund-policy
+
+## Technical Sitemap
+- **XML Sitemap**: https://hyrovision.com/sitemap.xml

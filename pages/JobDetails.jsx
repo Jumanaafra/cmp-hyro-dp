@@ -116,6 +116,11 @@ export default function JobDetails() {
         title={`${job.title} — Careers at Hyro Vision`}
         description={job.overview}
         schema={structuredSchema}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Careers", path: "/careers" },
+          { name: job.title, path: `/careers/${job.slug}` },
+        ]}
       />
       <Navbar />
 

@@ -11,7 +11,7 @@
   <url>
     <loc>https://hyrovision.com/about</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://hyrovision.com/services</loc>
@@ -26,12 +26,32 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hyrovision.com/services/web-development</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://hyrovision.com/services/full-stack-development</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hyrovision.com/services/saas-enterprise</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://hyrovision.com/services/ai-integration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://hyrovision.com/services/ai-solutions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://hyrovision.com/services/automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -45,6 +65,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  <url>
+    <loc>https://hyrovision.com/services/seo-optimization</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
 
   <!-- Projects Portfolio & Case Studies -->
   <url>
@@ -53,54 +78,24 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://hyrovision.com/projects/hillstourism</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
     <loc>https://hyrovision.com/projects/hills-tourism</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hyrovision.com/projects/super-d-hospital-management-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
     <loc>https://hyrovision.com/projects/super-d-hospital-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://hyrovision.com/projects/happy-star-satellite-vision</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hyrovision.com/projects/pakka-tourism</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hyrovision.com/projects/advanced-crm-hrms</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hyrovision.com/projects/bsmartglass-auravision</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hyrovision.com/projects/ai-learning-path-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hyrovision.com/projects/alumni-connect-platform</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hyrovision.com/projects/jojo-resort</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hyrovision.com/projects/personal-3d-ai-portfolio</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 
   <!-- Careers & Job Openings -->
@@ -132,6 +127,11 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hyrovision.com/blog/lessons-from-building-hillstourism-platform</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://hyrovision.com/blog/architecting-multi-provider-llm-fallbacks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -161,12 +161,17 @@
   <url>
     <loc>https://hyrovision.com/faq</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <!-- Legal & Compliance -->
   <url>
     <loc>https://hyrovision.com/privacy-policy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://hyrovision.com/terms-and-conditions</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

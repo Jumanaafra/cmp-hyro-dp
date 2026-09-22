@@ -99,7 +99,7 @@ export default function Footer() {
             <div className="footer-col">
               <h4 className="footer-col-title">Legal & Trust</h4>
               <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
-              <Link to="/terms" className="footer-link">Terms & Conditions</Link>
+              <Link to="/terms-and-conditions" className="footer-link">Terms & Conditions</Link>
               <Link to="/cookie-policy" className="footer-link">Cookie Policy</Link>
               <Link to="/refund-policy" className="footer-link">Refund & Cancellation</Link>
               <a href={`mailto:${company.contact.email}`} className="footer-link">

@@ -56,6 +56,10 @@ export default function Blog() {
         title="Engineering Insights & Technical Articles — Hyro Vision"
         description="Deep dives into multi-provider LLM fallbacks, enterprise SaaS multi-tenancy, grounded RAG vector pipelines, and IoT architectures."
         schema={structuredSchema}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ]}
       />
       <Navbar />
 

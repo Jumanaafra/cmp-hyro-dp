@@ -39,9 +39,13 @@ export default function Careers() {
   return (
     <>
       <SEO
-        title="Careers — Join Our Engineering Team"
+        title="Careers — Join Our Engineering Team | Hyro Vision"
         description="Build high-performance digital products and autonomous AI systems. Explore open remote engineering roles at Hyro Vision."
         schema={structuredSchema}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Careers", path: "/careers" },
+        ]}
       />
       <Navbar />
 

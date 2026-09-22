@@ -16,6 +16,10 @@ export default function CookiePolicy() {
       <SEO
         title="Cookie Policy — Hyro Vision"
         description="Understand how Hyro Vision uses cookies and local storage tokens to optimize site functionality and user experience."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Cookie Policy", path: "/cookie-policy" },
+        ]}
       />
       <Navbar />
 

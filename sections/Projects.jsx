@@ -19,7 +19,7 @@ import {
   LuHeartPulse,
 } from "react-icons/lu";
 
-const FILTERS = ["ALL", "AI & AGENTS", "SAAS & ENTERPRISE", "IoT", "COMMERCIAL"];
+const FILTERS = ["ALL", "TOURISM & TRAVEL", "HEALTHCARE & ENTERPRISE"];
 
 export function getProjectIcon(project, size = 22) {
   const key = (project.id || project.slug || project.title || "").toLowerCase();
@@ -43,15 +43,13 @@ export function getProjectIcon(project, size = 22) {
 
 function matchesFilter(project, filter) {
   if (filter === "ALL") return true;
-  const cat = (project.category || "").toUpperCase();
+  const cat = (project.category || project.industry || "").toUpperCase();
   const tech = (project.technologies || project.tech || []).join(" ").toUpperCase();
   const title = (project.title || "").toUpperCase();
   const full = `${cat} ${tech} ${title}`;
 
-  if (filter === "AI & AGENTS") return full.includes("AI") || full.includes("AGENT") || full.includes("VISION");
-  if (filter === "SAAS & ENTERPRISE") return full.includes("SAAS") || full.includes("ENTERPRISE") || full.includes("CRM") || full.includes("MANAGEMENT") || full.includes("PLATFORM") || full.includes("HOSPITAL") || full.includes("HEALTHCARE");
-  if (filter === "IoT") return full.includes("IOT") || full.includes("GLASS") || full.includes("HARDWARE") || full.includes("WEBRTC");
-  if (filter === "COMMERCIAL") return full.includes("COMMERCIAL") || full.includes("TOURISM") || full.includes("RESORT") || full.includes("BUSINESS") || full.includes("HILLS");
+  if (filter === "TOURISM & TRAVEL") return full.includes("TOURISM") || full.includes("TRAVEL") || full.includes("HILLS");
+  if (filter === "HEALTHCARE & ENTERPRISE") return full.includes("HEALTH") || full.includes("HOSPITAL") || full.includes("ENTERPRISE") || full.includes("SAAS");
   return true;
 }
 

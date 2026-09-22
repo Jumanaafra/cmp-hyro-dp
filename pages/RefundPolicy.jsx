@@ -16,6 +16,10 @@ export default function RefundPolicy() {
       <SEO
         title="Refund & Cancellation Policy — Hyro Vision"
         description="Learn about Hyro Vision's milestone-based billing, sprint cancellations, defect remediation, and refund policy for custom software projects."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Refund Policy", path: "/refund-policy" },
+        ]}
       />
       <Navbar />
 

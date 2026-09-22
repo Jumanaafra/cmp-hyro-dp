@@ -16,6 +16,10 @@ export default function TermsConditions() {
       <SEO
         title="Terms & Conditions — Hyro Vision"
         description="Review the terms and conditions governing the use of Hyro Vision's website and commercial software engineering engagements."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Terms & Conditions", path: "/terms-and-conditions" },
+        ]}
       />
       <Navbar />
 

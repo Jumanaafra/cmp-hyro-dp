@@ -187,6 +187,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               }
             />
             <Route
+              path="/terms-and-conditions"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <TermsConditions />
+                </Suspense>
+              }
+            />
+            <Route
               path="/cookie-policy"
               element={
                 <Suspense fallback={<PageLoader />}>

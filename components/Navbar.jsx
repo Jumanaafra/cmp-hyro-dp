@@ -68,47 +68,27 @@ const SERVICES_DATA = [
   },
 ];
 
-// Portfolio Data for Desktop Mega Menu
+// Portfolio Data for Desktop Mega Menu (Verified Public Projects)
 const FEATURED_PROJECTS = [
   {
-    id: "hills-tourism",
+    id: "hillstourism",
     title: "HillsTourism",
     status: "Live",
     statusColor: "live",
     category: "Tourism / Travel Tech",
     desc: "Complete hill station booking platform with packages, resorts & fleet reservations.",
-    path: "/projects/hills-tourism",
+    path: "/projects/hillstourism",
     image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
   },
   {
-    id: "super-d-hospital",
-    title: "Super D Hospital",
+    id: "super-d-hospital-management-system",
+    title: "Super D — Hospital Management",
     status: "Ongoing",
     statusColor: "ongoing",
     category: "Healthcare / MedTech",
     desc: "Enterprise hospital management platform for EMR, doctor scheduling & billing.",
-    path: "/projects/super-d-hospital-management",
+    path: "/projects/super-d-hospital-management-system",
     image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    id: "happy-star",
-    title: "Happy Star Satellite",
-    status: "Live",
-    statusColor: "live",
-    category: "Commercial SaaS",
-    desc: "Commercial business operations platform with automated payment workflows.",
-    path: "/projects/happy-star-satellite-vision",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    id: "bsmartglass",
-    title: "BSmartGlass",
-    status: "Live",
-    statusColor: "live",
-    category: "IoT & Hardware",
-    desc: "Smart eyewear firmware & device telemetry synchronization system.",
-    path: "/projects/bsmartglass",
-    image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=400&q=80",
   },
 ];
 

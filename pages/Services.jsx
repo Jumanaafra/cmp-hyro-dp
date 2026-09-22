@@ -66,9 +66,13 @@ export default function Services() {
   return (
     <>
       <SEO
-        title="Services — Full-Stack, Autonomous AI & Cloud Engineering"
-        description="Explore Hyro Vision's production-grade engineering services: Full-Stack Web Apps, SaaS Platforms, Autonomous AI Agents, Robust Backend Systems, and Cloud DevOps."
+        title="Engineering Services — Full-Stack, AI & Cloud Solutions | Hyro Vision"
+        description="Explore Hyro Vision's production-grade engineering services: Full-Stack Web Development, Custom SaaS Platforms, AI Solutions, Backend Architecture, and Technical SEO."
         schema={structuredSchema}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ]}
       />
       <Navbar />
 

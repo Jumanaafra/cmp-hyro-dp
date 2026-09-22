@@ -113,6 +113,10 @@ export default function Contact() {
         title="Contact Us — Start an Engineering Project"
         description="Connect with Hyro Vision's engineering team to scope your web platform, SaaS dashboard, or autonomous AI agent project."
         schema={structuredSchema}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]}
       />
       <Navbar />
 
@@ -450,6 +454,16 @@ export default function Contact() {
                 </form>
               )}
             </div>
+          </div>
+
+          {/* Semantic Internal Linking to Services & Case Studies */}
+          <div style={{ marginTop: "36px", textAlign: "center", display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>
+            <Link to="/services" className="page-btn page-btn-outline" style={{ fontSize: "0.875rem" }}>
+              Explore Engineering Services →
+            </Link>
+            <Link to="/projects" className="page-btn page-btn-outline" style={{ fontSize: "0.875rem" }}>
+              View Verified Case Studies →
+            </Link>
           </div>
         </div>
       </main>

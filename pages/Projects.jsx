@@ -17,10 +17,8 @@ import {
 
 const CATEGORIES = [
   "ALL",
-  "AI & AGENTS",
-  "ENTERPRISE & SAAS",
-  "IOT & HARDWARE",
-  "COMMERCIAL PLATFORMS",
+  "TRAVEL & TOURISM",
+  "HEALTHCARE & ENTERPRISE",
 ];
 
 export default function Projects() {
@@ -35,26 +33,15 @@ export default function Projects() {
     return projects.filter((project) => {
       // Category filter
       let matchesCategory = true;
-      if (selectedCategory === "AI & AGENTS") {
+      const cat = (project.category || project.industry || "").toLowerCase();
+      if (selectedCategory === "TRAVEL & TOURISM") {
+        matchesCategory = cat.includes("tourism") || cat.includes("travel");
+      } else if (selectedCategory === "HEALTHCARE & ENTERPRISE") {
         matchesCategory =
-          project.category.toLowerCase().includes("ai") ||
-          project.category.toLowerCase().includes("agent");
-      } else if (selectedCategory === "ENTERPRISE & SAAS") {
-        matchesCategory =
-          project.category.toLowerCase().includes("enterprise") ||
-          project.category.toLowerCase().includes("crm") ||
-          project.category.toLowerCase().includes("hospital") ||
-          project.category.toLowerCase().includes("healthcare") ||
-          project.category.toLowerCase().includes("saas");
-      } else if (selectedCategory === "IOT & HARDWARE") {
-        matchesCategory =
-          project.category.toLowerCase().includes("iot") ||
-          project.category.toLowerCase().includes("hardware");
-      } else if (selectedCategory === "COMMERCIAL PLATFORMS") {
-        matchesCategory =
-          project.category.toLowerCase().includes("commercial") ||
-          project.category.toLowerCase().includes("tourism") ||
-          project.category.toLowerCase().includes("networking");
+          cat.includes("health") ||
+          cat.includes("hospital") ||
+          cat.includes("enterprise") ||
+          cat.includes("saas");
       }
 
       // Search query
@@ -85,9 +72,13 @@ export default function Projects() {
   return (
     <>
       <SEO
-        title="Portfolio & Case Studies — Engineered Digital Systems"
-        description="Explore production software, autonomous AI systems, enterprise SaaS platforms, and IoT applications built by Hyro Vision."
+        title="Portfolio & Case Studies — Verified Engineering Work | Hyro Vision"
+        description="Explore verified case studies of production software systems engineered by Hyro Vision, including HillsTourism (Live) and Super D Hospital Management System (Ongoing)."
         schema={structuredSchema}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Projects", path: "/projects" },
+        ]}
       />
       <Navbar />
 

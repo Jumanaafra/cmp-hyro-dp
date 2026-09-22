@@ -18,6 +18,10 @@ export default function PrivacyPolicy() {
       <SEO
         title="Privacy Policy — Hyro Vision"
         description="Learn how Hyro Vision collects, protects, and handles your data when you visit our website or engage our engineering services."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Privacy Policy", path: "/privacy-policy" },
+        ]}
       />
       <Navbar />
 

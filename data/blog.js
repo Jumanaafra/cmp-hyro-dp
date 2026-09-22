@@ -14,6 +14,55 @@ export const blogCategories = [
 
 export const blogPosts = [
   {
+    id: "lessons-from-building-hillstourism-platform",
+    slug: "lessons-from-building-hillstourism-platform",
+    title: "Engineering a High-Performance Tourism Platform: Lessons from Building HillsTourism",
+    excerpt:
+      "An architectural breakdown of designing an end-to-end travel platform with Next.js, relational database indexing, and technical SEO for hill station discovery.",
+    category: "Full-Stack Engineering",
+    author: {
+      name: "Engineering Team",
+      role: "Full-Stack Web Engineering",
+      avatar: "/assets/hyro-logo-mark.png",
+    },
+    publishedDate: "2026-09-01",
+    readTime: "7 min read",
+    coverGradient: "linear-gradient(135deg, #0D948820 0%, #14B8A620 100%)",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    tags: ["Next.js", "PostgreSQL", "Tourism Tech", "Technical SEO", "Architecture"],
+    content: `
+### The Challenge of Fragmented Travel Booking
+
+When travelers plan hill station holidays, they frequently encounter fragmented digital ecosystems. Accommodation portals, private vehicle operators, and regional tour guides operate on isolated spreadsheets and manual messaging, causing friction for customers and administrative chaos for operators.
+
+When engineering [HillsTourism](https://hillstourism.com), the Hyro Vision team focused on unifying these three core verticals — holiday tour packages, resort bookings, and transport reservations — into a unified, high-performance web platform.
+
+---
+
+### Key Architectural Decisions
+
+#### 1. Server-Side Rendering for Discoverability and Speed
+Travel booking journeys begin on search engines. To ensure search crawlers can discover every hill station itinerary and destination guide, we engineered the platform using Next.js with server-side rendering and static pre-rendering. This guarantees high Core Web Vitals scores and rapid First Contentful Paint (FCP) on mobile networks.
+
+#### 2. Relational Modeling for Complex Availability
+Holiday packages often couple hotel inventory with vehicle dispatch schedules. We utilized PostgreSQL with composite indexes across reservation dates and room allotments, preventing overbooking and ensuring sub-50ms query latency during high-traffic holiday seasons.
+
+#### 3. Technical SEO & Schema.org Integration
+Every tour package and destination page is annotated with rich Schema.org structured data, dynamic OpenGraph previews, and canonical link headers. This makes the platform immediately comprehensible to search engines and AI discovery systems.
+
+---
+
+### Discover More
+- Explore the verified [HillsTourism Case Study](/projects/hillstourism)
+- Visit the live deployed application at [hillstourism.com](https://hillstourism.com)
+- Learn about our [Full-Stack Web Development Services](/services/fullstack-web)
+    `,
+    relatedSlugs: [
+      "scaling-saas-architectures-nextjs-supabase",
+      "architecting-multi-provider-llm-fallbacks",
+    ],
+  },
+  {
     id: "multi-provider-llm-fallback-architecture",
     slug: "architecting-multi-provider-llm-fallbacks",
     title: "Architecting Multi-Provider LLM Fallbacks: Zero-Downtime AI in Production",

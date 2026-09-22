@@ -14,15 +14,24 @@ import {
   LuLayers,
   LuSearch,
   LuArrowLeft,
+  LuCpu,
+  LuExternalLink,
 } from "react-icons/lu";
 
-// Friendly alias mappings
+// Comprehensive alias mappings for AI-readable & semantic URLs
 const ALIAS_MAP = {
+  "web-development": "fullstack-web",
+  "full-stack-development": "fullstack-web",
+  "ai-solutions": "ai-integration",
+  "automation": "ai-integration",
   "ai-autonomous-agents": "ai-integration",
+  "seo-optimization": "cloud-seo",
+  "cloud-devops-architecture": "cloud-seo",
+  "custom-software": "saas-enterprise",
   "enterprise-web-applications": "fullstack-web",
   "saas-platform-engineering": "saas-enterprise",
-  "cloud-devops-architecture": "cloud-seo",
   "api-integrations-microservices": "backend-database",
+  "backend-architecture": "backend-database",
   "iot-industrial-systems": "saas-enterprise",
 };
 
@@ -64,7 +73,6 @@ export default function ServiceDetails() {
   }
 
   const structuredSchema = {
-    "@context": "https://schema.org",
     "@type": "Service",
     "name": service.title,
     "description": service.description,
@@ -77,6 +85,12 @@ export default function ServiceDetails() {
     "termsOfService": "https://hyrovision.com/terms",
   };
 
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: service.shortTitle || service.title, path: `/services/${service.slug}` },
+  ];
+
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
@@ -84,9 +98,10 @@ export default function ServiceDetails() {
   return (
     <>
       <SEO
-        title={`${service.shortTitle || service.title} — Hyro Vision`}
+        title={`${service.shortTitle || service.title} Services — Hyro Vision`}
         description={service.description}
         schema={structuredSchema}
+        breadcrumbs={breadcrumbs}
       />
       <Navbar />
 
@@ -104,7 +119,7 @@ export default function ServiceDetails() {
         />
 
         <div className="page-container">
-          {/* Breadcrumb */}
+          {/* Breadcrumb Navigation */}
           <nav className="page-breadcrumb" aria-label="Breadcrumb">
             <Link to="/">Home</Link>
             <span className="page-breadcrumb-sep">/</span>
@@ -113,7 +128,7 @@ export default function ServiceDetails() {
             <span className="page-breadcrumb-current">{service.shortTitle || service.title}</span>
           </nav>
 
-          {/* Header */}
+          {/* Main Service Header (H1) */}
           <header className="page-header">
             <div
               className="page-tag"
@@ -124,36 +139,45 @@ export default function ServiceDetails() {
               }}
             >
               <span className="page-tag-dot" style={{ background: service.color, boxShadow: `0 0 8px ${service.color}` }} />
-              {service.category} • Stage {service.number}
+              {service.category} • Practice {service.number}
             </div>
 
             <h1 className="page-title">{service.title}</h1>
             <p className="page-subtitle" style={{ fontSize: "1.15rem", maxWidth: "800px" }}>
-              {service.detailedDescription || service.description}
+              {service.description}
             </p>
 
             <div style={{ marginTop: "24px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
               <Link to="/contact" className="page-btn page-btn-primary">
                 Inquire About This Service <LuArrowRight />
               </Link>
-              <button
-                onClick={() => navigate(-1)}
-                className="page-btn page-btn-outline"
-              >
+              <Link to="/services" className="page-btn page-btn-outline">
                 <LuArrowLeft /> All Services
-              </button>
+              </Link>
             </div>
           </header>
 
-          {/* Capabilities & Tech Stack */}
+          {/* Definition Section (H2) */}
+          <section className="page-block">
+            <div className="page-card" style={{ padding: "32px", borderColor: `${service.color}33` }}>
+              <h2 className="page-card-title" style={{ fontSize: "1.35rem", marginBottom: "12px" }}>
+                What is our {service.shortTitle || service.title} service?
+              </h2>
+              <p style={{ color: "var(--text-muted)", fontSize: "1.025rem", lineHeight: "1.7", margin: 0 }}>
+                {service.detailedDescription || service.description}
+              </p>
+            </div>
+          </section>
+
+          {/* What We Build / Capabilities & Tech Stack (H2) */}
           <section className="page-block">
             <div className="page-grid-2">
               <div className="page-card">
-                <h3 className="page-card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <LuLayers color={service.color} /> Core Capabilities
-                </h3>
+                <h2 className="page-card-title" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "1.25rem" }}>
+                  <LuLayers color={service.color} /> What We Build & Deliver
+                </h2>
                 <p className="page-card-desc">
-                  Granular capabilities and engineering competencies included in this practice:
+                  Granular engineering capabilities and deliverables included in this service:
                 </p>
                 <div className="page-chip-list">
                   {service.capabilities.map((cap, i) => (
@@ -165,11 +189,11 @@ export default function ServiceDetails() {
               </div>
 
               <div className="page-card">
-                <h3 className="page-card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <LuCode color={service.color} /> Technologies Used
-                </h3>
+                <h2 className="page-card-title" style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "1.25rem" }}>
+                  <LuCode color={service.color} /> Technology
+                </h2>
                 <p className="page-card-desc">
-                  Modern, audited, and production-tested toolchain powering our delivery:
+                  Audited, modern, and production-tested toolchain powering our delivery:
                 </p>
                 <div className="page-chip-list">
                   {service.technologies.map((tech, i) => (
@@ -191,10 +215,10 @@ export default function ServiceDetails() {
             </div>
           </section>
 
-          {/* Engineering Process Timeline */}
+          {/* Development Process (H2) */}
           {service.process && service.process.length > 0 && (
             <section className="page-block">
-              <h2 className="page-block-title">Engineering Execution Process</h2>
+              <h2 className="page-block-title">Our development process</h2>
               <div className="page-grid-3">
                 {service.process.map((step, idx) => (
                   <div key={idx} className="page-card">
@@ -222,9 +246,23 @@ export default function ServiceDetails() {
             </section>
           )}
 
-          {/* Deliverables & Use Cases */}
+          {/* Typical Use Cases & Deliverables */}
           <section className="page-block">
             <div className="page-grid-2">
+              {service.useCases && (
+                <div className="page-card">
+                  <h3 className="page-card-title">Typical Use Cases</h3>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "14px" }}>
+                    {service.useCases.map((useCase, idx) => (
+                      <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "12px", color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: "1.5" }}>
+                        <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: service.color, marginTop: "7px", flexShrink: 0 }} />
+                        <span>{useCase}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {service.deliverables && (
                 <div className="page-card">
                   <h3 className="page-card-title">Production Deliverables</h3>
@@ -238,24 +276,40 @@ export default function ServiceDetails() {
                   </ul>
                 </div>
               )}
-
-              {service.useCases && (
-                <div className="page-card">
-                  <h3 className="page-card-title">Primary Use Cases</h3>
-                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "14px" }}>
-                    {service.useCases.map((useCase, idx) => (
-                      <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "12px", color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: "1.5" }}>
-                        <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: service.color, marginTop: "7px", flexShrink: 0 }} />
-                        <span>{useCase}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </div>
           </section>
 
-          {/* Service-Specific FAQs */}
+          {/* Related Case Study Spotlight (Internal Linking) */}
+          <section className="page-block">
+            <div className="page-card" style={{ padding: "28px", borderColor: "rgba(var(--cyan-rgb), 0.2)" }}>
+              <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--cyan)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                Case Study Spotlight
+              </span>
+              <h3 style={{ fontSize: "1.25rem", color: "var(--text-heading)", margin: "8px 0 10px 0" }}>
+                {service.id === "fullstack-web" || service.id === "cloud-seo"
+                  ? "See this in production: HillsTourism"
+                  : "See enterprise engineering in action: Super D Hospital Management"}
+              </h3>
+              <p style={{ color: "var(--text-muted)", fontSize: "0.925rem", lineHeight: "1.6", marginBottom: "16px" }}>
+                {service.id === "fullstack-web" || service.id === "cloud-seo"
+                  ? "Explore how Hyro Vision architected and launched HillsTourism with complete holiday packages, resort bookings, and technical SEO."
+                  : "Discover our architectural approach for Super D, centralizing clinical hospital workflows and doctor scheduling."}
+              </p>
+              <Link
+                to={
+                  service.id === "fullstack-web" || service.id === "cloud-seo"
+                    ? "/projects/hillstourism"
+                    : "/projects/super-d-hospital-management-system"
+                }
+                className="page-btn page-btn-primary"
+                style={{ padding: "8px 18px", fontSize: "0.85rem", display: "inline-flex" }}
+              >
+                Read Case Study <LuArrowRight />
+              </Link>
+            </div>
+          </section>
+
+          {/* Service-Specific FAQs (H2) */}
           {service.faqs && service.faqs.length > 0 && (
             <section className="page-block">
               <h2 className="page-block-title">Frequently Asked Questions</h2>
@@ -284,7 +338,7 @@ export default function ServiceDetails() {
             </section>
           )}
 
-          {/* Bottom CTA Box */}
+          {/* Bottom CTA Box (H2) */}
           <section className="page-cta-box">
             <h2 className="page-cta-title">Ready to Begin with {service.shortTitle}?</h2>
             <p className="page-cta-desc">

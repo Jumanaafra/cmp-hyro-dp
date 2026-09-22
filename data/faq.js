@@ -1,157 +1,125 @@
 /**
- * HYROVISION — Centralized FAQ Repository
+ * HYRO VISION — Centralized FAQ Repository
  * Structured data source for the /faq page, chatbot grounding, and Schema.org FAQPage generation.
+ * Optimized for natural-language search and Generative Engine Optimization (GEO).
  */
 
 export const faqCategories = [
   "All",
   "General",
   "Services",
-  "Development",
   "AI & Automation",
   "Projects",
-  "Pricing & Engagement",
-  "Support",
+  "Technology",
+  "Engagement & Contact",
 ];
 
 export const faqs = [
-  // ── General ──
+  // ── General / Company Identity ──
   {
     id: "gen-1",
     category: "General",
-    question: "What is HyroVision?",
+    question: "Who is Hyro Vision?",
     answer:
-      "HyroVision is a modern technology and IT services engineering company focused on building intelligent digital products, AI-powered systems, workflow automation solutions, SaaS architectures, enterprise platforms, and connected IoT experiences.",
+      "Hyro Vision is a modern technology and IT services engineering company focused on building intelligent digital products, full-stack web applications, AI-powered systems, automation solutions, SaaS architectures, and enterprise platforms.",
   },
   {
     id: "gen-2",
     category: "General",
-    question: "Where is HyroVision located?",
+    question: "What does Hyro Vision do?",
     answer:
-      "HyroVision operates as a remote-first engineering studio with distributed clients and partners worldwide. We manage communication through structured async updates, email, WhatsApp, and scheduled video conferences.",
+      "Hyro Vision develops custom web applications, digital products, and intelligent automation solutions for modern businesses. We take projects from initial discovery and systems architecture through frontend engineering, backend development, database design, and cloud deployment.",
   },
   {
     id: "gen-3",
     category: "General",
-    question: "How do I initiate a new project with HyroVision?",
+    question: "Where is Hyro Vision located?",
     answer:
-      "You can begin by submitting an inquiry through our Contact page or emailing us directly at info@hyrovision.com. We schedule an initial technical discovery session to evaluate project scope, timelines, and architectural requirements.",
+      "Hyro Vision operates as a remote-first engineering studio with distributed clients and partners worldwide. We manage communication through structured async updates, email, WhatsApp, and scheduled video conferences.",
   },
 
   // ── Services ──
   {
     id: "srv-1",
     category: "Services",
-    question: "What core services does HyroVision offer?",
+    question: "What web development services does Hyro Vision provide?",
     answer:
-      "We provide end-to-end Full-Stack Web Application Development, Custom SaaS & Enterprise Platforms, AI Integration & Autonomous Agent Workflows, Backend Architecture & Database Design, and Cloud Deployment & Technical SEO.",
+      "Hyro Vision provides end-to-end full-stack web development. This includes responsive, high-speed frontends in React and Next.js, scalable backend microservices in Node.js, Express, or Python, REST/GraphQL APIs, relational and NoSQL database modeling, and Core Web Vitals optimization.",
   },
   {
     id: "srv-2",
     category: "Services",
-    question: "Do you build custom software or customize off-the-shelf templates?",
+    question: "Does Hyro Vision build custom software?",
     answer:
-      "We build custom, production-grade software engineered specifically to your business workflows. We do not use bloated pre-built themes; every solution is tailored for performance, security, and scalability.",
+      "Yes. Hyro Vision specializes in building custom, production-grade software engineered specifically to business workflows. We do not use bloated pre-built themes; every platform, dashboard, and system is tailored for performance, security, and long-term scalability.",
   },
   {
     id: "srv-3",
     category: "Services",
-    question: "Can HyroVision audit and upgrade an existing application?",
+    question: "Does Hyro Vision provide AI solutions?",
     answer:
-      "Yes. We frequently conduct legacy codebase modernization, security audits, database query optimization, and UI/UX engineering for established platforms looking to scale.",
+      "Yes. Hyro Vision develops grounded generative AI systems and autonomous workflows. Our capabilities include Retrieval-Augmented Generation (RAG) anchored to proprietary corporate data, multi-agent orchestration pipelines (LangGraph, n8n), tool-calling integrations, and multi-provider LLM routers ensuring zero downtime.",
+  },
+  {
+    id: "srv-4",
+    category: "Services",
+    question: "Does Hyro Vision provide SEO optimization?",
+    answer:
+      "Yes. Hyro Vision provides technical SEO and Generative Engine Optimization (GEO). We implement clean semantic HTML, dynamic canonical URLs, automated XML sitemaps, robots.txt crawl policies, OpenGraph social cards, Schema.org JSON-LD structured data, and Core Web Vitals performance tuning to maximize discoverability across search engines and AI answer engines.",
   },
 
-  // ── Development ──
+  // ── Technology ──
   {
-    id: "dev-1",
-    category: "Development",
-    question: "What tech stack do you recommend for high-performance web apps?",
+    id: "tech-1",
+    category: "Technology",
+    question: "What technologies does Hyro Vision use?",
     answer:
-      "We specialize in React.js and Next.js for high-speed frontends, coupled with Node.js, Express, or Python on the backend. For data persistence, we utilize PostgreSQL, MongoDB, Supabase, and Redis for caching.",
+      "Hyro Vision engineers with audited, production-grade tools. On the frontend, we use React.js, Next.js, HTML5, CSS3, and Tailwind CSS. On the backend, we use Node.js, Express.js, and Python. For databases, we employ PostgreSQL, MongoDB, and Supabase. For AI and automation, we integrate Gemini, OpenAI, LangGraph, and n8n. Deployments run on Vercel, Netlify, and AWS.",
   },
   {
-    id: "dev-2",
-    category: "Development",
-    question: "How do you ensure code quality and maintainability?",
+    id: "tech-2",
+    category: "Technology",
+    question: "How does Hyro Vision prevent AI hallucinations in client applications?",
     answer:
-      "We follow strict clean architecture principles, modular component structures, automated linting, test-driven validation, and git-based code review workflows before deploying to production.",
-  },
-  {
-    id: "dev-3",
-    category: "Development",
-    question: "Who owns the intellectual property and code produced during the project?",
-    answer:
-      "Upon full milestone settlement, all custom source code, documentation, and assets belong 100% to the client. We deliver complete repository access and deployment documentation.",
-  },
-
-  // ── AI & Automation ──
-  {
-    id: "ai-1",
-    category: "AI & Automation",
-    question: "How does HyroVision build grounded AI systems without hallucinations?",
-    answer:
-      "We engineer Retrieval-Augmented Generation (RAG) pipelines backed by vector databases (such as ChromaDB or pgvector). The AI answers queries strictly based on your organization's verified documentation, complete with source citations.",
-  },
-  {
-    id: "ai-2",
-    category: "AI & Automation",
-    question: "What is your multi-provider LLM fallback architecture?",
-    answer:
-      "To prevent downtime from API outages or rate limits, we implement intelligent LLM routers. Primary requests are handled by fast models (like Google Gemini 1.5 Flash), and if an error occurs, requests seamlessly fall back to secondary providers (like Groq open-source Llama models) with zero context loss.",
-  },
-  {
-    id: "ai-3",
-    category: "AI & Automation",
-    question: "Can you automate internal business workflows using n8n or LangGraph?",
-    answer:
-      "Yes. We design autonomous agentic workflows that connect external APIs, CRM systems, webhooks, and communication channels (Slack, WhatsApp, Email) to execute routine business operations autonomously.",
+      "We implement grounded Retrieval-Augmented Generation (RAG) with vector databases. Models are strictly constrained with system prompts and citation mechanisms that anchor responses solely to verified documentation, with transparent fallback behavior when information is absent.",
   },
 
   // ── Projects ──
   {
     id: "prj-1",
     category: "Projects",
-    question: "What real-world projects has HyroVision engineered?",
+    question: "What projects has Hyro Vision developed?",
     answer:
-      "Our portfolio includes Happy Star Satellite Vision (commercial platform with Razorpay payments), Pakka Tourism (curated booking experience), Advanced CRM/HRMS (enterprise workforce platform), and BSmartGlass / AuraVision 2.0 (AI + IoT wearable system).",
+      "Hyro Vision's verified public projects include HillsTourism (a live, full-featured travel and tourism booking platform available at https://hillstourism.com) and Super D — Hospital Management System (a comprehensive healthcare and clinical operations platform currently under active development).",
   },
   {
     id: "prj-2",
     category: "Projects",
-    question: "How long does an average custom project take from start to launch?",
+    question: "What is the HillsTourism project by Hyro Vision?",
     answer:
-      "Timelines depend on complexity: MVP web applications typically take 3 to 6 weeks, while comprehensive enterprise SaaS or multi-agent AI ecosystems span 8 to 14 weeks across structured milestones.",
+      "HillsTourism (https://hillstourism.com) is a complete hill station tourism and travel platform engineered by Hyro Vision. It features curated holiday tour packages, real-time hotel and resort bookings, private vehicle reservations, back-office administration, and full SEO infrastructure.",
+  },
+  {
+    id: "prj-3",
+    category: "Projects",
+    question: "What is the Super D Hospital Management System project?",
+    answer:
+      "Super D is a hospital information and clinical management platform currently under active development by Hyro Vision. It is engineered to streamline electronic medical records (EMR), doctor consultation scheduling, multi-department clinical workflows (OPD/IPD/Diagnostics), and administrative billing.",
   },
 
-  // ── Pricing & Engagement ──
+  // ── Engagement & Contact ──
   {
-    id: "prc-1",
-    category: "Pricing & Engagement",
-    question: "What engagement models does HyroVision offer?",
+    id: "cnt-1",
+    category: "Engagement & Contact",
+    question: "How can I contact Hyro Vision?",
     answer:
-      "We offer milestone-based fixed-scope projects for clearly defined deliverables, and dedicated engineering retainers for ongoing development, architecture, and feature scaling.",
+      "You can contact Hyro Vision by submitting an inquiry through our Contact page (https://hyrovision.com/contact), emailing us directly at info@hyrovision.com, or messaging us via WhatsApp at +919360294463. Our engineering team reviews inquiries and responds within 24 to 48 business hours.",
   },
   {
-    id: "prc-2",
-    category: "Pricing & Engagement",
-    question: "How are project payments structured?",
+    id: "cnt-2",
+    category: "Engagement & Contact",
+    question: "How does the project development process work at Hyro Vision?",
     answer:
-      "Milestone-based projects typically operate on an initial kickoff deposit followed by progressive payments tied to verifiable milestone deliverables (e.g. Design/Prototype, Beta Release, Production Deployment).",
-  },
-
-  // ── Support ──
-  {
-    id: "sup-1",
-    category: "Support",
-    question: "Do you provide post-launch maintenance and support?",
-    answer:
-      "Yes. Every completed deployment includes an initial 30-day warranty period for bug fixes and stability monitoring. We also provide ongoing monthly maintenance contracts covering security patches, uptime monitoring, and feature updates.",
-  },
-  {
-    id: "sup-2",
-    category: "Support",
-    question: "How quickly do you respond to urgent technical issues?",
-    answer:
-      "For clients on active support retainers, critical severity issues are acknowledged within 1 to 2 hours, with prioritized resolution pipelines.",
+      "We follow an eight-step agile delivery process: Discover (problem analysis), Define (scope and specs), Design (wireframes and architecture), Build (iterative coding sprints), Integrate (APIs and databases), Test (quality assurance and performance), Deploy (cloud CDN staging and rollout), and Scale (monitoring and support).",
   },
 ];

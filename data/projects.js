@@ -1,184 +1,99 @@
 /**
- * HYROVISION — Centralized Projects Data
- * SOURCE OF TRUTH for all project/portfolio information.
- * Used by AI chatbot, landing page, and project catalog components.
+ * HYRO VISION — Centralized Projects & Case Studies Repository
+ * SOURCE OF TRUTH for verified public projects and case studies.
+ *
+ * Public Projects contain strictly verified company work:
+ * 1. HillsTourism (LIVE — https://hillstourism.com)
+ * 2. Super D — Hospital Management System (ONGOING — Under active engineering)
+ *
+ * All case studies follow structured GEO & Schema.org guidelines.
  */
 
 export const projects = [
   {
-    id: "hills-tourism",
+    id: "hillstourism",
+    slug: "hillstourism",
+    legacyId: "hills-tourism",
     title: "HillsTourism",
-    slug: "hills-tourism",
-    status: "Completed / Live",
-    domain: "hillstourism.com",
+    industry: "Tourism / Travel Technology",
     category: "Tourism / Travel Technology",
+    status: "LIVE",
+    domain: "hillstourism.com",
+    liveUrl: "https://hillstourism.com",
+    officialUrl: "https://hillstourism.com",
     description:
       "A complete tourism platform featuring tailored hill station holiday packages, hotel & resort bookings, transport vehicle reservations, back-office administration, and full SEO infrastructure.",
-    technologies: ["Next.js", "React", "PostgreSQL", "Node.js", "Tailwind CSS", "SEO Infrastructure"],
-    liveUrl: "https://hillstourism.com",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    problem:
+      "Travelers seeking hill station holidays previously faced fragmented booking experiences across separate accommodation portals, regional tour operators, and private vehicle rentals, leading to operational friction and elevated booking abandonment.",
+    solution:
+      "Hyro Vision engineered a unified, high-performance tourism web platform consolidating bespoke holiday packages, verified resort reservations, chauffeur vehicle scheduling, and administrative management into a single frictionless digital application.",
+    features: [
+      "Curated hill station tour packages with detailed day-by-day itineraries",
+      "Real-time hotel & resort reservation workflow with instant booking confirmation",
+      "Transport vehicle reservations and chauffeur scheduling engine",
+      "Centralized administrative dashboard for bookings, inquiries, and customer management",
+      "Comprehensive technical SEO infrastructure and high-speed page delivery",
+      "Fully responsive, mobile-optimized interface with accessible navigation",
+    ],
+    technologies: [
+      "Next.js",
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "SEO Infrastructure",
+    ],
+    developmentApproach:
+      "Engineered using a modern component architecture with server-rendered and statically generated routes for lightning-fast Core Web Vitals and organic search crawler discoverability. Database schemas were normalized in PostgreSQL for relational integrity across package bookings, hotel rooms, and vehicle allocations.",
+    outcome:
+      "Successfully launched in live production at https://hillstourism.com. The platform provides travelers with reliable hill station holiday discovery and gives administrators streamlined operational control.",
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
     color: "#0D9488",
     featured: true,
   },
   {
-    id: "super-d-hospital",
+    id: "super-d-hospital-management-system",
+    slug: "super-d-hospital-management-system",
+    legacyId: "super-d-hospital-management",
+    altId: "super-d-hospital",
     title: "Super D — Hospital Management System",
-    slug: "super-d-hospital-management",
-    status: "Ongoing",
-    domain: "",
+    industry: "Healthcare / Hospital Management",
     category: "Healthcare / Hospital Management",
+    status: "ONGOING",
+    domain: "",
+    liveUrl: "",
+    notice:
+      "Project currently under development. Active engineering sprint in progress — no public demo link available.",
     description:
       "A comprehensive hospital management platform currently under active development, engineered for patient records (EMR), doctor scheduling, department workflows, clinical billing, and pharmacy operations.",
-    technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "RBAC Auth"],
-    liveUrl: "",
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+    problem:
+      "Healthcare facilities frequently struggle with fragmented paper documentation, doctor scheduling conflicts, delayed patient intake, and disconnected department communication between outpatient, inpatient, and diagnostic divisions.",
+    solution:
+      "Hyro Vision is engineering an integrated, secure hospital management system that centralizes electronic medical records (EMR), doctor consultation appointments, department routing, and clinical billing into a cohesive digital workflow.",
+    features: [
+      "Electronic Medical Records (EMR) management with strict data access control",
+      "Doctor consultation scheduling and interactive appointment calendar",
+      "Multi-department clinical workflow routing (OPD, IPD, Diagnostics, Pharmacy)",
+      "Patient registration, admission tracking, and discharge summary generation",
+      "Role-Based Access Control (RBAC) for physicians, clinical staff, and billing personnel",
+      "Integrated billing flows and clinical service requisition tracking",
+    ],
+    technologies: [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "Role-Based Access Control (RBAC)",
+    ],
+    developmentApproach:
+      "Designed with a modular architecture prioritizing strict role-based access control (RBAC), end-to-end data validation, and resilient error recovery. Interfaces are crafted for high-stress clinical workflows with high readability and keyboard accessibility.",
+    outcome:
+      "Project currently under active engineering development. Clinical workflow testing, role permission auditing, and database stress testing are actively underway.",
+    image:
+      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
     color: "#2563EB",
     featured: true,
-  },
-  {
-    id: "happy-star",
-    title: "Happy Star Satellite Vision",
-    slug: "happy-star-satellite-vision",
-    status: "Completed / Live",
-    domain: "happystarsatellitevision.netlify.app",
-    category: "Commercial / Business Management Platform",
-    description:
-      "A comprehensive commercial business management platform with integrated payment processing, designed for operational efficiency and scale.",
-    technologies: ["Next.js", "Supabase", "PostgreSQL", "Razorpay", "Netlify"],
-    liveUrl: "https://happystarsatellitevision.netlify.app/",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
-    color: "#14B8A6",
-    featured: true,
-  },
-  {
-    id: "pakka-tourism",
-    title: "Pakka Tourism",
-    slug: "pakka-tourism",
-    status: "Completed / Live",
-    domain: "pakkatourism.com",
-    category: "Tourism Platform",
-    description:
-      "A modern tourism platform providing curated travel experiences, booking management, and destination discovery.",
-    technologies: ["Next.js", "Firebase", "React", "Tailwind CSS"],
-    liveUrl: "https://pakkatourism.com",
-    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
-    color: "#10B981",
-    featured: true,
-  },
-  {
-    id: "advanced-crm-hrms",
-    title: "Advanced CRM / HRMS",
-    slug: "advanced-crm-hrms",
-    status: "Completed",
-    domain: "",
-    category: "Enterprise Platform",
-    description:
-      "A full-featured enterprise CRM and HRMS platform for managing customer relationships, workforce operations, and business data.",
-    technologies: ["MongoDB", "Express", "React", "Node.js", "Chart.js"],
-    liveUrl: "",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
-    color: "#8B5CF6",
-    featured: true,
-  },
-  {
-    id: "bsmartglass-auravision",
-    title: "BSmartGlass / AuraVision 2.0",
-    slug: "bsmartglass-auravision",
-    status: "Completed / Prototype Live",
-    domain: "b-smart-glass-aura-vision.vercel.app",
-    category: "AI + IoT",
-    description:
-      "An AI-powered IoT smart glasses system with real-time video streaming, location services, AI assistance, and automation — connecting wearable hardware with intelligent cloud services.",
-    technologies: [
-      "MERN",
-      "WebRTC",
-      "WebSockets",
-      "Google Maps API",
-      "OpenAI API",
-      "n8n",
-      "Bluetooth/WiFi",
-      "Raspberry Pi Zero 2 W",
-    ],
-    liveUrl: "https://b-smart-glass-aura-vision.vercel.app/",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
-    color: "#06B6D4",
-    featured: true,
-  },
-  {
-    id: "ai-learning-path",
-    title: "AI-Powered Learning Path Generator",
-    slug: "ai-learning-path-generator",
-    status: "Completed",
-    domain: "",
-    category: "AI Agent / Autonomous Workflow",
-    description:
-      "An autonomous AI agent that generates personalized learning paths by integrating multiple APIs and knowledge sources — built with agentic AI architecture.",
-    technologies: [
-      "Python",
-      "LangGraph",
-      "Streamlit",
-      "MCP",
-      "Gemini",
-      "YouTube API",
-      "Google Drive API",
-      "Notion API",
-    ],
-    liveUrl: "",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
-    color: "#6366F1",
-    featured: false,
-  },
-  {
-    id: "alumni-connect",
-    title: "Alumni Connect Platform",
-    slug: "alumni-connect-platform",
-    status: "Completed / Live",
-    domain: "alumni-connection-frontend.vercel.app",
-    category: "Full-Stack Networking Platform",
-    description:
-      "A professional alumni networking platform enabling graduates to connect, collaborate, and share opportunities within their institution community.",
-    technologies: ["MERN", "AWS", "MongoDB", "Mongoose", "React"],
-    liveUrl: "https://alumni-connection-frontend.vercel.app/",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
-    color: "#3B82F6",
-    featured: false,
-  },
-  {
-    id: "jojo-resort",
-    title: "Jojo Resort",
-    slug: "jojo-resort",
-    status: "Completed",
-    domain: "",
-    category: "Commercial Web Application",
-    description:
-      "A premium commercial web application for a resort business, featuring booking management, gallery, and guest experience features.",
-    technologies: ["Next.js", "React", "CSS Modules"],
-    liveUrl: "",
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
-    color: "#EC4899",
-    featured: false,
-  },
-  {
-    id: "3d-ai-portfolio",
-    title: "Personal 3D AI Portfolio",
-    slug: "personal-3d-ai-portfolio",
-    status: "Completed",
-    domain: "",
-    category: "AI + Interactive Web Experience",
-    description:
-      "An interactive 3D portfolio website with AI-powered features, canvas animations, and premium visual effects — showcasing creative technology capabilities.",
-    technologies: [
-      "Next.js",
-      "Tailwind CSS",
-      "GSAP",
-      "HTML5 Canvas",
-      "Gemini",
-      "OpenAI",
-      "GA4",
-    ],
-    liveUrl: "",
-    image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",
-    color: "#F59E0B",
-    featured: false,
   },
 ];
