@@ -16,7 +16,7 @@ import {
   LuCircleCheck,
   LuArrowRight,
 } from "react-icons/lu";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FaWhatsapp, FaLinkedin, FaInstagram } from "react-icons/fa6";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -194,8 +194,56 @@ export default function Contact() {
                   >
                     <div style={{ color: "#25D366", fontSize: "22px" }}><FaWhatsapp /></div>
                     <div>
-                      <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>WhatsApp Chat</div>
+                       <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>WhatsApp Chat</div>
                       <div style={{ fontWeight: 600 }}>{company.contact.whatsappNumber}</div>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/company/hyrovision/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "14px",
+                      textDecoration: "none",
+                      color: "var(--text)",
+                      padding: "12px 16px",
+                      borderRadius: "10px",
+                      background: "var(--input-bg)",
+                      border: "1px solid var(--border)",
+                      transition: "border-color 0.2s",
+                    }}
+                  >
+                    <div style={{ color: "#0A66C2", fontSize: "22px" }}><FaLinkedin /></div>
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>LinkedIn Official</div>
+                      <div style={{ fontWeight: 600 }}>linkedin.com/company/hyrovision</div>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "14px",
+                      textDecoration: "none",
+                      color: "var(--text)",
+                      padding: "12px 16px",
+                      borderRadius: "10px",
+                      background: "var(--input-bg)",
+                      border: "1px solid var(--border)",
+                      transition: "border-color 0.2s",
+                    }}
+                  >
+                    <div style={{ color: "#E4405F", fontSize: "22px" }}><FaInstagram /></div>
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>Instagram Official</div>
+                      <div style={{ fontWeight: 600 }}>@hyro_vision</div>
                     </div>
                   </a>
                 </div>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { company } from "../data/company";
+import { FaLinkedin, FaInstagram } from "react-icons/fa6";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -26,6 +27,50 @@ export default function Footer() {
               <span style={{ fontSize: "0.75rem", padding: "3px 10px", borderRadius: "999px", background: "rgba(20,184,166,0.1)", color: "var(--cyan, #14B8A6)" }}>
                 Production-Grade Delivery
               </span>
+            </div>
+            <div style={{ marginTop: "16px", display: "flex", gap: "10px", alignItems: "center" }}>
+              <a
+                href={company.socials?.linkedin || "https://www.linkedin.com/company/hyrovision/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Hyro Vision on LinkedIn"
+                aria-label="Hyro Vision on LinkedIn"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "10px",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "#ffffff",
+                  transition: "all 0.2s",
+                }}
+              >
+                <FaLinkedin size={16} />
+              </a>
+              <a
+                href={company.socials?.instagram || "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx"}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Hyro Vision on Instagram"
+                aria-label="Hyro Vision on Instagram"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "10px",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "#ffffff",
+                  transition: "all 0.2s",
+                }}
+              >
+                <FaInstagram size={16} />
+              </a>
             </div>
           </div>
 
@@ -67,6 +112,22 @@ export default function Footer() {
                 className="footer-link"
               >
                 WhatsApp Inquiry
+              </a>
+              <a
+                href="https://www.linkedin.com/company/hyrovision/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                LinkedIn Page ↗
+              </a>
+              <a
+                href="https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Instagram Profile ↗
               </a>
               <Link to="/contact" className="footer-link" style={{ color: "var(--cyan, #14B8A6)", fontWeight: 600 }}>
                 Start a Project →

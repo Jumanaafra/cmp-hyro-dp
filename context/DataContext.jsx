@@ -74,8 +74,8 @@ export const CONTACT_FALLBACK = {
   whatsapp_link: `https://wa.me/${company.contact.whatsappNumber.replace(/[^0-9]/g, "")}`,
   location: "Remote Worldwide · Engineering Hub",
   socials: [
-    { label: "LinkedIn", href: "#" },
-    { label: "GitHub", href: "#" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/hyrovision/" },
+    { label: "Instagram", href: "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx" },
     { label: "Website", href: company.contact.website },
   ],
 };

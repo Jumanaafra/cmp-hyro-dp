@@ -3,7 +3,7 @@ import { useData } from "../context/DataContext";
 import { createDoc } from "../firebase/firestore";
 import { company } from "../data/company";
 import { LuMail, LuMapPin, LuGlobe, LuSend, LuCheck } from "react-icons/lu";
-import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa6";
+import { FaWhatsapp, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa6";
 
 const PROJECT_TYPES = [
   "Web Application",
@@ -124,8 +124,8 @@ export default function ContactSection() {
   ];
 
   const SOCIALS = [
-    { label: "LinkedIn", href: "#", icon: FaLinkedin },
-    { label: "GitHub", href: "#", icon: FaGithub },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/hyrovision/", icon: FaLinkedin },
+    { label: "Instagram", href: "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx", icon: FaInstagram },
     { label: "Website", href: company.contact.website, icon: LuGlobe },
   ];
 

@@ -77,6 +77,11 @@ export const company = {
     website: "https://hyrovision.com",
   },
 
+  socials: {
+    linkedin: "https://www.linkedin.com/company/hyrovision/",
+    instagram: "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx",
+  },
+
   /** How to start a project — for chatbot responses */
   howToStart:
     "You can start a project with HyroVision by visiting our Contact section and filling out the project inquiry form. Share details about your project type, timeline, and requirements — and our team will get back to you to discuss the next steps.",
