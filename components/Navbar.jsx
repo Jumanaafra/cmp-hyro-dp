@@ -140,25 +140,9 @@ const COMPANY_ITEMS = [
     path: "/faq",
     icon: LuCircleHelp,
   },
-  {
-    title: "Agile Methodology",
-    desc: "5-stage engineering lifecycle from architecture to production.",
-    path: "/#process",
-    isAnchor: true,
-    anchorId: "process",
-    icon: LuCpu,
-  },
-  {
-    title: "Technology Stack",
-    desc: "Next.js, React, Node, Python, PyTorch, Supabase & AWS.",
-    path: "/#tech",
-    isAnchor: true,
-    anchorId: "tech",
-    icon: LuServer,
-  },
 ];
 
-// Clean, Uncluttered Mobile Navigation List (Includes Company Insights)
+// Clean, Uncluttered Mobile Navigation List
 const MOBILE_NAV_ITEMS = [
   { label: "Home", path: "/", icon: LuHouse, desc: "Main Portal & Capabilities" },
   { label: "Services", path: "/services", icon: LuLayers, desc: "AI, Cloud & Full-Stack Practices" },
@@ -167,8 +151,6 @@ const MOBILE_NAV_ITEMS = [
   { label: "Careers", path: "/careers", icon: LuUserPlus, desc: "Open Engineering Squad Roles", badge: "Hiring" },
   { label: "Engineering Blog", path: "/blog", icon: LuBookOpen, desc: "Tech Insights & AI Systems", badge: "New" },
   { label: "FAQ & Delivery", path: "/faq", icon: LuCircleHelp, desc: "Pricing, Sprints & SLAs" },
-  { label: "Development Process", path: "/#process", icon: LuCpu, desc: "5-Stage Agile Lifecycle", isAnchor: true, anchorId: "process" },
-  { label: "Technology Stack", path: "/#tech", icon: LuServer, desc: "Next.js, Node, Python & Cloud", isAnchor: true, anchorId: "tech" },
   { label: "Contact Us", path: "/contact", icon: LuMail, desc: "Start a Project or Consultation" },
 ];
 
