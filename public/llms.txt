@@ -24,13 +24,49 @@
 - **HillsTourism** (Status: LIVE)
   - **Category**: Tourism / Travel Technology
   - **URL**: https://hillstourism.com
-  - **Case Study**: https://hyrovision.com/projects/hills-tourism
+  - **Case Study**: https://hyrovision.com/projects/hillstourism
   - **Overview**: Full-featured tourism and travel platform featuring holiday package booking, hotel and resort reservations, transport booking flows, and administrative management.
 - **Super D — Hospital Management System** (Status: ONGOING)
   - **Category**: Healthcare / Hospital Management
   - **Status Notice**: Project currently under development.
-  - **Case Study**: https://hyrovision.com/projects/super-d-hospital-management
+  - **Case Study**: https://hyrovision.com/projects/super-d-hospital-management-system
   - **Overview**: Comprehensive hospital information and management system engineered for electronic medical records (EMR), doctor scheduling, department workflows, and clinical operations.
+- **Happy Star Satellite Vision** (Status: LIVE)
+  - **Category**: Commercial / Business Management Platform
+  - **URL**: https://happystarsatellitevision.netlify.app/
+  - **Case Study**: https://hyrovision.com/projects/happy-star
+  - **Overview**: Commercial operations and customer billing portal with automated Razorpay payment workflows and Supabase PostgreSQL data infrastructure.
+- **Pakka Tourism** (Status: LIVE)
+  - **Category**: Tourism Platform
+  - **URL**: https://pakkatourism.com
+  - **Case Study**: https://hyrovision.com/projects/pakka-tourism
+  - **Overview**: Regional tourism platform providing curated holiday experiences, package reservations, and real-time Firestore travel inquiry pipelines.
+- **Advanced CRM / HRMS** (Status: Completed)
+  - **Category**: Enterprise Platform
+  - **Case Study**: https://hyrovision.com/projects/advanced-crm-hrms
+  - **Overview**: Enterprise CRM and human resource management platform unifying sales lead funnels, employee attendance, and automated payroll calculations.
+- **BSmartGlass / AuraVision 2.0** (Status: Completed / Prototype Live)
+  - **Category**: AI + IoT
+  - **URL**: https://b-smart-glass-aura-vision.vercel.app/
+  - **Case Study**: https://hyrovision.com/projects/bsmartglass-auravision
+  - **Overview**: AI-powered IoT smart glasses system pairing Raspberry Pi Zero 2 W wearable hardware with WebRTC streaming and OpenAI vision analysis.
+- **AI-Powered Learning Path Generator** (Status: Completed)
+  - **Category**: AI Agent / Autonomous Workflow
+  - **Case Study**: https://hyrovision.com/projects/ai-learning-path
+  - **Overview**: Autonomous AI agent graph built with LangGraph and MCP synthesizing tailored 12-week educational curricula across YouTube, Notion, and Google Drive.
+- **Alumni Connect Platform** (Status: Completed / Live)
+  - **Category**: Full-Stack Networking Platform
+  - **URL**: https://alumni-connection-frontend.vercel.app/
+  - **Case Study**: https://hyrovision.com/projects/alumni-connect
+  - **Overview**: Higher-education alumni community platform facilitating graduate mentoring, job board applications, and institutional event coordination.
+- **Jojo Resort** (Status: Completed)
+  - **Category**: Commercial Web Application
+  - **Case Study**: https://hyrovision.com/projects/jojo-resort
+  - **Overview**: High-converting luxury boutique resort booking website engineered with responsive Next.js architectures and zero layout shift.
+- **Personal 3D AI Portfolio** (Status: Completed)
+  - **Category**: AI + Interactive Web Experience
+  - **Case Study**: https://hyrovision.com/projects/3d-ai-portfolio
+  - **Overview**: Interactive 3D WebGL experience featuring custom canvas shaders, GSAP physics animations, and embedded dual-provider LLM conversational assistance.
 
 ## Important Public Resources
 - **Home**: https://hyrovision.com/

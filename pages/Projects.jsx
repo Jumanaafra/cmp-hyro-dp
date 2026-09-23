@@ -17,8 +17,10 @@ import {
 
 const CATEGORIES = [
   "ALL",
+  "AI & IOT",
+  "ENTERPRISE & SAAS",
   "TRAVEL & TOURISM",
-  "HEALTHCARE & ENTERPRISE",
+  "COMMERCIAL PLATFORMS",
 ];
 
 export default function Projects() {
@@ -34,14 +36,41 @@ export default function Projects() {
       // Category filter
       let matchesCategory = true;
       const cat = (project.category || project.industry || "").toLowerCase();
-      if (selectedCategory === "TRAVEL & TOURISM") {
-        matchesCategory = cat.includes("tourism") || cat.includes("travel");
-      } else if (selectedCategory === "HEALTHCARE & ENTERPRISE") {
+      const title = (project.title || "").toLowerCase();
+      const tech = (project.technologies || []).join(" ").toLowerCase();
+      const full = `${cat} ${title} ${tech}`;
+
+      if (selectedCategory === "AI & IOT") {
         matchesCategory =
-          cat.includes("health") ||
-          cat.includes("hospital") ||
-          cat.includes("enterprise") ||
-          cat.includes("saas");
+          full.includes("ai") ||
+          full.includes("iot") ||
+          full.includes("agent") ||
+          full.includes("smart") ||
+          full.includes("learning") ||
+          full.includes("hardware") ||
+          full.includes("interactive") ||
+          full.includes("3d");
+      } else if (selectedCategory === "ENTERPRISE & SAAS") {
+        matchesCategory =
+          full.includes("enterprise") ||
+          full.includes("crm") ||
+          full.includes("hrms") ||
+          full.includes("hospital") ||
+          full.includes("healthcare") ||
+          full.includes("saas");
+      } else if (selectedCategory === "TRAVEL & TOURISM") {
+        matchesCategory =
+          full.includes("tourism") ||
+          full.includes("travel") ||
+          full.includes("hills") ||
+          full.includes("resort");
+      } else if (selectedCategory === "COMMERCIAL PLATFORMS") {
+        matchesCategory =
+          full.includes("commercial") ||
+          full.includes("networking") ||
+          full.includes("business") ||
+          full.includes("satellite") ||
+          full.includes("alumni");
       }
 
       // Search query
@@ -50,6 +79,7 @@ export default function Projects() {
         !query ||
         project.title.toLowerCase().includes(query) ||
         project.description.toLowerCase().includes(query) ||
+        cat.includes(query) ||
         (project.technologies &&
           project.technologies.some((t) => t.toLowerCase().includes(query)));
 
@@ -73,7 +103,7 @@ export default function Projects() {
     <>
       <SEO
         title="Portfolio & Case Studies — Verified Engineering Work | Hyro Vision"
-        description="Explore verified case studies of production software systems engineered by Hyro Vision, including HillsTourism (Live) and Super D Hospital Management System (Ongoing)."
+        description="Explore verified case studies of 10+ production software systems engineered by Hyro Vision, spanning AI agents, IoT hardware, tourism platforms, and enterprise SaaS."
         schema={structuredSchema}
         breadcrumbs={[
           { name: "Home", path: "/" },

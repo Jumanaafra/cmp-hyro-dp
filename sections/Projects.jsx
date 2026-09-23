@@ -19,7 +19,7 @@ import {
   LuHeartPulse,
 } from "react-icons/lu";
 
-const FILTERS = ["ALL", "TOURISM & TRAVEL", "HEALTHCARE & ENTERPRISE"];
+const FILTERS = ["ALL", "AI & IOT", "ENTERPRISE & SAAS", "TOURISM & TRAVEL", "COMMERCIAL PLATFORMS"];
 
 export function getProjectIcon(project, size = 22) {
   const key = (project.id || project.slug || project.title || "").toLowerCase();
@@ -48,8 +48,10 @@ function matchesFilter(project, filter) {
   const title = (project.title || "").toUpperCase();
   const full = `${cat} ${tech} ${title}`;
 
-  if (filter === "TOURISM & TRAVEL") return full.includes("TOURISM") || full.includes("TRAVEL") || full.includes("HILLS");
-  if (filter === "HEALTHCARE & ENTERPRISE") return full.includes("HEALTH") || full.includes("HOSPITAL") || full.includes("ENTERPRISE") || full.includes("SAAS");
+  if (filter === "AI & IOT") return full.includes("AI") || full.includes("IOT") || full.includes("AGENT") || full.includes("SMART") || full.includes("LEARNING") || full.includes("HARDWARE") || full.includes("3D");
+  if (filter === "ENTERPRISE & SAAS") return full.includes("HEALTH") || full.includes("HOSPITAL") || full.includes("ENTERPRISE") || full.includes("SAAS") || full.includes("CRM") || full.includes("HRMS");
+  if (filter === "TOURISM & TRAVEL") return full.includes("TOURISM") || full.includes("TRAVEL") || full.includes("HILLS") || full.includes("RESORT");
+  if (filter === "COMMERCIAL PLATFORMS") return full.includes("COMMERCIAL") || full.includes("NETWORKING") || full.includes("ALUMNI") || full.includes("SATELLITE");
   return true;
 }
 

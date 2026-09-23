@@ -90,6 +90,26 @@ const FEATURED_PROJECTS = [
     path: "/projects/super-d-hospital-management-system",
     image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=400&q=80",
   },
+  {
+    id: "happy-star",
+    title: "Happy Star Satellite Vision",
+    status: "Live",
+    statusColor: "live",
+    category: "Commercial / Business SaaS",
+    desc: "Commercial business operations portal with automated Razorpay billing & subscriber inventory.",
+    path: "/projects/happy-star",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    id: "bsmartglass-auravision",
+    title: "BSmartGlass / AuraVision 2.0",
+    status: "Prototype Live",
+    statusColor: "live",
+    category: "AI + IoT Hardware",
+    desc: "AI-powered IoT smart glasses system with real-time WebRTC streaming and edge computer vision.",
+    path: "/projects/bsmartglass-auravision",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80",
+  },
 ];
 
 // Company Data for Desktop Mega Menu

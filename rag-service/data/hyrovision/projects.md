@@ -1,5 +1,24 @@
 # HyroVision — Project Portfolio
 
+## Project: HillsTourism
+- Category: Tourism / Travel Technology
+- Description: A complete tourism platform featuring tailored hill station holiday packages, hotel & resort bookings, transport vehicle reservations, back-office administration, and full SEO infrastructure.
+- Technologies: Next.js, React, Node.js, PostgreSQL, Tailwind CSS, SEO Infrastructure
+- Live URL: https://hillstourism.com
+- Status: Live
+- Featured: Yes
+
+---
+
+## Project: Super D — Hospital Management System
+- Category: Healthcare / Hospital Management
+- Description: A comprehensive hospital management platform engineered for electronic medical records (EMR), doctor scheduling, department workflows, clinical billing, and pharmacy operations.
+- Technologies: React, Node.js, Express.js, MongoDB, Tailwind CSS, Role-Based Access Control (RBAC)
+- Status: Ongoing Development
+- Featured: Yes
+
+---
+
 ## Project: Happy Star Satellite Vision
 - Category: Commercial / Business Management Platform
 - Description: A comprehensive commercial business management platform with integrated payment processing, designed for operational efficiency and scale.

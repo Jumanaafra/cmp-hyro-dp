@@ -28,6 +28,19 @@ const PROJECT_ALIASES = {
   "super-d-hospital": "super-d-hospital-management-system",
   "super-d-hospital-management": "super-d-hospital-management-system",
   "super-d-hospital-management-system": "super-d-hospital-management-system",
+  "happy-star": "happy-star",
+  "happy-star-satellite-vision": "happy-star",
+  "pakka-tourism": "pakka-tourism",
+  "advanced-crm-hrms": "advanced-crm-hrms",
+  "bsmartglass-auravision": "bsmartglass-auravision",
+  "b-smart-glass-aura-vision": "bsmartglass-auravision",
+  "ai-learning-path": "ai-learning-path",
+  "ai-learning-path-generator": "ai-learning-path",
+  "alumni-connect": "alumni-connect",
+  "alumni-connect-platform": "alumni-connect",
+  "jojo-resort": "jojo-resort",
+  "3d-ai-portfolio": "3d-ai-portfolio",
+  "personal-3d-ai-portfolio": "3d-ai-portfolio",
 };
 
 export default function ProjectDetails() {
