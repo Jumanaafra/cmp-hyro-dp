@@ -84,6 +84,12 @@ export default function About() {
       "logo": "https://hyrovision.com/assets/hyro-logo-mark.png",
       "description":
         "Hyro Vision builds high-performance digital products, AI-powered systems and intelligent automation solutions for modern businesses.",
+      "founder": {
+        "@type": "Person",
+        "name": "Bharath",
+        "jobTitle": "Founder of Hyrovision",
+        "image": "https://hyrovision.com/assets/bharath-founder.jpg",
+      },
     },
   };
 
@@ -160,6 +166,65 @@ export default function About() {
                   <span className="page-chip"><LuCircleCheck color="var(--cyan)" /> Full-Stack Web Apps</span>
                   <span className="page-chip"><LuCircleCheck color="var(--cyan)" /> Autonomous AI Agents</span>
                   <span className="page-chip"><LuCircleCheck color="var(--cyan)" /> Enterprise Systems</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Founder of Hyrovision */}
+          <section className="page-block" style={{ marginTop: "32px" }}>
+            <div className="founder-card">
+              <div className="founder-card-glow" />
+              <div className="founder-image-col">
+                <div className="founder-image-wrapper">
+                  <img
+                    src="/assets/bharath-founder.jpg"
+                    alt="Bharath — Founder of Hyrovision"
+                    className="founder-image"
+                    loading="lazy"
+                    decoding="async"
+                    width="280"
+                    height="373"
+                  />
+                  <div className="founder-badge-pill">
+                    <span className="page-tag-dot" />
+                    Founder
+                  </div>
+                </div>
+              </div>
+
+              <div className="founder-details">
+                <span className="founder-role-tag">Leadership & Vision</span>
+                <h2 className="founder-name-heading">Bharath</h2>
+                <p className="founder-designation">Founder of Hyrovision · Lead Systems Architect</p>
+                <p className="founder-bio">
+                  Leading technology engineering, intelligent systems architecture, and product innovation at Hyro Vision. Driven by a deterministic engineering philosophy, Bharath architects enterprise-grade web applications, autonomous AI pipelines, and resilient cloud software that deliver tangible business leverage.
+                </p>
+                <div className="founder-quote">
+                  "We believe in building technology that isn't just functional, but transformative — bridging the gap between ambitious ideas and scalable production realities with clean architecture and zero bloat."
+                </div>
+                <div className="founder-actions">
+                  <Link to="/contact" className="page-btn page-btn-primary" style={{ padding: "10px 20px", fontSize: "0.875rem" }}>
+                    Get in Touch <LuArrowRight size={15} />
+                  </Link>
+                  <a
+                    href={company.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="page-btn page-btn-outline"
+                    style={{ padding: "10px 18px", fontSize: "0.875rem" }}
+                  >
+                    LinkedIn <LuExternalLink size={13} />
+                  </a>
+                  <a
+                    href={company.socials.github || "https://github.com/hyrovision"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="page-btn page-btn-outline"
+                    style={{ padding: "10px 18px", fontSize: "0.875rem" }}
+                  >
+                    GitHub <LuExternalLink size={13} />
+                  </a>
                 </div>
               </div>
             </div>

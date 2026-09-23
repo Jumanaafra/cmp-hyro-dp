@@ -6,6 +6,7 @@
 - **Website**: https://hyrovision.com
 - **Description**: Hyro Vision is a modern technology and IT services engineering company. We build intelligent digital products, full-stack web applications, SaaS platforms, enterprise systems, and AI-powered automation solutions.
 - **Headquarters**: Remote Worldwide · Engineering Hub
+- **Founder**: Bharath (Founder of Hyrovision & Lead Systems Architect)
 - **Contact Email**: info@hyrovision.com
 - **Telephone**: +919360294463
 - **Official Profiles**:

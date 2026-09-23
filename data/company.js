@@ -23,6 +23,19 @@ export const company = {
   phone: "+919360294463",
   address: "Remote Worldwide · Engineering Hub",
 
+  founder: {
+    name: "Bharath",
+    role: "Founder of Hyrovision",
+    title: "Founder & Lead Systems Architect",
+    image: "/assets/bharath-founder.jpg",
+    bio: "Visionary founder and systems architect leading engineering, product strategy, and intelligent digital systems at Hyro Vision.",
+    socials: {
+      linkedin: "https://www.linkedin.com/company/hyrovision/",
+      github: "https://github.com/hyrovision",
+      email: "info@hyrovision.com",
+    },
+  },
+
   socialProfiles: [
     "https://www.linkedin.com/company/hyrovision/",
     "https://www.instagram.com/hyro_vision?stkn=NnlmdjM1cnd2dmkx",

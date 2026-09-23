@@ -203,6 +203,68 @@ export default function AboutSection() {
                 </div>
               ))}
             </div>
+
+            {/* Founder Spotlight on Home Page About */}
+            <div
+              className="about-founder-snippet liquid-glass"
+              style={{
+                marginTop: "28px",
+                display: "flex",
+                alignItems: "center",
+                gap: "18px",
+                padding: "16px 20px",
+                borderRadius: "16px",
+                border: "1px solid rgba(20, 184, 166, 0.3)",
+                background: "rgba(255, 255, 255, 0.03)",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.35)",
+              }}
+            >
+              <div style={{ position: "relative", flexShrink: 0 }}>
+                <img
+                  src="/assets/bharath-founder.jpg"
+                  alt="Bharath — Founder of Hyrovision"
+                  loading="lazy"
+                  decoding="async"
+                  width="68"
+                  height="68"
+                  style={{
+                    width: "68px",
+                    height: "68px",
+                    borderRadius: "14px",
+                    objectFit: "cover",
+                    objectPosition: "center 15%",
+                    border: "2px solid var(--cyan, #14B8A6)",
+                    boxShadow: "0 0 16px rgba(20, 184, 166, 0.35)",
+                    display: "block",
+                  }}
+                />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+                  <span
+                    style={{
+                      fontSize: "0.7rem",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      color: "var(--cyan, #14B8A6)",
+                      background: "rgba(20, 184, 166, 0.12)",
+                      border: "1px solid rgba(20, 184, 166, 0.25)",
+                      padding: "2px 8px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    Founder
+                  </span>
+                </div>
+                <h4 style={{ margin: "0 0 2px 0", fontSize: "1.15rem", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em" }}>
+                  Bharath
+                </h4>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "rgba(255, 255, 255, 0.72)", lineHeight: 1.4 }}>
+                  Founder of Hyrovision · Lead Systems Architect
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="about-right">
