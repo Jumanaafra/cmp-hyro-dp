@@ -7,7 +7,7 @@ function useParticles(canvasRef) {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const COLORS = ["#14B8A6", "#3b82f6", "#10b981", "#6366f1", "#22d3ee"];
-    let W, H, pts = [], rafId;
+    let W, H, pts = [], rafId, isVisible = true;
     const resize = () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; };
     window.addEventListener("resize", resize, { passive: true });
     resize();
@@ -26,13 +26,14 @@ function useParticles(canvasRef) {
         max: Math.random() * 380 + 240,
       };
     };
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 45; i++) {
       const p = mkP();
       p.y = Math.random() * H;
       p.life = Math.random() * p.max;
       pts.push(p);
     }
     const draw = () => {
+      if (!isVisible) return;
       ctx.clearRect(0, 0, W, H);
       pts.forEach((p, i) => {
         p.x += p.vx;
@@ -66,8 +67,24 @@ function useParticles(canvasRef) {
       });
       rafId = requestAnimationFrame(draw);
     };
-    draw();
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(draw);
+        } else {
+          cancelAnimationFrame(rafId);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
+    rafId = requestAnimationFrame(draw);
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(rafId);
     };

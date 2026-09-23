@@ -20,6 +20,7 @@ import {
 } from "react-icons/lu";
 import { getProjectIcon } from "../sections/Projects";
 import { projects as verifiedProjects } from "../data/projects";
+import { getCdnImageUrl, getCdnImageSrcSet } from "../utils/cdn";
 
 // Clean alias lookup map
 const PROJECT_ALIASES = {
@@ -255,8 +256,13 @@ export default function ProjectDetails() {
             }}
           >
             <img
-              src={project.image}
+              src={getCdnImageUrl(project.image, 1080)}
+              srcSet={getCdnImageSrcSet(project.image, [480, 800, 1200])}
+              sizes="(max-width: 1024px) 100vw, 1000px"
               alt={project.title}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(10, 15, 26, 0.85) 100%)" }} />

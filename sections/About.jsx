@@ -8,7 +8,7 @@ function use3DCube(canvasRef) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    let angle = 0, rafId;
+    let angle = 0, rafId, isVisible = true;
     const size = 90;
 
     const project = (x, y, z, ax, ay) => {
@@ -42,6 +42,7 @@ function use3DCube(canvasRef) {
     ];
 
     const draw = () => {
+      if (!isVisible) return;
       const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
       const ax = angle * 0.4, ay = angle;
@@ -84,9 +85,28 @@ function use3DCube(canvasRef) {
       canvas.height = canvas.offsetHeight;
     };
     resize();
-    draw();
-    window.addEventListener("resize", resize);
-    return () => { cancelAnimationFrame(rafId); window.removeEventListener("resize", resize); };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(draw);
+        } else {
+          cancelAnimationFrame(rafId);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
+    rafId = requestAnimationFrame(draw);
+    window.addEventListener("resize", resize, { passive: true });
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", resize);
+    };
   }, [canvasRef]);
 }
 

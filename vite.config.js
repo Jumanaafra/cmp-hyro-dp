@@ -36,13 +36,18 @@ export default defineConfig({
   plugins: [react(), apiDevServer()],
   build: {
     chunkSizeWarningLimit: 600,
+    cssCodeSplit: true,
+    target: 'es2020',
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {
-          // Firebase SDK in its own long-cached chunk
+          // Firebase SDK in its own long-cached chunk (loaded only when needed)
           firebase: ['firebase/app', 'firebase/firestore', 'firebase/storage', 'firebase/auth'],
-          // React + Router in a stable vendor chunk
+          // React core + router in a stable vendor chunk
           vendor: ['react', 'react-dom', 'react-router-dom'],
+          // Icons chunk to keep core application bundle minimal
+          icons: ['react-icons/lu'],
         },
       },
     },

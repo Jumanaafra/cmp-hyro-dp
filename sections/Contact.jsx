@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useData } from "../context/DataContext";
-import { createDoc } from "../firebase/firestore";
 import { company } from "../data/company";
 import { LuMail, LuMapPin, LuGlobe, LuSend, LuCheck } from "react-icons/lu";
 import { FaWhatsapp, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa6";
@@ -62,8 +61,9 @@ export default function ContactSection() {
         throw new Error(data.error || "Failed to submit enquiry. Please try again.");
       }
 
-      // 2. Also log to Firestore if available
+      // 2. Also log to Firestore in background if available
       try {
+        const { createDoc } = await import("../firebase/firestore");
         await createDoc("contact_submissions", {
           name: form.name,
           email: form.email,

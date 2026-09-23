@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/DataContext";
+import { getCdnImageUrl, getCdnImageSrcSet } from "../utils/cdn";
 
 import {
   LuRocket,
@@ -102,10 +103,15 @@ function ProjectCard({ project }) {
         {project.image && (
           <div className="proj-preview-media">
             <img
-              src={project.image}
+              src={getCdnImageUrl(project.image, 600)}
+              srcSet={getCdnImageSrcSet(project.image, [360, 600, 900])}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
               alt={project.title}
               className="proj-preview-img"
               loading="lazy"
+              decoding="async"
+              width="600"
+              height="340"
             />
             <div className="proj-preview-overlay" />
             <div className="proj-preview-badges">

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
+import { getCdnImageUrl } from "../utils/cdn";
 import {
   LuHouse,
   LuUsers,
@@ -341,7 +342,15 @@ export default function Navbar() {
         {/* Brand Logo */}
         <a href="/" className="hv-logo" onClick={handleLogoClick} aria-label="Hyro Vision Home">
           <div className="hv-logo-mark">
-            <img src="/assets/hyro-logo-mark.png" alt="Hyro Vision Logo" className="hv-logo-mark-img" />
+            <img
+              src="/assets/hyro-logo-mark.png"
+              alt="Hyro Vision Logo"
+              className="hv-logo-mark-img"
+              width="32"
+              height="32"
+              fetchpriority="high"
+              decoding="async"
+            />
           </div>
           <span className="hv-logo-text">
             Hyro <span>Vision</span>
@@ -565,10 +574,14 @@ export default function Navbar() {
                 >
                   <div className="hv-mega-project-thumb-wrap">
                     <img
-                      src={proj.image}
+                      src={getCdnImageUrl(proj.image, 320)}
                       alt={proj.title}
                       className="hv-mega-project-thumb"
                       loading="lazy"
+                      fetchpriority="low"
+                      decoding="async"
+                      width="240"
+                      height="140"
                     />
                     <span className={`hv-mega-status-badge hv-mega-status-badge--${proj.statusColor}`}>
                       {proj.status}

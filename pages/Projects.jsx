@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import { projects } from "../data/projects";
+import { getCdnImageUrl, getCdnImageSrcSet } from "../utils/cdn";
 import "../styles/pages.css";
 
 import {
@@ -223,10 +224,15 @@ export default function Projects() {
                     {project.image && (
                       <div className="proj-preview-media">
                         <img
-                          src={project.image}
+                          src={getCdnImageUrl(project.image, 600)}
+                          srcSet={getCdnImageSrcSet(project.image, [360, 600, 900])}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                           alt={project.title}
                           className="proj-preview-img"
                           loading="lazy"
+                          decoding="async"
+                          width="600"
+                          height="340"
                         />
                         <div className="proj-preview-overlay" />
                         <div className="proj-preview-badges">

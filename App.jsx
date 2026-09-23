@@ -1,9 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import "./styles/global.css";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import AIChatbot from "./components/AIChatbot";
 import SEO from "./components/SEO";
 import HeroSection from "./sections/Hero";
 import AboutSection from "./sections/About";
@@ -13,6 +12,9 @@ import ProcessSection from "./sections/Process";
 import TechStackSection from "./sections/TechStack";
 import CtaSection from "./sections/Cta";
 import ContactSection from "./sections/Contact";
+
+// Lazy-load floating chat widget so it does not block initial landing paint
+const AIChatbot = lazy(() => import("./components/AIChatbot"));
 
 /* ── Cursor spotlight ── */
 function CursorSpotlight() {
@@ -79,7 +81,9 @@ export default function App() {
         <ContactSection />
       </main>
       <Footer />
-      <AIChatbot />
+      <Suspense fallback={null}>
+        <AIChatbot />
+      </Suspense>
     </>
   );
 }

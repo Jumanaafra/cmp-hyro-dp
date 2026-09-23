@@ -1,4 +1,4 @@
-import { useFirestoreCollection, useFirestoreDoc } from "../hooks/useFirestoreCollection";
+import { useState, useEffect } from "react";
 import {
   DataContext,
   withLiveUrl,
@@ -13,18 +13,55 @@ import {
 } from "./DataContext";
 
 export function DataProvider({ children }) {
-  // Single-document collections
-  const { data: heroRaw, loading: heroLoading } = useFirestoreDoc("hero_section", "main");
-  const { data: aboutRaw, loading: aboutLoading } = useFirestoreDoc("about_section", "main");
-  const { data: ctaRaw, loading: ctaLoading } = useFirestoreDoc("cta_section", "main");
-  const { data: contactRaw, loading: contactLoading } = useFirestoreDoc("contact_info", "main");
-  const { data: settingsRaw, loading: settingsLoading } = useFirestoreDoc("settings", "main");
+  // Instantaneous fallback data on frame 0 — zero layout shift, zero network delay
+  const [heroRaw, setHeroRaw] = useState(null);
+  const [aboutRaw, setAboutRaw] = useState(null);
+  const [ctaRaw, setCtaRaw] = useState(null);
+  const [contactRaw, setContactRaw] = useState(null);
+  const [settingsRaw, setSettingsRaw] = useState(null);
 
-  // Array collections
-  const { data: services, loading: servicesLoading } = useFirestoreCollection("services");
-  const { data: projects, loading: projectsLoading } = useFirestoreCollection("projects");
-  const { data: processSteps, loading: processLoading } = useFirestoreCollection("process_steps");
-  const { data: techStack, loading: techLoading } = useFirestoreCollection("tech_stack");
+  const [services, setServices] = useState(SERVICES_FALLBACK);
+  const [projects, setProjects] = useState(PROJECTS_FALLBACK);
+  const [processSteps, setProcessSteps] = useState(PROCESS_FALLBACK);
+  const [techStack, setTechStack] = useState(TECH_FALLBACK);
+
+  // Background deferred synchronization with Firestore (runs only when browser is idle)
+  useEffect(() => {
+    const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
+    if (!apiKey || apiKey === "undefined" || apiKey === "placeholder") return;
+
+    let unsubs = [];
+    const schedule =
+      typeof window !== "undefined" && window.requestIdleCallback
+        ? window.requestIdleCallback
+        : (cb) => setTimeout(cb, 1800);
+
+    const idleId = schedule(async () => {
+      try {
+        const { subscribeDoc, subscribeCollection } = await import("../firebase/firestore");
+        unsubs.push(
+          subscribeDoc("hero_section", "main", (data) => data && setHeroRaw(data)),
+          subscribeDoc("about_section", "main", (data) => data && setAboutRaw(data)),
+          subscribeDoc("cta_section", "main", (data) => data && setCtaRaw(data)),
+          subscribeDoc("contact_info", "main", (data) => data && setContactRaw(data)),
+          subscribeDoc("settings", "main", (data) => data && setSettingsRaw(data)),
+          subscribeCollection("services", (docs) => docs && docs.length > 0 && setServices(docs)),
+          subscribeCollection("projects", (docs) => docs && docs.length > 0 && setProjects(docs.map(withLiveUrl))),
+          subscribeCollection("process_steps", (docs) => docs && docs.length > 0 && setProcessSteps(docs)),
+          subscribeCollection("tech_stack", (docs) => docs && docs.length > 0 && setTechStack(docs))
+        );
+      } catch (err) {
+        // Fallback data is active and complete
+      }
+    });
+
+    return () => {
+      if (typeof window !== "undefined" && window.cancelIdleCallback && typeof idleId === "number") {
+        window.cancelIdleCallback(idleId);
+      }
+      unsubs.forEach((unsub) => typeof unsub === "function" && unsub());
+    };
+  }, []);
 
   const value = {
     heroData: heroRaw || HERO_FALLBACK,
@@ -47,15 +84,15 @@ export function DataProvider({ children }) {
     ),
 
     loading: {
-      hero: heroLoading,
-      about: aboutLoading,
-      services: servicesLoading,
-      projects: projectsLoading,
-      process: processLoading,
-      techStack: techLoading,
-      cta: ctaLoading,
-      contact: contactLoading,
-      settings: settingsLoading,
+      hero: false,
+      about: false,
+      services: false,
+      projects: false,
+      process: false,
+      techStack: false,
+      cta: false,
+      contact: false,
+      settings: false,
     },
   };
 
