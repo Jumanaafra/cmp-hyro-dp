@@ -153,7 +153,7 @@ export default function ContactSection() {
               {CONTACT_INFO.map((c) => (
                 <div key={c.label} className="ci-item">
                   <div className="ci-icon" style={{ color: "var(--cyan)" }}>{c.icon}</div>
-                  <div>
+                  <div style={{ minWidth: 0, overflowWrap: "break-word", wordBreak: "break-word" }}>
                     <div className="ci-label">{c.label}</div>
                     {c.href ? (
                       <a href={c.href} className="ci-value">

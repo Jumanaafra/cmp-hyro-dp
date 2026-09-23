@@ -409,26 +409,36 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .form-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
+  width: 100%;
+  min-width: 0;
 }
 @media (max-width: 640px) {
   .form-row-2 {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 }
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 .form-label {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text);
+  word-break: break-word;
 }
 .form-label-required {
   color: #ef4444;
@@ -436,6 +446,9 @@
 }
 .form-input, .form-textarea, .form-select {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   background: var(--input-bg);
   border: 1px solid var(--input-border);
   color: var(--text);
@@ -458,15 +471,31 @@
   font-size: 0.8rem;
   color: #f87171;
   margin-top: 4px;
+  word-break: break-word;
 }
 .form-success-banner {
-  padding: 18px 24px;
+  padding: 18px 20px;
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: var(--radius-sm);
   color: #34d399;
   font-size: 0.95rem;
   line-height: 1.5;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+.form-page-card {
+  padding: 36px;
+}
+@media (max-width: 640px) {
+  .form-page-card {
+    padding: 20px 16px !important;
+  }
+  .form-shell button[type="submit"],
+  .form-shell .page-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
 }
 
 /* ── Filter Tabs ── */
@@ -581,5 +610,59 @@
   inset: 0;
   background: linear-gradient(180deg, transparent 55%, rgba(10, 15, 26, 0.7) 100%);
   pointer-events: none;
+}
+
+/* ═══════════════════════ RESPONSIVE INNER PAGES ═══════════════════════ */
+@media (max-width: 640px) {
+  .page-shell {
+    padding-top: 96px;
+    padding-bottom: 60px;
+  }
+  .page-container {
+    padding: 0 16px;
+  }
+  .page-card {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+  .page-cta-box {
+    padding: 28px 16px;
+    border-radius: 18px;
+    margin-top: 40px;
+  }
+  .page-cta-title {
+    font-size: clamp(1.6rem, 6.5vw, 2rem);
+  }
+  .page-header {
+    margin-bottom: 32px;
+  }
+  .page-title {
+    font-size: clamp(1.85rem, 8vw, 2.6rem);
+    word-break: break-word;
+    margin-bottom: 12px;
+  }
+  .page-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .page-breadcrumb {
+    font-size: 0.8rem;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .page-block {
+    margin-top: 40px;
+  }
+  .page-block-title {
+    font-size: 1.5rem;
+  }
+  .blog-card-media {
+    height: 160px;
+  }
+  .blog-post-hero-image-wrap {
+    height: 220px;
+    border-radius: 14px;
+    margin: 20px 0 24px;
+  }
 }
 

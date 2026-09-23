@@ -220,7 +220,7 @@ export default function JobDetails() {
           )}
 
           {/* Application Form */}
-          <section className="page-card" id="apply" style={{ padding: "36px", borderColor: "rgba(var(--cyan-rgb), 0.3)" }}>
+          <section className="page-card form-page-card" id="apply" style={{ borderColor: "rgba(var(--cyan-rgb), 0.3)" }}>
             <h2 className="page-card-title" style={{ fontSize: "1.5rem", marginBottom: "8px" }}>
               Apply for {job.title}
             </h2>
@@ -320,7 +320,7 @@ export default function JobDetails() {
                   type="submit"
                   disabled={submitting}
                   className="page-btn page-btn-primary"
-                  style={{ alignSelf: "flex-start", opacity: submitting ? 0.7 : 1 }}
+                  style={{ opacity: submitting ? 0.7 : 1 }}
                 >
                   {submitting ? "Submitting Application..." : (
                     <>

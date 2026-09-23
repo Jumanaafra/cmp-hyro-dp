@@ -132,7 +132,7 @@ export default function About() {
           {/* Core Entity Question 1: Who is Hyro Vision? */}
           <section className="page-block" style={{ marginTop: "20px" }}>
             <div className="page-grid-2">
-              <div className="page-card" style={{ padding: "36px" }}>
+              <div className="page-card">
                 <div className="page-card-icon">
                   <LuCpu />
                 </div>
@@ -148,7 +148,7 @@ export default function About() {
               </div>
 
               {/* Core Entity Question 2: What does Hyro Vision build? */}
-              <div className="page-card" style={{ padding: "36px" }}>
+              <div className="page-card">
                 <div className="page-card-icon">
                   <LuNetwork />
                 </div>
@@ -340,7 +340,7 @@ export default function About() {
           </section>
 
           {/* Contact Information & Channels */}
-          <section className="page-card" style={{ padding: "36px", marginBottom: "40px", borderColor: "rgba(var(--cyan-rgb), 0.3)" }}>
+          <section className="page-card" style={{ marginBottom: "40px", borderColor: "rgba(var(--cyan-rgb), 0.3)" }}>
             <h2 className="page-card-title" style={{ fontSize: "1.35rem", marginBottom: "8px" }}>
               How to Contact Hyro Vision
             </h2>

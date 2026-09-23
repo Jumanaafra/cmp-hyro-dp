@@ -570,10 +570,12 @@
 /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
 @media (max-width: 480px) {
   .hv-chat-panel {
-    bottom: 84px;
-    right: 16px;
-    left: 16px;
+    bottom: 76px;
+    right: 12px;
+    left: 12px;
     width: auto;
+    max-width: calc(100vw - 24px);
+    box-sizing: border-box;
     height: 65vh;
     max-height: 480px;
     border-radius: var(--chat-radius);
@@ -583,8 +585,8 @@
   .hv-chat-toggle {
     bottom: 16px;
     right: 16px;
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
   }
 }
 

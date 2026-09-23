@@ -113,7 +113,6 @@ export default function Services() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  padding: "36px",
                   borderColor: "var(--card-border)",
                 }}
               >

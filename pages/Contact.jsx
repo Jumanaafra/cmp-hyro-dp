@@ -150,7 +150,7 @@ export default function Contact() {
           <div className="page-grid-2" style={{ gap: "40px", alignItems: "flex-start" }}>
             {/* Left: Contact Info & SLAs */}
             <div>
-              <div className="page-card" style={{ padding: "32px", marginBottom: "24px" }}>
+              <div className="page-card" style={{ marginBottom: "24px" }}>
                 <h2 className="page-card-title">Direct Communication Channels</h2>
                 <p className="page-card-desc">
                   Skip the middleman and communicate directly with our technical team.
@@ -170,10 +170,11 @@ export default function Contact() {
                       background: "var(--input-bg)",
                       border: "1px solid var(--border)",
                       transition: "border-color 0.2s",
+                      minWidth: 0,
                     }}
                   >
-                    <div style={{ color: "var(--cyan)", fontSize: "20px" }}><LuMail /></div>
-                    <div>
+                    <div style={{ color: "var(--cyan)", fontSize: "20px", flexShrink: 0 }}><LuMail /></div>
+                    <div style={{ minWidth: 0, wordBreak: "break-all", overflowWrap: "anywhere" }}>
                       <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>Email Inquiries</div>
                       <div style={{ fontWeight: 600 }}>{company.contact.email}</div>
                     </div>
@@ -194,10 +195,11 @@ export default function Contact() {
                       background: "var(--input-bg)",
                       border: "1px solid var(--border)",
                       transition: "border-color 0.2s",
+                      minWidth: 0,
                     }}
                   >
-                    <div style={{ color: "#25D366", fontSize: "22px" }}><FaWhatsapp /></div>
-                    <div>
+                    <div style={{ color: "#25D366", fontSize: "22px", flexShrink: 0 }}><FaWhatsapp /></div>
+                    <div style={{ minWidth: 0, wordBreak: "break-all", overflowWrap: "anywhere" }}>
                        <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>WhatsApp Chat</div>
                       <div style={{ fontWeight: 600 }}>{company.contact.whatsappNumber}</div>
                     </div>
@@ -218,10 +220,11 @@ export default function Contact() {
                       background: "var(--input-bg)",
                       border: "1px solid var(--border)",
                       transition: "border-color 0.2s",
+                      minWidth: 0,
                     }}
                   >
-                    <div style={{ color: "#0A66C2", fontSize: "22px" }}><FaLinkedin /></div>
-                    <div>
+                    <div style={{ color: "#0A66C2", fontSize: "22px", flexShrink: 0 }}><FaLinkedin /></div>
+                    <div style={{ minWidth: 0, wordBreak: "break-all", overflowWrap: "anywhere" }}>
                       <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>LinkedIn Official</div>
                       <div style={{ fontWeight: 600 }}>linkedin.com/company/hyrovision</div>
                     </div>
@@ -242,10 +245,11 @@ export default function Contact() {
                       background: "var(--input-bg)",
                       border: "1px solid var(--border)",
                       transition: "border-color 0.2s",
+                      minWidth: 0,
                     }}
                   >
-                    <div style={{ color: "#E4405F", fontSize: "22px" }}><FaInstagram /></div>
-                    <div>
+                    <div style={{ color: "#E4405F", fontSize: "22px", flexShrink: 0 }}><FaInstagram /></div>
+                    <div style={{ minWidth: 0, wordBreak: "break-all", overflowWrap: "anywhere" }}>
                       <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>Instagram Official</div>
                       <div style={{ fontWeight: 600 }}>@hyro_vision</div>
                     </div>
@@ -266,10 +270,11 @@ export default function Contact() {
                       background: "var(--input-bg)",
                       border: "1px solid var(--border)",
                       transition: "border-color 0.2s",
+                      minWidth: 0,
                     }}
                   >
-                    <div style={{ color: "var(--text-heading)", fontSize: "22px" }}><FaGithub /></div>
-                    <div>
+                    <div style={{ color: "var(--text-heading)", fontSize: "22px", flexShrink: 0 }}><FaGithub /></div>
+                    <div style={{ minWidth: 0, wordBreak: "break-all", overflowWrap: "anywhere" }}>
                       <div style={{ fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase" }}>GitHub Official</div>
                       <div style={{ fontWeight: 600 }}>github.com/hyrovision</div>
                     </div>
@@ -278,7 +283,7 @@ export default function Contact() {
               </div>
 
               {/* Guarantees Box */}
-              <div className="page-card" style={{ padding: "28px" }}>
+              <div className="page-card">
                 <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--text-heading)", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
                   <LuShieldCheck color="var(--cyan)" /> Our Commitment to You
                 </h3>
@@ -300,7 +305,7 @@ export default function Contact() {
             </div>
 
             {/* Right: Scoping Form */}
-            <div className="page-card" style={{ padding: "36px", borderColor: "rgba(var(--cyan-rgb), 0.25)" }}>
+            <div className="page-card form-page-card" style={{ borderColor: "rgba(var(--cyan-rgb), 0.25)" }}>
               <h2 className="page-card-title" style={{ fontSize: "1.5rem", marginBottom: "8px" }}>
                 Project Scoping Form
               </h2>
@@ -467,7 +472,7 @@ export default function Contact() {
                     type="submit"
                     disabled={loading}
                     className="page-btn page-btn-primary"
-                    style={{ alignSelf: "flex-start", opacity: loading ? 0.7 : 1 }}
+                    style={{ opacity: loading ? 0.7 : 1 }}
                   >
                     {loading ? "Sending..." : (
                       <>
